@@ -1,0 +1,411 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block main %}
+
+<div class="content-wrapper">
+          
+    <section class="content-header">
+      <h1>
+        Dados Estatísticos dos Funcionários
+        <small>RH</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+        <li><a href="#">Recursos Humanos</a></li>
+        <li class="active"> <a >  Dados Estatísticos dos Funcionários <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+      </ol>
+    </section>
+    <br>
+    <div class="col-md-12">
+      <div class="box box-success ">
+        <div class="box-header with-border" style="height: 70px">
+          <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+          <div class="box-tools pull-right">
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+           <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+          </div>
+          <br>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <section class="content" >
+      <!-- Page Content  -->
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                       <div class="iq-header-title">
+                        <br>
+                          <h4 class="card-title">Lista de Funcionários Activos</h4>
+                       </div>
+                    </div>
+                    <div class="iq-card-body">
+                      <div id="table" class="table-editable">
+                        <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                          <input type="text" id="searchInput" placeholder="Pesquisar...">
+                          <label for="filterSelect">Número de Linhas:</label>
+                          <select id="filterSelect">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="1000">Todos</option>
+                          </select>
+                        </span>
+                        <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                          <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-funcionarios' %}"><i class="fa fa-file-excel-o"><span class=""> Excel</span></i></a>
+                          <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                          </a>
+                        </span>
+                        <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                          <thead>
+                            <tr>
+                              <th>Nome Completo</th>
+                              <th>Data de Nascimento</th>
+                              <th>BI</th>
+                              <th>Estado Cívil</th>
+                              <th>Contacto Telefônico</th>
+                              <th>Correio Electrônico</th>
+                              <!-- <th>Localidade</th> -->
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for funcionario_a in funcionarios_a %}
+                            <tr>
+                              <td>{{funcionario_a.firstname}} {{funcionario_a.surname}}</td>
+                              <td>{{funcionario_a.date_of_birth}}</td>
+                              <td>{{funcionario_a.personnel_number}}</td>
+                              <td>{{funcionario_a.estado_civil}}</td>
+                              {% if funcionario_a.telefone is not None %}
+                              <td>{{funcionario_a.telefone}}</td>
+                              {% endif %}
+                              {% if funcionario_a.correio_electronico is not None %}
+                              <td>{{funcionario_a.correio_electronico}}</td>
+          
+                              {% else %}
+                              <td></td>
+          
+                              {% endif %}
+          
+                              <!-- {% if funcionario_a.localidade is not None %}
+                              <td>{{funcionario_a.localidade}}</td>
+          
+                              {% else %}
+                              <td></td>
+          
+                              {% endif %} -->
+                            </tr>
+                            {% endfor %}
+                         
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+              
+           </div>
+          <div class="row">
+            <div class="col-md-12">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                      <br>
+                        <h4 class="card-title">Lista de Funcionários Licenciados</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                    <div id="table" class="table-editable">
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                        <input type="text" id="searchInput" placeholder="Pesquisar...">
+                        <label for="filterSelect">Número de Linhas:</label>
+                        <select id="filterSelect">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="1000">Todos</option>
+                        </select>
+                      </span>
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                        <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-funcionarios-licenciados' %}"><i class="fa fa-file-excel-o"><span class=""> Excel</span></i></a>
+                        <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-licenciado-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                        </a>
+                      </span>
+                      <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                        <thead>
+                          <tr>
+                            <th>Nome Completo</th>
+                            <th>Data de Nascimento</th>
+                            <th>BI</th>
+                            <th>Estado Cívil</th>
+                            <th>Contacto Telefônico</th>
+                            <th>Correio Electrônico</th>
+                            <th>Localidade</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for funcionario_l in funcionarios_l %}
+                          <tr>
+                            <td>{{funcionario_l.firstname}} {{funcionario_l.surname}}</td>
+                            <td>{{funcionario_l.date_of_birth}}</td>
+                            <td>{{funcionario_l.personnel_number}}</td>
+                            <td>{{funcionario_l.estado_civil}}</td>
+                            {% if funcionario_l.telefone is not None %}
+                            <td>{{funcionario_l.telefone}}</td>
+                            {% endif %}
+                            {% if funcionario_l.correio_electronico is not None %}
+                            <td>{{funcionario_l.correio_electronico}}</td>
+        
+                            {% else %}
+                            <td></td>
+        
+                            {% endif %}
+        
+                            {% if funcionario_l.localidade is not None %}
+                            <td>{{funcionario_l.localidade}}</td>
+        
+                            {% else %}
+                            <td></td>
+        
+                            {% endif %}
+                          </tr>
+                          {% endfor %}
+                       
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                      <br>
+                        <h4 class="card-title">Lista de Funcionários Pré-Reformados</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                    <div id="table" class="table-editable">
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                        <input type="text" id="searchInput" placeholder="Pesquisar...">
+                        <label for="filterSelect">Número de Linhas:</label>
+                        <select id="filterSelect">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="1000">Todos</option>
+                        </select>
+                      </span>
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                        <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-funcionarios-pre-reforma' %}"><i class="fa fa-file-excel-o"><span class=""> Excel</span></i></a>
+                        <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-pre-reforma-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                        </a>
+                      </span>
+                      <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                        <thead>
+                          <tr>
+                            <th>Nome Completo</th>
+                            <th>Data de Nascimento</th>
+                            <th>BI</th>
+                            <th>Estado Cívil</th>
+                            <th>Contacto Telefônico</th>
+                            <th>Correio Electrônico</th>
+                            <th>Localidade</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for funcionario_p in funcionarios_p %}
+                          <tr>
+                            <td>{{funcionario_p.firstname}} {{funcionario_p.surname}}</td>
+                            <td>{{funcionario_p.date_of_birth}}</td>
+                            <td>{{funcionario_p.personnel_number}}</td>
+                            <td>{{funcionario_p.estado_civil}}</td>
+                            {% if funcionario_p.telefone is not None %}
+                            <td>{{funcionario_p.telefone}}</td>
+                            {% endif %}
+                            {% if funcionario_p.correio_electronico is not None %}
+                            <td>{{funcionario_p.correio_electronico}}</td>
+        
+                            {% else %}
+                            <td></td>
+        
+                            {% endif %}
+        
+                            {% if funcionario_p.localidade is not None %}
+                            <td>{{funcionario_p.localidade}}</td>
+        
+                            {% else %}
+                            <td></td>
+        
+                            {% endif %}
+                          </tr>
+                          {% endfor %}
+                       
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="iq-card">
+                <div class="iq-card-body">
+                  <h5 class="iq-card-title">Gráfico de Linha de Funcionários</h5>
+                  <!-- Line Chart -->
+                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#lineChart'), {
+                        type: 'line',
+                        data: {
+                          labels: ['Activos', 'Licenciados', 'Pré-Reformados'],
+                          datasets: [{
+                            label: 'Gráfico de Linha',
+                            data: ["{{ qtd_func }}", "{{ qtd_func_lic }}", "{{ qtd_func_re }}"],
+                            fill: false,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                  <!-- End Line CHart -->
+  
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md-6">
+              <div class="iq-card">
+                  <div class="iq-card-body">
+                    <h5 class="iq-card-title">Gráfico de Barra de Funcionários</h5>
+  
+                  <!-- Bar Chart -->
+                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#barChart'), {
+                        type: 'bar',
+                        data: {
+                          labels: ['Activos', 'Licenciados', 'Pré-Reformados'],
+                          datasets: [{
+                            label: 'Gráfico de Barra',
+                            data: ["{{ qtd_func }}", "{{ qtd_func_lic }}", "{{ qtd_func_re }}"],
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(255, 159, 64, 0.2)',
+                              // 'rgba(255, 205, 86, 0.2)',
+                              // 'rgba(75, 192, 192, 0.2)',
+                              // 'rgba(54, 162, 235, 0.2)',
+                              // 'rgba(153, 102, 255, 0.2)',
+                              // 'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(75, 192, 192)',
+                              'rgb(255, 159, 64)',
+                              // 'rgb(255, 205, 86)',
+                              // 'rgb(75, 192, 192)',
+                              // 'rgb(54, 162, 235)',
+                              // 'rgb(153, 102, 255)',
+                              // 'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                  <!-- End Bar CHart -->
+  
+                </div>
+              </div>
+            </div>
+  
+            <br>
+            <br>
+  
+            <div class="col-md-12">
+              <div class="iq-card">
+                <div class="iq-card-body">
+                  <h5 class="iq-card-title">Gráfico de Pizza de Funcionários</h5>
+  
+                  <!-- Pie Chart -->
+                  <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#pieChart'), {
+                        type: 'pie',
+                        data: {
+                          labels: [
+                            'Activos',
+                            'Licenciados',
+                            'Pré-Reformados'
+                          ],
+                          datasets: [{
+                            label: 'My First Dataset',
+                            data: ["{{ qtd_func }}", "{{ qtd_func_lic }}", "{{ qtd_func_re }}"],
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 4
+                          }]
+                        }
+                      });
+                    });
+                  </script>
+                  <!-- End Pie CHart -->
+  
+                </div>
+              </div>
+            </div>
+  
+  
+            <br>
+            <br>
+  
+            
+          </div>
+        </div>
+        
+    </div>
+  </section>
+  
+
+    <!-- /.content -->
+  </div>
+ 
+
+{% endblock main %}
+

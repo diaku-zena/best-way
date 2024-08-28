@@ -1,0 +1,774 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block main %}
+
+
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Funcionários
+      <small>RH</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a> Funcionários <small class="label pull-right" style="color: green;">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Geral</font>
+            </font>
+          </small> </a></li>
+    </ol>
+  </section>
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+        </h5>
+
+        <div class="box-tools pull-right">
+          {% if error %}
+          <!-- Modal -->
+          <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModal4"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="">
+
+                        <div class="-header d-flex justify-content-between">
+
+                          <div class="iq-header-title">
+                            <br>
+                            <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                          </div>
+                          <br>
+
+                        </div>
+                        <div class="-body" style="padding-left: 0;">
+                          <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-8">
+                              <p id="modalMessage">{{error}}</p>
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fim do conteúdo da modal -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="box-tools pull-right">
+            <div class="alert text-white bg-success" style="padding-right: 6px;" role="alert">
+              <div class="iq-alert-text"> {{error}} </div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="ri-close-line"></i>
+              </button>
+           </div>  -->
+          {% endif %}
+          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <!-- Janela Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="width: 100%; height: 100%;">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-user"><span class=""> </span></i> Novo Funcionário </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="iq-card-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <ul id="top-tabbar-vertical" class="p-0">
+                        <li class="active text-center" id="personal">
+                          <a href="javascript:void();">
+                            <i class="ri-user-fill text-primary"></i>
+                            <span style="display:block;">Cadastrar Funcionário</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-8">
+                      <form id="form-wizard3" name="employee_form" method="post" class="text-center" action="create/"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <fieldset>
+                          <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                                <h3 class="mb-4">Informações Pessoais:</h3>
+                              </div>
+                            </div>
+                            <div class="form-card text-left">
+                              <div class="row">
+                                <div class="col-12">
+                                  <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label">Nome Completo:</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control"
+                                      placeholder="Informe o seu nome completo" name="primeiro_nome" />
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label">Genêro:</label>
+                                    <select class="form-control" name="genero" required="required">
+                                      <option value="" selected>Selecione</option>
+                                      <option value="Masculino">Masculino</option>
+                                      <option value="Feminino">Feminino</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label">Estado Cívil:</label>
+                                    <select class="form-control" name="estado_civil" required="required">
+                                      <option value="" selected>Selecione</option>
+                                      <option value="Solteiro (a)">Solteiro (a)</option>
+                                      <option value="Casado (a)">Casado (a)</option>
+                                      <option value="Divorciado (a)">Divorciado (a)</option>
+                                      <option value="Viúvo (a)">Viúvo (a)</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="telefone" class="control-label">Contacto Telefônico:</label>
+                                    <input type="text" class="form-control" id="telefone" name="telefone"
+                                      placeholder="Informe o seu contacto">
+                                    <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                      name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="numero_bi" class="control-label">Número do BI:</label>
+                                    <input id="numero_bi" name="numero_bi" type="text" class="form-control"
+                                      required="required" maxlength="14" placeholder="Informe o número do BI">
+                                    <!-- <input id="numero_bi" name="numero_bi" type="text" class="form-control"
+                                       required="required" maxlength="14" placeholder="Informe o número do BI" pattern="[0-9]{9}(LA|BE|HU|HA|MO|BO|CA|KK|CU|UI|NE|CC|CE|BA|HO|ZA)[0-9]{3}" title="Entre Com um Número de bilhete Válido"> -->
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="data_de_validade" class="control-label">Data de Validade: </label>
+                                    <input type="date" id="data_de_validade" class="form-control" required="required"
+                                      name="data_de_validade">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="data_nascimento" class="control-label">Data de Nascimento: </label>
+                                    <input type="date" id="data_nascimento" class="form-control" required="required"
+                                      name="data_nascimento">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="morada" class="control-label">Morada: </label>
+                                    <input type="text" class="form-control" required="required" id="morada"
+                                      name="morada" placeholder="Informe a sua morada">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="provincia_residencia" class="control-label">Província de
+                                      Residência:</label>
+                                    <select class="form-control" name="provincia_residencia" required="required">
+                                      <option value="0" selected>Selecione</option>
+                                      <option value="Bengo">Bengo</option>
+                                      <option value="Benguela">Benguela</option>
+                                      <option value="Bié">Bié</option>
+                                      <option value="Cabinda">Cabinda</option>
+                                      <option value="Cuando Cubango">Cuando Cubango</option>
+                                      <option value="Cuanza Norte">Cuanza Norte</option>
+                                      <option value="Cuanza Sul">Cuanza Sul</option>
+                                      <option value="Cunene">Cunene</option>
+                                      <option value="Huambo">Huambo</option>
+                                      <option value="Huíla">Huíla</option>
+                                      <option value="Luanda">Luanda</option>
+                                      <option value="Lunda Norte">Lunda Norte</option>
+                                      <option value="Lunda Sul">Lunda Sul</option>
+                                      <option value="Malanje">Malanje</option>
+                                      <option value="Moxico">Moxico</option>
+                                      <option value="Namibe">Namibe</option>
+                                      <option value="Uíge">Uíge</option>
+                                      <option value="Zaire">Zaire</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="provincia_nascimento" class="control-label">Província de
+                                      Nascimento:</label>
+                                    <select class="form-control" name="provincia_nascimento" required="required">
+                                      <option value="0" selected>Selecione</option>
+                                      <option value="Bengo">Bengo</option>
+                                      <option value="Benguela">Benguela</option>
+                                      <option value="Bié">Bié</option>
+                                      <option value="Cabinda">Cabinda</option>
+                                      <option value="Cuando Cubango">Cuando Cubango</option>
+                                      <option value="Cuanza Norte">Cuanza Norte</option>
+                                      <option value="Cuanza Sul">Cuanza Sul</option>
+                                      <option value="Cunene">Cunene</option>
+                                      <option value="Huambo">Huambo</option>
+                                      <option value="Huíla">Huíla</option>
+                                      <option value="Luanda">Luanda</option>
+                                      <option value="Lunda Norte">Lunda Norte</option>
+                                      <option value="Lunda Sul">Lunda Sul</option>
+                                      <option value="Malanje">Malanje</option>
+                                      <option value="Moxico">Moxico</option>
+                                      <option value="Namibe">Namibe</option>
+                                      <option value="Uíge">Uíge</option>
+                                      <option value="Zaire">Zaire</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="numero_mecanografico" class="control-label">Número Mecanográfico:
+                                    </label>
+                                    <input type="text" class="form-control" required="required"
+                                      id="numero_mecanografico" name="numero_mecanografico"
+                                      placeholder="Número mecanográfico">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="numero_seguranca_social" class="control-label">Número Segurança Social:
+                                    </label>
+                                    <input type="text" class="form-control" required="required"
+                                      id="numero_seguranca_social" name="numero_seguranca_social"
+                                      placeholder="Número Segurança Social">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="numero_dependentes" class="control-label">Número de Dependentes:
+                                    </label>
+                                    <input type="text" class="form-control" required="required" id="numero_dependentes"
+                                      name="numero_dependentes" placeholder="Informe o nº de dependentes">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <hr>
+
+                          <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                                <h3 class="mb-4">Informações Profissionais:</h3>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_admissao" class="control-label">Data de Admissão: </label>
+                                  <input type="date" id="data_admissao" class="form-control" required="required"
+                                    name="data_admissao">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="motivo_admissao" class="control-label">Motivo da Admissão: </label>
+                                  <input type="text" id="motivo_admissao" class="form-control" name="motivo_admissao">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_de_demissao" class="control-label">Data de Demissão: </label>
+                                  <input type="date" id="data_de_demissao" class="form-control" name="data_de_demissao">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="motivo_demissao" class="control-label">Motivo da Demissão: </label>
+                                  <input type="text" id="motivo_demissao" class="form-control" name="motivo_demissao">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_fim_contrato" class="control-label">Data Fim Contrato: </label>
+                                  <input type="date" id="data_fim_contrato" class="form-control"
+                                    name="data_fim_contrato">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Reforma:</label>
+                                  <select class="form-control" name="reforma" required="required">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Reformado">Reformado</option>
+                                    <option value="Pré-reforma">Pré-reforma</option>
+                                    <option value="Não reformado">Não reformado</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="cargo" class="control-label">Cargo / Função: </label>
+                                  <input type="text" id="cargo" class="form-control" required="required" name="cargo">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="profissao" class="control-label">Profissão: </label>
+                                  <input type="text" id="profissao" class="form-control" required="required"
+                                    name="profissao">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="tipo_contrato" class="control-label">Tipo de Contrato: </label>
+                                  <input type="text" id="tipo_contrato" class="form-control" required="required"
+                                    name="tipo_contrato">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Tipo de Pessoal:</label>
+                                  <select class="form-control" name="tipo_pessoal" required="required">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Pessoal do Quadro Efectivo">Pessoal do Quadro Efectivo</option>
+                                    <option value="Pessoal Não Efectivo">Pessoal Não Efectivo</option>
+                                    <option value="Comissão de Serviço">Comissão de Serviço</option>
+                                    <option value="Colaborador">Colaborador</option>
+                                    <option value="Reformado">Reformado</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <!-- <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="tipo_pessoal" class="control-label">Tipo de Pessoal: </label>
+                                    <input type="text" id="tipo_pessoal" class="form-control" required="required" name="tipo_pessoal" >
+                                  </div>
+                                </div> -->
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Situação de Contrato:</label>
+                                  <select class="form-control" name="situacao_contrato" required="required">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Contratado">Contratado</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="carga_horaria_diurna" class="control-label">Carga Horária Diurna: </label>
+                                  <input type="text" id="carga_horaria_diurna" class="form-control" required="required"
+                                    name="carga_horaria_diurna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="carga_horaria_nocturna" class="control-label">Carga Horária Nocturna:
+                                  </label>
+                                  <input type="text" id="carga_horaria_nocturna" class="form-control"
+                                    required="required" name="carga_horaria_nocturna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="valor_aula_diurna" class="control-label">Valor Aula Diurna: </label>
+                                  <input type="text" id="valor_aula_diurna" class="form-control" required="required"
+                                    name="valor_aula_diurna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="valor_aula_nocturna" class="control-label">Valor Aula Nocturna: </label>
+                                  <input type="text" id="valor_aula_nocturna" class="form-control" required="required"
+                                    name="valor_aula_nocturna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="aula_diurna" class="control-label">Honorário / Aula Diurna: </label>
+                                  <input type="text" id="aula_diurna" class="form-control" required="required"
+                                    name="aula_diurna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="aula_nocturna" class="control-label">Honorário / Aula Nocturna: </label>
+                                  <input type="text" id="aula_nocturna" class="form-control" required="required"
+                                    name="aula_nocturna">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="honorario_total" class="control-label">Honorário Total: </label>
+                                  <input type="text" id="honorario_total" class="form-control" required="required"
+                                    name="honorario_total">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Estabelecimento:</label>
+                                  <select class="form-control" name="direcao_alocacao">
+                                    <option value=" " selected>Selecione</option>
+                                    {% for direccao in direccoes %}
+
+                                    <option value="{{direccao.id}}">{{direccao.nome}}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Categoria Laboral Antiga:</label>
+                                  <select class="form-control" name="categoria">
+                                    <option value="" selected>Selecione</option>
+                                    {% for categoria in categorias %}
+                                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Função Chefia Nova:</label>
+                                  <select class="form-control" name="funcoes_chefias_nova">
+                                    <option value="" selected>Selecione</option>
+                                    {% for categoria in funcoes_chefia %}
+                                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Função Chefia Antiga:</label>
+                                  <select class="form-control" name="funcoes_chefias_antiga">
+                                    <option value="" selected>Selecione</option>
+                                    {% for categoria in categorias_nova %}
+                                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="vencimento_mensal" class="control-label">Salário Base:</label>
+                                  <input type="text" class="form-control" id="vencimento_mensal" required="required"
+                                    name="vencimento_mensal" placeholder="Informe o salário base">
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Habilitação Literária:</label>
+                                  <select class="form-control" name="habilitacao_literaria" required="required">
+                                    <option value="None" selected>Selecione</option>
+                                    <option value="Ensino de Base">Ensino de Base</option>
+                                    <option value="Ensino Médio">Ensino Médio</option>
+                                    <option value="Licenciatura">Licenciatura</option>
+                                    <option value="Especialização em pós-graduação">Especialização em pós-graduação
+                                    </option>
+                                    <option value="Mestrado">Mestrado</option>
+                                    <option value="Doutoramento">Doutoramento</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="area_de_formacao" class="control-label">Área de Formação: </label>
+                                  <input type="text" class="form-control" id="area_de_formacao" name="area_de_formacao"
+                                    placeholder="Informe a área de formação">
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Regime de Trabalho:</label>
+                                  <select class="form-control" name="regime_trabalho" required="required">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Colaborador">Colaborador</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <input type="submit" class="btn btn-primary action-button pull-right " value="Salvar">
+                          <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal"
+                            style="margin-right: 3px;">Fechar</button>
+
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                      <form id="form-wizard3" method="post" class="text-center" action="{% url 'upload_excel' %}"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- fieldsets -->
+                        <fieldset>
+                          <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                                <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="control-label">Escolha um Ficheiro:</label>class
+                                  <input maxlength="100" type="file" required="required" class="form-control"
+                                    placeholder="Informe o seu nome completo" name="excel_file" />
+                                </div>
+                              </div>
+                        </fieldset>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary action-button pull-right">Importar</button>
+                        <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal"
+                          style="margin-right: 3px;">Fechar</button>
+                      </form>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-times"><span class=""> </span></i> Eliminar Dados </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-card text-left">
+                        <div class="row">
+                          <div class="">
+                            <p class="control-label justify-content-center" style="text-align: center;">Tem a Certeza
+                              que Pretende Eliminar ?</p>
+                            <br><br>
+                            <button type="button" class="btn btn-danger action-button pull-right">Eliminar</button>
+                            <button type="button" class="btn btn-secondary action-button  pull-right"
+                              data-dismiss="modal" style="margin-right: 3px;">Cancelar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="progress" id="progressBar" style="display: none;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;"
+      aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
+  <section class="content">
+    <!-- Page Content  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+            <div class="iq-header-title">
+              <br>
+              <h4 class="card-title">Lista de Funcionários</h4>
+            </div>
+          </div>
+          <div class="iq-card-body">
+
+            <div id="table" class="table-editable">
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <label for="filterSelect">Número de Linhas:</label>
+                <select id="filterSelect">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="1000">Todos</option>
+                </select>
+              </span>
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal1"><i
+                    class="fa fa-upload"><span class=""> Importar</span></i>
+                </button>
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal"><i
+                    class="fa fa-plus"><span class=""> Adicionar
+                      Novo</span></i>
+                </button>
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-pdf' %}"><i class="fa fa-file-pdf-o"><span
+                      class=""> PDF</span></i>
+                </a>
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-funcionarios' %}"><i
+                    class="fa fa-file-excel-o"><span class=""> Exportar</span></i></a>
+              </span>
+
+              <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                  <tr>
+                    <th>Nº Mecanográfico</th>
+                    <th>Nome Completo</th>
+                    <th>Data de Nascimento</th>
+                    <th>Nº BI</th>
+                    <th>Estado Cívil</th>
+                    <th>Morada</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="employeeTableBody"></tbody> <!-- Populate dynamically -->
+              </table>
+
+              <nav aria-label="Page navigation example" class="text-center">
+                <ul class="pagination justify-content-center" id="paginationControls">
+                  <!-- Pagination buttons will be dynamically inserted here -->
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- /.content -->
+</div>
+
+<script>showModal()</script>
+
+{% endblock main %}

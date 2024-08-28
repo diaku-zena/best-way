@@ -1,0 +1,433 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<br>
+<br>
+<br>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Funcionários
+      <small>RH</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a> Funcionários <small class="label pull-right" style="color: green;">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Geral</font>
+            </font>
+          </small> </a></li>
+    </ol>
+  </section>
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+        </h5>
+
+        <div class="box-tools pull-right">
+
+          
+
+          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <!-- Janela Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Adicionar Novo Funcionário</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-user"><span class=""> </span></i> Novo Funcionário </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="iq-card-body" style="padding-left: 0;">
+                  <div class="row"> 
+                     <div class="col-md-4">
+                        <ul id="top-tabbar-vertical" class="p-0">
+                           <li class="active text-center" id="personal" >
+                              <a href="javascript:void();">
+                                 <i class="ri-user-fill text-primary"></i>
+                              <span style="display:block;">Informações Pessoais</span>
+                              </a>
+                           </li>
+                           <li class="text-center" id="contact">
+                              <a href="javascript:void();">
+                              <i class="ri-briefcase-4-fill text-warning"></i>
+                              <span style="display:block;">Informações Profissionais</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="col-md-8">
+    
+                      
+                          <form action="" method="POST" enctype="multipart/form-data" class="text-center">
+                          {% csrf_token %}
+                           <fieldset>
+                              <div class="form-card text-left">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <h3 class="mb-4">Informações Pessoais:</h3>
+                                    </div>
+                                 </div>
+                                 <div class="form-card text-left">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                   
+                                    
+                                    
+                                    
+                                    
+                                    {% include 'corecode/form_snippet_actual.html' %}
+                                    
+                                    
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <button id="submit" type="button" name="next" class="btn btn-primary next action-button pull-right" value="Próximo" >Próximo</button>
+                           </fieldset>
+                           <fieldset>
+                              <div class="form-card text-left">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <h3 class="mb-4">Informações Profissionais:</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label for="emailid" class="control-label">Data de Admissão: </label>
+                                          <input type="date" id="emailid" class="form-control" required="required" name="emailid" >
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="control-label">Direcção de Alocação:</label>
+                                          <select class="form-control">
+                                                <option value="0" selected>Selecione</option>
+                                                <option value="Dir.1">Dir.1</option>
+                                                <option value="Dir.2">Dir.2</option>
+                                                <option value="Dir...">Dir...</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="control-label">Categoria Laboral Antiga:</label>
+                                          <select class="form-control">
+                                                <option value="0" selected>Selecione</option>
+                                                <option value="Categoria.1">Categoria.1</option>
+                                                <option value="Categoria.2">Categoria.2</option>
+                                                <option value="Categoria...">Categoria...</option>
+                                                <option value="Outra">Outra</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label for="uname" class="control-label">Outra:</label>
+                                          <input type="text" class="form-control" id="uname" required="required" name="uname" placeholder="Informe uma outra categoria">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="control-label">Categoria Laboral Nova:</label>
+                                          <select class="form-control">
+                                                <option value="0" selected>Selecione</option>
+                                                <option value="Categoria.1">Categoria.1</option>
+                                                <option value="Categoria.2">Categoria.2</option>
+                                                <option value="Categoria...">Categoria...</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label for="uname" class="control-label">Salário Base:</label>
+                                          <input type="text" class="form-control" id="uname" required="required" name="uname" placeholder="Informe o salário base">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="control-label">Função de Chefia:</label>
+                                          <select class="form-control">
+                                                <option value="0" selected>Selecione</option>
+                                                <option value="Chefia.1">Chefia.1</option>
+                                                <option value="Chefia.2">Chefia.2</option>
+                                                <option value="Chefia...">Chefia...</option>
+                                                <option value="Outra">Outra</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label for="uname" class="control-label">Outra:</label>
+                                          <input type="text" class="form-control" id="uname" required="required" name="uname" placeholder="Informe uma outra função">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="control-label">ND:</label>
+                                          <select class="form-control">
+                                             <option value="0" selected>Selecione</option>
+                                             <option value="1º">1º</option>
+                                             <option value="2º">2º</option>
+                                             <option value="3º">3º</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label class="control-label">Reforma:</label>
+                                          <select class="form-control">
+                                             <option value="0" selected>Selecione</option>
+                                             <option value="Reformado">Reformado</option>
+                                             <option value="Pré-reforma">Pré-reforma</option>
+                                             <option value="Não">Não</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label class="control-label">Habilitação Literária:</label>
+                                          <select class="form-control">
+                                                <option value="0" selected>Selecione</option>
+                                                <option value="Ensino de Base">Ensino de Base</option>
+                                                <option value="Ensino Médio">Ensino Médio</option>
+                                                <option value="Licenciatura">Licenciatura</option>
+                                                <option value="Especialização em pós-graduação">Especialização em pós-graduação</option>
+                                                <option value="Mestrado">Mestrado</option>
+                                                <option value="Doutoramento">Doutoramento</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                                    <a class="btn btn-primary action-button pull-right " href="#" >Salvar</a>
+                                
+                                    <button type="button" name="previous" class="btn btn-secondary previous action-button-previous pull-right " value="Previous" style="margin-right: 3px;">Anterior</button>
+                             
+                           </fieldset>
+                        </form>
+                        
+                     </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                      <form id="form-wizard3" class="text-center">
+                        <!-- fieldsets -->
+                        <fieldset>
+                          <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                                <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="control-label">Escolha um Ficheiro:</label>
+                                  <input maxlength="100" type="file" required="required" class="form-control"
+                                    placeholder="Informe o seu nome completo" />
+                                </div>
+                              </div>
+                        </fieldset>
+                        <br>
+                        <br>
+                          <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-primary action-button pull-right" style="margin-right: 3px;">Importar</button>
+                      </form>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <!-- Page Content  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+            <div class="iq-header-title">
+              <br>
+              <h4 class="card-title">Lista de Funcionários</h4> 
+            </div>
+          </div>
+          <div class="iq-card-body">
+
+            <div id="table" class="table-editable">
+              <!-- @include('include.table_filter') -->
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <select id="filterSelect">
+                  <option value="all">Todos</option>
+                </select>
+              </span>
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal1"><i class="fa fa-upload"><span class=""> Importar</span></i>
+                </button>
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'employee-create' %}"><i
+                  class="fas fa-plus"></i> Novo Funcionario</a>
+
+                  
+                </button>
+                <button class="btn btn-sm iq-bg-dark"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                </button>
+              </span>
+              <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                  <tr>
+                    <th>Nome Completo</th>
+                    <th>Data de Nascimento</th>
+                    <th>Gênero</th>
+                    <th>BI</th>
+                    <th>Estado Cívil</th>
+                    <th>Contacto Telefônico</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+        {% for employee in employees %}
+          <tr class='clickable-row' data-href="{% url 'employee-detail' employee.id %}">
+          <!--  <td>{{ forloop.counter}}</td> -->
+          <td>{{employee.firstname }} {{ employee.surname}} </td>
+            <td>{{ employee.date_of_birth}}</td>
+            <td>{{ employee.gender}}</td>
+            <td>{{ employee.personnel_number}}</td>
+            <td>{{ employee.telefone}}</td>
+            <td>{{ employee.estado_civil}}</td>
+            
+            <td>{{ employee.get_current_status_display}}</td>
+            <td>
+                <span class="text-center"><a href="editarFuncionario.html" type="button"
+                  class="btn iq-bg-warning btn-rounded btn-sm my-0"><i class="fa fa-pencil"
+                    aria-hidden="false"></i></a>
+              </span>
+              <span class=""><a href="visualizarFuncionario.html" type="button" class="btn iq-bg-primary btn-rounded btn-sm my-0"><i
+                    class="fa fa-eye" aria-hidden="true"></i></a>
+              </span>
+              </td>
+          </tr>
+        {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation example" class="text-center">
+              <ul class="pagination justify-content-center">
+                 <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                 </li>
+                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                 <li class="page-item"><a class="page-link" href="#">2</a></li>
+                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                 <li class="page-item">
+                    <a class="page-link" href="#">Próximo</a>
+                 </li>
+              </ul>
+           </nav>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</section>
+<!-- /.content -->
+</div>
+
+
+
+
+
+
+
+
+{% endblock main %}
+
+
+
+

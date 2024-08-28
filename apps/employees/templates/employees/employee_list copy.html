@@ -1,0 +1,659 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block main %}
+
+
+  
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Funcionários
+      <small>RH</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a> Funcionários <small class="label pull-right" style="color: green;">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Geral</font>
+            </font>
+          </small> </a></li>
+    </ol>
+  </section>
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+        </h5>
+
+        <div class="box-tools pull-right">
+          {% if error %}
+          <!-- Modal -->
+          <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModal4"
+          aria-hidden="true">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="">
+      
+                      <div class="-header d-flex justify-content-between">
+      
+                        <div class="iq-header-title">
+                          <br>
+                          <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                        </div>
+                        <br>
+      
+                      </div>
+                      <div class="-body" style="padding-left: 0;">
+                        <div class="row">
+                          <div class="col-md-2">
+      
+                          </div>
+                          <div class="col-md-8">
+                            <p id="modalMessage">{{error}}</p>
+                          </div>
+                          <div class="col-md-2">
+      
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Fim do conteúdo da modal -->
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- <div class="box-tools pull-right">
+            <div class="alert text-white bg-success" style="padding-right: 6px;" role="alert">
+              <div class="iq-alert-text"> {{error}} </div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="ri-close-line"></i>
+              </button>
+           </div>  -->
+           {% endif %}
+          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <!-- Janela Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="width: 100%; height: 100%;">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-user"><span class=""> </span></i> Novo Funcionário </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="iq-card-body" style="padding-left: 0;">
+                  <div class="row"> 
+                     <div class="col-md-4">
+                        <ul id="top-tabbar-vertical" class="p-0">
+                           <li class="active text-center" id="personal" >
+                              <a href="javascript:void();">
+                                 <i class="ri-user-fill text-primary"></i>
+                              <span style="display:block;">Cadastrar Funcionário</span>
+                              </a>
+                           </li>
+                           <!-- <li class="text-center" id="contact">
+                              <a href="javascript:void();">
+                              <i class="ri-briefcase-4-fill text-warning"></i>
+                              <span style="display:block;">Informações Profissionais</span>
+                              </a>
+                           </li> -->
+                        </ul>
+                     </div>
+                     <div class="col-md-8">
+                      <form id="form-wizard3" name="employee_form" method="post" class="text-center" action="create/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                     
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-12">
+                                    <h3 class="mb-4">Informações Pessoais:</h3>
+                                 </div>
+                              </div>
+                              <div class="form-card text-left">
+                               <div class="row">
+                                 <div class="col-12">
+                                   <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                                 </div>
+                               </div>
+                               <div class="row">
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label class="control-label">Nome:</label>
+                                     <input maxlength="100" type="text" required="required" class="form-control"
+                                       placeholder="Informe o seu nome completo" name="primeiro_nome" />
+                                   </div>
+                                 </div>
+                    
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label class="control-label">Genêro:</label>
+                                     <select class="form-control" name="genero">
+                                       <option value="" selected>Selecione</option>
+                                       <option value="masculino">Masculino</option>
+                                       <option value="feminino">Feminino</option>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label class="control-label">Estado Cívil:</label>
+                                     <select class="form-control" name="estado_civil">
+                                       <option value="" selected>Selecione</option>
+                                       <option value="solteiro">Solteiro (a)</option>
+                                       <option value="casado">Casado (a)</option>
+                                       <option value="divorciado">Divorciado (a)</option>
+                                       <option value="viuvo">Viúvo (a)</option>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="numero_bi" class="control-label">Número do BI:</label>
+                                     <input id="numero_bi" name="numero_bi" type="text" class="form-control"
+                                       required="required" maxlength="14" placeholder="Informe o número do BI" pattern="[0-9]{9}(LA|BE|HU|MO|BO|CA|KK|CU|UI)[0-9]{3}" title="Entre Com um Número de bilhete Válido">
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="data_nascimento" class="control-label">Data de Nascimento: </label>
+                                     <input type="date" id="data_nascimento" class="form-control" required="required"
+                                       name="data_nascimento">
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="localizacao" class="control-label">Localidade: </label>
+                                     <input type="text" class="form-control" required="required" id="localizacao" name="localizacao"
+                                       placeholder="Informe a sua localidade">
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="morada" class="control-label">Morada: </label>
+                                     <input type="text" class="form-control" required="required" id="morada" name="morada"
+                                       placeholder="Informe a sua morada">
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="provincia_residencia" class="control-label">Província de Residência:</label>
+                                     <select class="form-control" name="provincia_residencia">
+                                       <option value="0" selected>Selecione</option>
+                                       <option value="Bengo">Bengo</option>
+                                       <option value="Benguela">Benguela</option>
+                                       <option value="Bié">Bié</option>
+                                       <option value="Cabinda">Cabinda</option>
+                                       <option value="Cuando Cubango">Cuando Cubango</option>
+                                       <option value="Cuanza Norte">Cuanza Norte</option>
+                                       <option value="Cuanza Sul">Cuanza Sul</option>
+                                       <option value="Cunene">Cunene</option>
+                                       <option value="Huambo">Huambo</option>
+                                       <option value="Huíla">Huíla</option>
+                                       <option value="Luanda">Luanda</option>
+                                       <option value="Lunda Norte">Lunda Norte</option>
+                                       <option value="Lunda Sul">Lunda Sul</option>
+                                       <option value="Malanje">Malanje</option>
+                                       <option value="Moxico">Moxico</option>
+                                       <option value="Namibe">Namibe</option>
+                                       <option value="Uíge">Uíge</option>
+                                       <option value="Zaire">Zaire</option>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="telefone" class="control-label">Contacto Telefônico:</label>
+                                     <input type="text" class="form-control" id="telefone" required="required"
+                                       name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido">
+                                   </div>
+                                 </div>
+                        
+                                 <div class="col-md-4">
+                                   <div class="form-group">
+                                     <label for="numero_mecanografico" class="control-label">Número Mecanográfico: </label>
+                                     <input type="text" class="form-control" required="required" id="numero_mecanografico" name="numero_mecanografico"
+                                       placeholder="Número mecanográfico">
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+
+                          <hr>
+                           
+                           <div class="form-card text-left">
+                            <div class="row">
+                               <div class="col-12">
+                                  <h3 class="mb-4">Informações Profissionais:</h3>
+                               </div>
+                            </div>
+                            <div class="row">
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label for="data_admissao" class="control-label">Data de Admissão: </label>
+                                     <input type="date" id="data_admissao" class="form-control" required="required" name="data_admissao" >
+                                  </div>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label class="control-label">Direcção de Alocação:</label>
+                                     <select class="form-control" name="direcao_alocacao">
+                                      <option value=" " selected>Selecione</option>
+                                      {% for direccao in direccoes %}
+                                           
+                                           <option value="{{direccao.id}}">{{direccao.nome}}</option>
+                                      
+                                      {% endfor %}
+                                     </select>
+                                  </div>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label class="control-label">Categoria Profisional:</label>
+                                     <select class="form-control" name="categoria">
+                                      <option value="" selected>Selecione</option>
+                                      {% for categoria in  categorias %}
+                                           <option value="{{categoria.id}}">{{categoria.nome}}</option>
+    
+                                      {% endfor %}
+                                     </select>
+                                     </select>
+                                  </div>
+                               </div>
+
+                               <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                   <label for="categoria_outra" class="control-label">Outra Categoria:</label>
+                                   <input type="text" class="form-control" id="categoria_outra"  name="categoria_outra" placeholder="Informe outra categoria ">
+                                </div>
+                             </div> -->
+
+                             <!-- <div class="col-md-4">
+                              <div class="form-group">
+                                 <label class="control-label">Nova Categoria:</label>
+                                 <select class="form-control" id="categoria_nova"  name="categoria_nova">
+                                  <option value="" selected>Selecione</option>
+                                  {% for categoria_nova in  categorias_nova %}
+                                       <option value="{{categoria.id}}">{{categoria_nova.nome}}</option>
+
+                                  {% endfor %}
+                                 </select>
+                                 </select>
+                              </div>
+                           </div> -->
+
+                         
+                             
+                   
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label for="vencimento_mensal" class="control-label">Vencimento Mensal:</label>
+                                     <input type="number" class="form-control" id="salario_base" required="required" name="vencimento_mensal" placeholder="Informe o salário base">
+                                  </div>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label class="control-label">Função de Chefia:</label>
+                                     
+                                     <select class="form-control" name="funcao_chefia">
+                                      <option value=" " selected>Selecione</option>
+                                      {% for funcao in funcoes_chefia %}   
+                                      <option value="{{direccoes.id}}">{{funcao.nome}}</option>
+                                      {% endfor %}
+                                     </select>
+                                  </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="numero_dependentes" class="control-label">Número de Dependentes: </label>
+                                  <input type="text" class="form-control" required="required" id="numero_dependentes" name="numero_dependentes"
+                                    placeholder="Informe o nº de dependentes">
+                                </div>
+                              </div>
+
+
+                               <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                   <label for="funcao_chefia_outra" class="control-label">Outra Função de Chefia:</label>
+                                   <input type="text" class="form-control" id="funcao_chefia_outra"  name="funcao_chefia_outra" placeholder="Informe Outra funcao de cefia">
+                                </div>
+                             </div> -->
+                    
+                
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label class="control-label">Situação:</label>
+                                     <select class="form-control" name="reforma">
+                                        <option value="" selected>Selecione</option>
+                                        <option value="activo">Normal</option>
+                                        <option value="licenciado">Licenciado</option>
+                                        <option value="pre-reformado">Pré-reforma</option>
+                                        <!-- <option value="reformado">Reformado</option> -->
+                                     </select>
+                                  </div>
+                               </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group" >
+                                   <label class="control-label">Estado:</label>
+                                   <select class="form-control" name="estado" readonly>
+                                      <!-- <option value="" >Selecione</option> -->
+                                      <option value="Incluso" selected>Incluso</option>
+                                      <option value="Activo">Activo</option>
+                                      <option value="Inactivo">Inactivo</option>
+                                   </select>
+                                </div>
+                              </div>
+                            
+                               <div class="col-md-4">
+                                  <div class="form-group">
+                                     <label class="control-label">Habilitação Literária:</label>
+                                     <select class="form-control" name="habilitacao_literaria">
+                                           <option value="0" selected>Selecione</option>
+                                           <option value="Ensino de Base">Ensino de Base</option>
+                                           <option value="Ensino Médio">Ensino Médio</option>
+                                           <option value="Licenciatura">Licenciatura</option>
+                                           <option value="Especialização em pós-graduação">Especialização em pós-graduação</option>
+                                           <option value="Mestrado">Mestrado</option>
+                                           <option value="Doutoramento">Doutoramento</option>
+                                     </select>
+                                  </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="Estabelecimento" class="control-label">Estabelecimento:</label>
+                                  <select class="form-control" name="estabelecimento">
+                                    <option value="0" selected>Selecione</option>
+                                    <option value="Bié">Bié</option>
+                                    <option value="Cubal">Cubal</option>
+                                    <option value="Huambo">Huambo</option>
+                                    <option value="Lobito">Lobito</option> 
+                                    <option value="Luanda">Luanda</option> 
+                                    <option value="Moxico">Moxico</option>
+                                  </select>
+                                </div>
+                             </div>
+                            </div>
+                         </div>
+                         <input type="submit" class="btn btn-primary action-button pull-right " value="Salvar" >
+                         <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;">Fechar</button>
+                         
+                        </fieldset>
+                     </form>
+                     </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                      <form id="form-wizard3" method="post" class="text-center" action="{% url 'upload_excel' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- fieldsets -->
+                        <fieldset>
+                          <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                                <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="control-label">Escolha um Ficheiro:</label>
+                                  <input maxlength="100" type="file" required="required" class="form-control"
+                                    placeholder="Informe o seu nome completo"  name="excel_file"/>
+                                </div>
+                              </div>
+                        </fieldset>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary action-button pull-right" >Importar</button>
+                        <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;">Fechar</button>
+                      </form>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+
+                  <div class="iq-header-title">
+                    <br>
+                    <h3 class=""><i class="fa fa-times"><span class=""> </span></i> Eliminar Dados </h3>
+                  </div>
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-card text-left">
+                        <div class="row">
+                          <div class="">
+                            <p class="control-label justify-content-center" style="text-align: center;">Tem a Certeza que Pretende Eliminar ?</p>
+                            <br><br>
+                            <button type="button"  class="btn btn-danger action-button pull-right" >Eliminar</button>
+                            <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;" >Cancelar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fim do conteúdo da modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="progress" id="progressBar" style="display: none;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
+  <section class="content">
+    <!-- Page Content  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+            <div class="iq-header-title">
+              <br>
+              <h4 class="card-title">Lista de Funcionários</h4> 
+            </div>
+          </div>
+          <div class="iq-card-body">
+
+            <div id="table" class="table-editable">
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <label for="filterSelect">Número de Linhas:</label>
+                <select id="filterSelect">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="1000">Todos</option>
+                </select>
+              </span>
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal1"><i class="fa fa-upload"><span class=""> Importar</span></i>
+                </button>
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"><span class=""> Adicionar
+                      Novo</span></i>
+                </button>
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                </a>
+              </span>
+              
+              <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                  <tr>
+                    <th>Nome Completo</th>
+                    <th>Data de Nascimento</th>
+                    <th>BI</th>
+                    <th>Estado Cívil</th>
+                    <th>Contacto Telefônico</th>
+                    <th>Localidade</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for funcionario in funcionarios %}
+                  <tr>
+                    <td>{{funcionario.firstname}} {{funcionario.surname}}</td>
+                    <td>{{funcionario.date_of_birth}}</td>
+                    <td>{{funcionario.personnel_number}}</td>
+                    <td>{{funcionario.estado_civil}}</td>
+                    {% if funcionario.telefone is not None %}
+                    <td>{{funcionario.telefone}}</td>
+
+                    {% else %}
+                    <td></td>
+
+                    {% endif %}
+
+                    {% if funcionario.localidade is not None %}
+                    <td>{{funcionario.localidade}}</td>
+
+                    {% else %}
+                    <td></td>
+
+                    {% endif %}
+                    
+                   
+
+
+                    
+                    <td >
+                      <span class="text-center"><a href="{% url 'employee-edit' funcionario.id %}" type="button"
+                          class="btn iq-bg-warning btn-rounded btn-sm my-0"><i class="fa fa-pencil"
+                            aria-hidden="false"></i></a>
+                      </span>
+                      <span class=""><a href="{% url 'employee-detail' funcionario.id  %}" type="button" class="btn iq-bg-primary btn-rounded btn-sm my-0"><i
+                            class="fa fa-eye" aria-hidden="true"></i></a>
+                      </span>
+                      <span class=""><a href="{% url 'employee-delete' funcionario.id  %}" type="button" class="btn iq-bg-danger btn-rounded btn-sm my-0"><i
+                        class="fa fa-trash" aria-hidden="true"></i></a>
+                      </span>
+                    </td>
+                  </tr>
+                  {% endfor %}
+               
+                </tbody>
+              </table>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</section>
+<!-- /.content -->
+</div>
+
+<script>showModal()</script>
+
+{% endblock main %}

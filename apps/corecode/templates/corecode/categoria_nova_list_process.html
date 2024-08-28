@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block main %}
+
+
+<style>
+  .modal {
+    /* width: 300px; 
+    height: 200px;  */
+
+    /* width: 50%; 
+    max-width: 80%; 
+    max-height: 80%;  */
+
+    position: fixed; /* Para manter a modal fixa na tela */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Move a modal de volta pela metade de sua própria largura e altura */
+    z-index: 9999; /* Garante que a modal esteja acima de outros elementos */
+    margin: 0 auto; /* Adiciona margem automática para centralizar */
+}
+</style>
+
+<div class="content-wrapper">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+     <h1>
+       Categorias Profissionais
+       <small>RH</small>
+     </h1>
+     <ol class="breadcrumb">
+       <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+       <li><a href="#">Recursos Humanos</a></li>
+       <li class="active"> <a > Categorias Profissionais <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+     </ol>
+   </section>
+   <br>
+   <div class="col-md-12">
+     <div class="box box-success ">
+       <div class="box-header with-border" style="height: 70px">
+         <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+         <div class="box-tools pull-right">
+
+
+           &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+         </div>
+         <br>
+         <p></p>
+       </div>
+     </div>
+   </div>
+
+   
+<!-- Janela Modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document" >
+<div class="modal-content">
+ <div class="modal-body">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+     <span aria-hidden="true">&times;</span>
+   </button>
+   <div class="row">
+     <div class="col-md-12">
+       <div class="">
+
+         <div class="-header d-flex justify-content-between">
+
+           <div class="iq-header-title">
+             <br>
+             <h3 class=""><i class="fa fa-address-card"><span class=""> </span></i> Nova Categoria Profissional </h3>
+           </div>
+           <br>
+
+         </div>
+         <div class="-body" style="padding-left: 0;">
+           <div class="row">
+             <div class="col-md-2">
+
+             </div>
+             <div class="col-md-8">
+              <form id="form-wizard3" method="post" class="text-center" action="{% url 'categoria-nova-create' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                 <!-- fieldsets -->
+                 <fieldset>
+                   <div class="form-card text-left">
+                     <div class="row">
+                       <div class="col-12">
+                         <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="control-label">Nome da Nova Categoria Profissional:</label>
+                           <input maxlength="100" type="text" required="required" class="form-control"
+                             placeholder="Informe a nova categoria profissional" name="nome"/>
+                         </div>
+                       </div>
+                 </fieldset>
+                 <br>
+                 <br>
+                 <input type="submit" class="btn btn-primary action-button pull-right " value="Salvar">
+                 <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;">Fechar</button>
+               </form>
+
+             </div>
+             <div class="col-md-2">
+
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- Fim do conteúdo da modal -->
+ </div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content">
+ <div class="modal-body">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+     <span aria-hidden="true">&times;</span>
+   </button>
+   <div class="row">
+     <div class="col-md-12">
+       <div class="">
+
+         <div class="-header d-flex justify-content-between">
+
+           <div class="iq-header-title">
+             <br>
+             <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+           </div>
+           <br>
+
+         </div>
+         <div class="-body" style="padding-left: 0;">
+           <div class="row">
+             <div class="col-md-2">
+
+             </div>
+             <div class="col-md-8">
+              <form id="form-wizard3" method="post" class="text-center" action="{% url 'upload-excel-categoria-nova' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                 <!-- fieldsets -->
+                 <fieldset>
+                   <div class="form-card text-left">
+                     <div class="row">
+                       <div class="col-12">
+                         <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="control-label">Escolha um Ficheiro:</label>
+                           <input maxlength="100" type="file" required="required" class="form-control"
+                             placeholder="Informe o seu nome completo" name="excel_file"/>
+                         </div>
+                       </div>
+                 </fieldset>
+                 <br>
+                 <br>
+                 <button type="submit" class="btn btn-primary action-button pull-right" >Importar</button>
+                 <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;">Fechar</button>
+               </form>
+
+             </div>
+             <div class="col-md-2">
+
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- Fim do conteúdo da modal -->
+ </div>
+</div>
+</div>
+</div>
+ 
+   <section class="content" >
+     <!-- Page Content  -->
+          <div class="row">
+             <div class="col-md-12">
+                <div class="iq-card">
+                   <div class="iq-card-header d-flex justify-content-between">
+                      <div class="iq-header-title">
+                       <br>
+                         <h4 class="card-title">Lista de Categorias Profissionais</h4>
+                      </div>
+                   </div>
+                   <div class="iq-card-body">
+
+                    <div id="table" class="table-editable">
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <label for="filterSelect">Número de Linhas:</label>
+                <select id="filterSelect">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <!-- <option value="all">Todos</option> -->
+                </select>
+              </span>
+                      <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                        <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal1"><i class="fa fa-upload"><span class=""> Importar</span></i>
+                        </button>
+                        <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"><span class=""> Adicionar
+                              Novo</span></i>
+                        </button>
+                        <a class="btn btn-sm iq-bg-dark" href="{% url 'funcionario-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                        </a>
+                      </span>
+                      <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                        <thead>
+                            <tr>
+                               
+                                <th>Nome</th>
+                  
+                            </tr>
+                        </thead>
+                        <tbody id="categoriaTableBody"></tbody> <!-- Populate dynamically -->
+                      </table>
+                    
+                    <nav aria-label="Page navigation example" class="text-center">
+                      <ul class="pagination justify-content-center" id="paginationControls">
+                          <!-- Pagination buttons will be dynamically inserted here -->
+                      </ul>
+                  </nav>
+                  
+                </div>
+              </div>
+                </div>
+             </div>
+          </div>
+       </div>
+   </div>
+ </section>
+   <!-- /.content -->
+ </div>
+
+ <script src="{% static 'assets/dist/js/categoria_list.js' %}"></script>
+{% endblock main %}
+
+

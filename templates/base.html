@@ -1,0 +1,633 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head style="position: fixed;">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="">
+  <link rel="shortcut icon" href="imagens/favicon.ico type=" image/x-icon">
+  <title>PROVA DE VIDA</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{% static 'assets/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'assets/bower_components/font-awesome/css/font-awesome.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'assets/bower_components/Ionicons/css/ionicons.min.css' %}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/skins/_all-skins.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/AdminLTE.min.css' %}">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'assets/dist/img/favicon.ico">
+  <!-- Bootstrap CSS -->
+  <!-- Typography CSS -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/typography.css' %}">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/style.css' %}">
+
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/responsive.css' %}">
+
+  <!-- Morris chart -->
+
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'assets/bower_components/jvectormap/jquery-jvectormap.css' %}">
+  <!-- Date Picker -->
+  <link rel="stylesheet"
+    href="{% static 'assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'assets/bower_components/bootstrap-daterangepicker/daterangepicker.css' %}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}">
+  <!-- DataTables -->
+  <link rel="stylesheet"
+    href="{% static 'assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/quill/quill.bubble.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/remixicon/remixicon.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/simple-datatables/style.css' %}">
+
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+    @media only screen and (max-width: 1302px) {
+      #data_inicio {
+        width: 40px;
+
+      }
+
+      #data_fim {
+        width: 40px;
+      }
+    }
+
+    .hoder {
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-dialog {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .dropdown-item:hover {
+      background-color: rgb(68, 129, 244) !important;
+      color: white !important;
+    }
+
+    .modal-content {
+      width: 100%;
+      height: auto;
+      min-height: 100%;
+      border-radius: 0;
+    }
+
+    .modal-body>#barChart {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+
+    .treeview-menu {
+      background-color: rgb(244, 242, 242) !important;
+    }
+  </style>
+
+  <style type="text/css" media="print">
+    @page {
+      size: landscape;
+    }
+  </style>
+  <style>
+    .modal {
+      /* width: 300px; 
+      height: 200px;  */
+
+      /* width: 50%; 
+      max-width: 80%; 
+      max-height: 80%;  */
+
+      position: fixed;
+      /* Para manter a modal fixa na tela */
+      top: 50%;
+      /* Centraliza verticalmente */
+      left: 50%;
+      /* Centraliza horizontalmente */
+      transform: translate(-50%, -50%);
+      /* Move a modal de volta pela metade de sua própria largura e altura */
+      z-index: 9999;
+      /* Garante que a modal esteja acima de outros elementos */
+      margin: 0 auto;
+      /* Adiciona margem automática para centralizar */
+    }
+  </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <header class="main-header" style="position: fixed; top:0; left:0; background-color: white; right:0;">
+    <!-- Logo -->
+    <a href="{% url 'home' %}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>P</b>V</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><img src="{% static 'imagens/provavida.png' %}" style="width: 80%; height:100%"></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" style="position: relative;">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+
+          </li>
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+
+          </li>
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="{% static 'assets/dist/img/78-785827_user-profile-avatar-login-account-male-user-icon.png' %}"
+                class="user-image" alt="User Image">
+
+              {{user}}
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+
+                <img src="{% static 'assets/dist/img/78-785827_user-profile-avatar-login-account-male-user-icon.png' %}"
+                  class="img-circle" alt="User Image">
+
+                <p>
+
+                </p>
+              </li>
+
+
+              <li class="user-footer">
+                <div class="pull-left">
+
+                  <a href="{% url 'admin:index' %}" class="btn btn-default btn-flat">Perfil</a>
+                </div>
+                <div class="pull-right">
+
+                  <a href="{% url 'logout-def' %}" class="btn btn-default btn-flat">Sair</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar" style="position: fixed;">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <br>
+        <div class="pull-left image">
+
+          <img src="{% static 'assets/dist/img/78-785827_user-profile-avatar-login-account-male-user-icon.png' %}"
+            class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-fw  fa-users"></i> <span>Cadastro</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+
+            <li><a href="{% url 'employee-list' %}"><i class="fa fa-circle-o"></i>Funcionários </a></li>
+            <li><a href="{% url 'funcao-chefia-list' %}"><i class="fa fa-circle-o"></i>Função de Chefia Nova </a></li>
+            <li><a href="{% url 'categoria-nova-list' %}"><i class="fa fa-circle-o"></i>Função de Chefia Antiga</a></li>
+            <li><a href="{% url 'categoria-list' %}"><i class="fa fa-circle-o"></i>Categorias Lab. Antiga</a></li>
+            
+
+            <li><a href="{% url 'direccao-list' %}"><i class="fa fa-circle-o"></i>Estabelecimento</a></li>
+
+            <!-- <li><a href="{% url 'departamento-list' %}"><i class="fa fa-circle-o"></i>Departamentos<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>  -->
+
+
+
+          </ul>
+
+        </li>
+      </ul>
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+          <a href="">
+            <i class="fa fa-life-ring"></i> <span>Prova de Vida</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+
+            <li><a href="{% url 'abertura-prova-vida-form' %}"><i class="fa fa-circle-o"></i>Abertura<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+            <li><a href="{% url 'prova-getfunc' %}"><i class="fa fa-circle-o"></i>Prova de Vida<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small></a></li>
+
+            <li><a href="{% url 'prova-vida-list' %}"><i class="fa fa-circle-o"></i>Concluídas<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+
+            <li><a href="{% url 'abertura-fecho' %}"><i class="fa fa-circle-o"></i>Fecho<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+
+
+
+
+            {% if abertura_actual.id %}
+
+            {% else %}
+            <li><a href="{% url 'abertura-prova-vida-reabrir' %}"><i class="fa fa-circle-o"></i>Reabertura<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+
+            {% endif %}
+
+
+          </ul>
+
+        </li>
+      </ul>
+
+
+      <!-- <ul class="sidebar-menu" data-widget="tree">
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>Estudos Atuariais</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+            <li><a href="perspectivaVida.html"><i class="fa fa-circle-o"></i>Perspectiva de Vida </a></li>
+          </ul>
+        </li>
+      </ul> -->
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-fw  fa-object-group"></i> <span>Relatórios</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{% url 'funcionario-relatorio' %}"><i class="fa fa-circle-o"></i>Funcionários<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+
+            <li><a href="{%url 'relatorio-prova-vida' %}"><i class="fa fa-circle-o"></i>Prova de Vida<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small> </a></li>
+
+
+            <!-- <li><a href="estudosAtuariaisRelatorio.html"><i class="fa fa-circle-o"></i>Estatísticas EA<small
+                  class="label pull-right bg-blue">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> Geral</font>
+                  </font>
+                </small></a></li> -->
+
+
+          </ul>
+
+        </li>
+      </ul>
+
+    </section>
+  </aside>
+
+
+
+
+  <main>
+    {% block main %}{% endblock main %}
+  </main>
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2024 <a href="#">TECTIC</a>.</strong> Todos os direitos reservados
+  </footer>
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery 3 -->
+  <script src="{% static 'assets/bower_components/jquery/dist/jquery.min.js' %}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{% static 'assets/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button);
+  </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="{% static 'assets/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  <!-- Sparkline -->
+  <script src="{% static 'assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
+  <!-- jvectormap -->
+  <script src="{% static 'assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{% static 'assets/bower_components/jquery-knob/dist/jquery.knob.min.js' %}"></script>
+  <!-- daterangepicker -->
+  <script src="{% static 'assets/bower_components/moment/min/moment.min.js' %}"></script>
+  <script src="{% static 'assets/bower_components/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+  <!-- datepicker -->
+  <script
+    src="{% static 'assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="{% static 'assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js' %}"></script>
+  <!-- Slimscroll -->
+  <script src="{% static 'assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <!-- FastClick -->
+  <script src="{% static 'assets/bower_components/fastclick/lib/fastclick.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{% static 'assets/dist/js/pages/dashboard.js' %}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{% static 'assets/dist/js/demo.js' %}"></script>
+
+  <script src="{% static 'assets/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+  <!-- ChartJS -->
+  <script src="{% static 'assets/bower_components/chart.js/Chart.js' %}"></script>
+  <script src="{% static 'assets/bower_components/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/dist/js/charjsplugin.js' %}"></script>
+
+  <script src="{% static 'assets/bower_components/pdfjs/jspdf.debug.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js' %}"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js' %}"></script>
+  <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/dist/js/main.js' %}"></script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{% static 'assets/dist/js/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/dist/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/dist/js/bootstrap.min.js' %}"></script>
+  <!-- Appear JavaScript -->
+  <script src="{% static 'assets/dist/js/jquery.appear.js' %}"></script>
+  <!-- Countdown JavaScript -->
+  <script src="{% static 'assets/dist/js/countdown.min.js' %}"></script>
+  <!-- Counterup JavaScript -->
+  <script src="{% static 'assets/dist/js//waypoints.min.js' %}"></script>
+  <script src="{% static 'assets/dist/js/jquery.counterup.min.js' %}"></script>
+  <!-- Wow JavaScript -->
+  <script src="{% static 'assets/dist/js/wow.min.js' %}"></script>
+  <!-- Apexcharts JavaScript -->
+  <script src="{% static 'assets/dist/js/apexcharts.js' %}"></script>
+  <!-- Slick JavaScript -->
+  <script src="{% static 'assets/dist/js/slick.min.js' %}"></script>
+  <!-- Select2 JavaScript -->
+  <script src="{% static 'assets/dist/js/select2.min.js' %}"></script>
+  <!-- Owl Carousel JavaScript -->
+  <script src="{% static 'assets/dist/js/owl.carousel.min.js' %}"></script>
+  <!-- Magnific Popup JavaScript -->
+  <script src="{% static 'assets/dist/js/jquery.magnific-popup.min.js' %}"></script>
+  <!-- Smooth Scrollbar JavaScript -->
+  <script src="{% static 'assets/dist/js/smooth-scrollbar.js' %}"></script>
+  <!-- lottie JavaScript -->
+  <script src="{% static 'assets/dist/js/lottie.js' %}"></script>
+  <!-- Chart Custom JavaScript -->
+  <script src="{% static 'assets/dist/js/chart-custom.js' %}"></script>
+  <!-- Custom JavaScript -->
+  <script src="{% static 'assets/dist/js/custom.js' %}"></script>
+  <script src="{% static 'assets/dist/js/employee_list.js' %}"></script>
+
+  <script src="{% static 'assets/dist/js/forms_validation.js' %}"></script>
+
+  <!-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById('searchInput');
+  const filterSelect = document.getElementById('filterSelect');
+  const dataTable = document.getElementById('dataTable');
+  const rows = dataTable.getElementsByTagName('tr');
+
+
+  filterSelect.value = '10';
+
+  searchInput.addEventListener('input', filterData);
+  filterSelect.addEventListener('change', filterData);
+
+  function filterData() {
+    const searchText = searchInput.value.trim().toLowerCase();
+    const selectedOption = parseInt(filterSelect.value);
+
+
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      let found = false;
+
+
+      for (let j = 0; j < row.cells.length; j++) {
+        const cell = row.cells[j];
+        const cellText = cell.textContent.trim().toLowerCase();
+
+     
+        if (cellText.includes(searchText)) {
+          found = true;
+          break;
+        }
+      }
+
+
+      if (found && i <= selectedOption) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+  }
+
+
+  filterData();
+});
+
+
+</script> -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById('searchInput');
+      const filterSelect = document.getElementById('filterSelect');
+      const dataTable = document.getElementById('dataTable');
+      const rows = dataTable.getElementsByTagName('tr');
+
+      // Configuração inicial: definir o número de linhas exibidas como 10
+      filterSelect.value = '10';
+
+      searchInput.addEventListener('input', filterData);
+      filterSelect.addEventListener('change', filterData);
+
+      function filterData() {
+        const searchText = searchInput.value.trim().toLowerCase();
+        const selectedOption = parseInt(filterSelect.value);
+
+        // Loop através das linhas da tabela
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          let found = false;
+
+          // Loop através das células da linha
+          for (let j = 0; j < row.cells.length; j++) {
+            const cell = row.cells[j];
+            const cellText = cell.textContent.trim().toLowerCase();
+
+            // Verifica se o texto da célula corresponde ao texto de pesquisa
+            if (cellText.includes(searchText)) {
+              found = true;
+              break;
+            }
+          }
+
+          // Aplica o estilo de exibição à linha com base no resultado da pesquisa
+          if (found && i <= selectedOption) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        }
+      }
+
+      // Chama a função de filtro ao carregar a página para exibir inicialmente apenas 10 linhas
+      filterData();
+    });
+
+
+  </script>
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal4");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Function to show the modal
+    function showModal() {
+      modal.style.display = "block";
+    }
+
+    // Close the modal when the user clicks on <span> (x)
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // Close the modal when the user clicks anywhere outside of the modal content
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+
+</html>

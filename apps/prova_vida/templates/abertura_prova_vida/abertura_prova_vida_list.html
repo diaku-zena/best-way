@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Сотрудники{% endblock title %}
+
+{% block breadcrumb %}
+<a class="btn btn-primary" href="{% url 'abertura-prova-vida-create' %}"><i
+    class="fas fa-plus"></i> Новый сотрудник</a>
+<a class="btn btn-primary" href="{% url 'abertura-prova-vida-upload' %}"><i
+    class="fas fa-upload"></i> Загрузка сотрудников</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="table-responsive">
+    <table id="abertura_prova_vidatable" class="table table-bordered table-hover" data-page-length='100'>
+      <thead class="thead-light">
+        <tr>
+     <!-- <th>Серия/Номер</th> -->
+          <th>Codigo da Abertura</th> 
+          
+          <th>Data de Inicio</th>
+          <th>Data de de fim</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for abertura in aberturas %}
+          <tr class='clickable-row' data-href="{% url 'abertura-prova-vida-detail' abertura.id %}">
+          <!--  <td>{{ forloop.counter}}</td> -->
+            <td>{{ abertura.id}}</td>
+            <td>{{abertura.data_de_abertura}}</td>
+            <td>{{abertura.data_de_fim}}</td>
+            <td>{{ abertura.estado_actual}}</td>
+          
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+
+
+{% block morejs %}
+<script>
+  $('#employeetable').DataTable({
+  });
+</script>
+
+{% endblock morejs %}

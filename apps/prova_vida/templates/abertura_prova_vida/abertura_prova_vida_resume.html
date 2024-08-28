@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+
+{% block main %}
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Fecho da Prova de Vida
+        <small>RH</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+        <li><a href="#">Recursos Humanos</a></li>
+        <li class="active"> <a > Fecho da Prova de Vida <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+      </ol>
+    </section>
+    <br>
+    <div class="col-md-12">
+      <div class="box box-success ">
+        <div class="box-header with-border" style="height: 70px">
+          <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+          <div class="box-tools pull-right">
+            <div class="alert text-white bg-success" style="padding-right: 6px;" role="alert">
+              <div class="iq-alert-text">Prova de Vida Aberta com Sucesso!</div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="ri-close-line"></i>
+              </button>
+           </div> 
+           <!-- <a   onclick="imprimirGeral(event)" data-placement="top" title="Imprimir Relatório" data-toggle="tooltip"  class="btn btn-default"><i class="fa fa-fw fa-file-pdf-o"> </i>PDF</a>  -->
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+           <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+          </div>
+          <br>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <section class="content" >
+      <div class="row">
+         <div class="row">
+          <div class="col-sm-12 col-lg-12">
+             <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                   <div class="iq-header-title">
+                      <h4 class="card-title">Prova de Vida</h4>
+                   </div>
+                </div>
+                <div class="iq-card-body">
+                   <!-- <div class="stepwizard mt-4">
+                      <div class="stepwizard-row setup-panel" style="display: inline;">
+                         <div id="user" class="wizard-step active" style="width: 500px;">
+                            <a href="#user-detail" class="active btn">
+                            <i class="ri-lock-unlock-line text-primary"></i><span>Informações da Prova de Vida</span>
+                            </a>
+                         </div>
+                         <div id="confirm" class="wizard-step" style="width: 500px;">
+                            <a href="#cpnfirm-data" class="btn btn-default">
+                            <i class="ri-check-fill text-warning"></i><span>Finalizar Prova de Vida</span>
+                            </a>
+                         </div>
+                      </div>
+                   </div> -->
+                   <form class="form" >
+                      <div class="row " id="">
+                         <div class="col-sm-12">
+                            <div class="col-md-12 p-0">
+                               <h3 class="mb-4">Informações:</h3>
+                               <br>
+                               <div class="row">
+                                  <div class="col-md-4">
+                                      <h5>Referência da Prova de Vida: </h5>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <p style="font-size: 16px;">{{abertura.id}} </p>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <h5>Data de Inicio:</h5>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <p style="font-size: 16px;">{{abertura.data_de_abertura}}</p>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <h5>Data de Fim:</h5>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <p style="font-size: 16px;">{{abertura.data_de_fim}}</p style="font-size: 16px;">
+                                  </div>
+                                  <div class="col-md-4">
+                                      <h5 for="descricao">Descrição:</h5><br>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <p style="font-size: 16px;">{{abertura.descricao}}</p><br>
+                                  </div>
+                               </div>
+                               <a href="{% url 'home' %}" type="button" name="next" class="btn btn-primary nextBtn btn-lg pull-right" value="Submit" >Página Inicial</a>
+                            </div>
+                         </div>
+                      </div>
+                      <!-- <div class="row setup-content" id="cpnfirm-data">
+                         <div class="col-sm-12">
+                            <div class="col-md-12 p-0">
+                               <div class="row justify-content-center">
+                                  <div class="row">
+                                      <div class="col-7">
+                                         <h3 class="mb-4 text-left">Finalizar:</h3>
+                                      </div>
+                                      <div class="col-5">
+                                         <h2 class="steps"></h2>
+                                      </div>
+                                   </div>
+                                   <br><br>
+                                   <h2 class="text-success text-center"><strong>SUCESSO!</strong></h2>
+                                   <br>
+                                   <div class="row justify-content-center">
+                                      <div class="col-3"> <img src="assets/dist/img/page-img/img-success.png"  class="fit-image ml-4 justify-content-center" alt="img-success" style="height:300px; width:300px;text-align: center;display: block; margin: auto;"> </div>
+                                   </div>
+                                   <br><br>
+                                   <div class="row justify-content-center">
+                                      <div class="col-7 text-center">
+             
+                                        <h5 class="purple-text text-center">A Prova de Vida, Foi Finalizada com Sucesso!</h5>
+                                      </div>
+                                   </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>  -->
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+      </div>
+</div>
+</section>
+    <!-- /.content -->
+  </div>
+
+
+{% endblock main %}

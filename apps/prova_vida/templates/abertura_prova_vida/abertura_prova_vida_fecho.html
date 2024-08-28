@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Fecho da Prova de Vida
+      <small>RH</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a > Fecho da Prova de Vida <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+    </ol>
+  </section>
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+        <div class="box-tools pull-right">
+          &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+         <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <section class="content" >
+    <div class="row">
+       <div class="row">
+        <div class="col-sm-12 col-lg-12">
+           <div class="iq-card">
+              <div class="iq-card-header d-flex justify-content-between">
+                 <div class="iq-header-title">
+                    <h4 class="card-title">Fecho da Prova de Vida</h4>
+                 </div>
+              </div>
+              <div class="iq-card-body">
+               <form  method="post" action="{% url 'confirmar-fecho' %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+
+                    <div class="row " id="">
+                       <div class="col-sm-12">
+                          <div class="col-md-12 p-0">
+                             <h3 class="mb-4">Informações:</h3>
+                             <br>
+                             <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Referência da Prova de Vida: </h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <p style="font-size: 16px;">{{abertura.id}} </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Data de Inicio:</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <p style="font-size: 16px;">{{abertura.data_de_abertura|date:"d-m-Y"}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Data de Fim:</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <p style="font-size: 16px;">{{abertura.data_de_fim|date:"d-m-Y"}}</p style="font-size: 16px;">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h5 for="descricao">Descrição:</h5><br>
+                                </div>
+                                <div class="col-md-8">
+                                    <p style="font-size: 16px;">{{abertura.descricao}}</p><br>
+                                </div>
+
+                                <div class="col-md-4">
+                                 <h5 for="descricao">Estado:</h5><br>
+                                 </div>
+                                 <div class="col-md-8">
+                                       <p style="font-size: 16px;">{{abertura.estado_actual}}</p><br>
+                                 </div>
+                                    
+                                
+                             </div>
+                             <input type="submit" name="next" class="btn btn-primary nextBtn btn-lg pull-right" value="Finalizar" >
+                          </div>
+                       </div>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+    </div>
+</div>
+</section>
+  <!-- /.content -->
+</div>
+
+
+
+
+
+{% endblock main %}

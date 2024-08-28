@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content-header %}
+<div class="card-header">
+  <div class="float-left"><h4>{{object}}</h4></div>
+  <div class="card-tools">
+    <a href="#" class="btn btn-tool">Распечатать</a>
+    <a href="{% url 'doc-update' object.id %}" class="btn btn-tool">
+      <i class="fas fa-edit"></i>
+    </a>
+    <a href="{% url 'doc-delete' object.id %}" class="btn btn-tool">
+      <i class="fas fa-times"></i>
+    </a>
+  </div>
+</div>
+{% endblock content-header %}
+
+{% block content %}
+    <div class="row mb-4">
+
+      <div class="col-sm-8">
+        <div>
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Документ
+            </label>
+            <div class="col">
+              {{ object.get_current_status_display }}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Серия, номер
+            </label>
+            <div class="col">
+              {{ object.serial }}, {{ object.number }}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Дата выдачи
+            </label>
+            <div class="col">
+              {{ object.date_of_issue|date:'d.m.Y' }}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Дата окончание
+            </label>
+            <div class="col">
+              {{ object.date_of_expiry|date:'d.m.Y' }}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Кем выдан
+            </label>
+            <div class="col">
+              {{ object.issued_authority }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group border-bottom row">
+          <label class="col">
+            Файл:
+          </label>
+          <div class="col">
+            <p class="file-upload">
+              {% if object.scanned_doc %}
+                <a href="{{ object.scanned_doc.url }}">{{ object.scanned_doc }}</a>
+              {% else %}
+                <a href="{% static 'dist/img/avatar.png' %}"></a>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+  </div>
+
+      </div>
+    </div>
+
+    <!-- <h4>Invoice/Payment History</h4>
+    <p>There are no payment history for {{object}}</p> -->
+
+
+
+
+{% endblock content %}

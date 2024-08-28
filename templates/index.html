@@ -1,0 +1,443 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block main %}   
+<br>
+<br>
+<br>
+<div class="content-wrapper">
+    <!-- <section class="col-md-12"> -->
+
+
+    </section>
+    <br>
+    <section class=" col-md-12 col-lg-12 col-xs-12 col-xl-12">
+        <div class="row">
+            <div class="col-md-12 col-lg-3 col-xs-12 ">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h5 style="color: #FFF">Total de Funcionários Activos:</h5>
+                        <p>
+                            <h4 style="color: #FFF;  align:center" >{{qtd_func}}</h4>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a href="{% url 'employee-list' %}" class="small-box-footer">Ver mais... <i
+                            class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3 col-xs-12 ">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h5 style="color: #FFF">Total de Funcionários Licenciados:</h5>
+                        <p>
+                            <h4 style="color: #FFF;  align:center" >{{qtd_func_lic}}</h4>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a href="{% url 'employee-list-type' 'licenciado' %}" class="small-box-footer">Ver mais... <i
+                            class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3 col-xs-12 ">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h5 style="color: #FFF">Total de Funcionários Pré-Reformados:</h5>
+                        <p>
+                            <h4 style="color: #FFF;  align:center" >{{qtd_func_pre}}</h4>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a href="{% url 'employee-list-type' 'pre-reformado' %}" class="small-box-footer">Ver mais... <i
+                            class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <!-- ./col -->
+            <div class="col-md-12 col-lg-3 col-xs-12" >
+                <div class="small-box bg-fuchsia">
+                    <div class="inner">
+                        <h4 style="color: #FFF">Prova de Vida</h4>
+                        {% if abertura_actual.id %}
+                        <p>
+                            <h4 style="color: #FFF; font-size:15px " >Concluídas: {{qtd_conc}}</h4>
+                            <h4 style="color: #FFF; font-size:15px " >Pendentes: {{qtd_pen}}</h4>
+                  
+                        </p>
+                        {% else %}
+
+                        <p>
+                          <h4 style="color: #FFF; font-size:15px " >Sem Processo de Prova de Vida.</h4>
+                     
+                      </p>
+                      {% endif %}
+
+
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="{% url 'relatorio-prova-vida' %}"class="small-box-footer">Ver mais... <i
+                            class="fa fa-arrow-circle-right"></i></a>
+
+                            
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class=" col-md-12 col-lg-12 col-xs-12 col-xl-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success ">
+                    <div class="box-header with-border" style="height: 70px">
+                        <h3 class="box-title"><i class="fa fa-fw  fa-money"></i> Dashboard</h3>
+                        
+                        <div class="box-tools pull-right">
+                          {% if error %}
+                            <div class="box-tools pull-right">
+                              <div class="alert text-white bg-danger" style="padding-right: 6px;" role="alert">
+                                <div class="iq-alert-text"> {{error}} </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="ri-close-line"></i>
+                                </button>
+                            </div> 
+                           {% endif %}
+                           <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+                        </div>
+                        <br>
+                        <p></p>
+                    </div>
+
+                    <section class="content">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <ol class="breadcrumb " style="font-weight: 500;">
+                            {% if abertura_actual.id %}
+                            <p>
+                              <p><i class="fa fa-life-ring" aria-hidden="true"></i> Prova de Vida em Curso: {{abertura_actual.referencia}}</p>
+                              <p><i class="fa fa-check-square" aria-hidden="true"></i> Estado: {{abertura_actual.estado_actual}}</p>
+                      
+                            </p>
+                            {% else %}
+    
+                            <p>
+                              <p><i class="fa fa-life-ring" aria-hidden="true" ></i> Prova de Vida em Curso: Sem Prova de Vida em Curso.</p>
+                      
+                           
+                         
+                          </p>
+                           {% endif %}
+    
+                         
+
+                            {% if ultima_abertura.id %}
+                            <p><i class="fa fa-life-ring" aria-hidden="true"></i> Última Prova de Vida Realizada: {{ultima_abertura.referencia}}</p>
+
+                            {% else %}
+                            <p><i class="fa fa-life-ring" aria-hidden="true"></i> Última Prova de Vida Realizada: Não Houve Nenhum Processo de Prova de Vida Realizada Anteriormente.</p>
+                           
+                            {% endif %}
+                          </ol>
+                        </div>
+                        <div class="col-md-6 ">
+                          <ol class="breadcrumb " style="font-weight: 500;">
+                            {% if abertura_actual.id %}
+                            <p><i class="fa fa-hourglass-start" aria-hidden="true"></i> Prazo: {{dias}}</p>
+                            <p><i class="fa fa-calendar" aria-hidden="true"></i> Data de Abertura: {{abertura_actual.data_de_abertura|date:"d-m-Y"}}</p>  
+                            <p><i class="fa fa-calendar" aria-hidden="true"></i> Data de Fecho:  {{abertura_actual.data_de_fim|date:"d-m-Y"}}</p>
+
+                            {%else %}
+
+                            {%if  ultima_abertura.id %}
+
+                            <p><i class="fa fa-calendar" aria-hidden="true"></i> Data de Abertura da Última Prova de Vida: {{ultima_abertura.data_de_abertura|date:"d-m-Y"}}</p>  
+                            <p><i class="fa fa-calendar" aria-hidden="true"></i> Data de Fecho da Última Prova de Vida:  {{ultima_abertura.data_de_fim|date:"d-m-Y"}}</p>
+
+
+                            {% endif %}
+              
+
+                            {% endif %}
+
+                          </ol>
+                        </div>
+                      </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="iq-card">
+                              <div class="iq-card-body">
+                                <h5 class="iq-card-title">Gráfico de Linha de Funcionários</h5>
+                                <!-- Line Chart -->
+                                <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#lineChart'), {
+                                      type: 'line',
+                                      data: {
+                                        labels: ['Activos', 'Licenciados', 'Pré-Reformados'],
+                                        datasets: [{
+                                          label: 'Gráfico de Linha',
+                                          data: ["{{ qtd_func }}", "{{ qtd_func_lic }}", "{{ qtd_func_pre }}"],
+                                          fill: false,
+                                          borderColor: 'rgb(75, 192, 192)',
+                                          tension: 0.1
+                                        }]
+                                      },
+                                      options: {
+                                        scales: {
+                                          y: {
+                                            beginAtZero: true
+                                          }
+                                        }
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Line CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="iq-card">
+                                <div class="iq-card-body">
+                                  <h5 class="iq-card-title">Gráfico de Barra de Funcionários</h5>
+
+                                <!-- Bar Chart -->
+                                <canvas id="barChart" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#barChart'), {
+                                      type: 'bar',
+                                      data: {
+                                        labels: ['Activos', 'Licenciados', 'Pré-Reformados'],
+                                        datasets: [{
+                                          label: 'Gráfico de Barra',
+                                          data: ["{{ qtd_func }}", "{{ qtd_fun_lic }}", "{{ qtd_func_re }}"],
+                                          backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)',
+                                            // 'rgba(255, 205, 86, 0.2)',
+                                            // 'rgba(75, 192, 192, 0.2)',
+                                            // 'rgba(54, 162, 235, 0.2)',
+                                            // 'rgba(153, 102, 255, 0.2)',
+                                            // 'rgba(201, 203, 207, 0.2)'
+                                          ],
+                                          borderColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(75, 192, 192)',
+                                            'rgb(255, 159, 64)',
+                                            // 'rgb(255, 205, 86)',
+                                            // 'rgb(75, 192, 192)',
+                                            // 'rgb(54, 162, 235)',
+                                            // 'rgb(153, 102, 255)',
+                                            // 'rgb(201, 203, 207)'
+                                          ],
+                                          borderWidth: 1
+                                        }]
+                                      },
+                                      options: {
+                                        scales: {
+                                          y: {
+                                            beginAtZero: true
+                                          }
+                                        }
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Bar CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <br>
+                          <br>
+
+                          <div class="col-md-12">
+                            <div class="iq-card">
+                              <div class="iq-card-body">
+                                <h5 class="iq-card-title">Gráfico de Pizza de Funcionários</h5>
+
+                                <!-- Pie Chart -->
+                                <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#pieChart'), {
+                                      type: 'pie',
+                                      data: {
+                                        labels: [
+                                          'Activos',
+                                          'Licenciados',
+                                          'Pré-Reformados'
+                                        ],
+                                        datasets: [{
+                                          label: 'My First Dataset',
+                                          data: ["{{ qtd_func }}", "{{ qtd_func_lic }}", "{{ qtd_func_re }}"],
+                                          backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(255, 205, 86)'
+                                          ],
+                                          hoverOffset: 4
+                                        }]
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Pie CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="iq-card">
+                              <div class="iq-card-body">
+                                <h5 class="iq-card-title">Gráfico de Linha de Prova de Vida</h5>
+                                <!-- Line Chart -->
+                                <canvas id="lineChart1" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#lineChart1'), {
+                                      type: 'line',
+                                      data: {
+                                        labels: ['Concluídas', 'Pendentes'],
+                                        datasets: [{
+                                          label: 'Gráfico de Linha',
+                                          data: ["{{ qtd_conc }}", "{{ qtd_pen }}"],
+                                          fill: false,
+                                          borderColor: 'rgb(75, 192, 192)',
+                                          tension: 0.1
+                                        }]
+                                      },
+                                      options: {
+                                        scales: {
+                                          y: {
+                                            beginAtZero: true
+                                          }
+                                        }
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Line CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="iq-card">
+                                <div class="iq-card-body">
+                                  <h5 class="iq-card-title">Gráfico de Barra de Prova de Vida</h5>
+
+                                <!-- Bar Chart -->
+                                <canvas id="barChart1" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#barChart1'), {
+                                      type: 'bar',
+                                      data: {
+                                        labels: ['Concluídas', 'Pendentes'],
+                                        datasets: [{
+                                          label: 'Gráfico de Barra',
+                                          data: ["{{ qtd_conc }}", "{{ qtd_pen }}"],
+                                          backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            // 'rgba(255, 159, 64, 0.2)',
+                                            // 'rgba(255, 205, 86, 0.2)',
+                                            // 'rgba(75, 192, 192, 0.2)',
+                                            // 'rgba(54, 162, 235, 0.2)',
+                                            // 'rgba(153, 102, 255, 0.2)',
+                                            // 'rgba(201, 203, 207, 0.2)'
+                                          ],
+                                          borderColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(75, 192, 192)',
+                                            // 'rgb(255, 159, 64)',
+                                            // 'rgb(255, 205, 86)',
+                                            // 'rgb(75, 192, 192)',
+                                            // 'rgb(54, 162, 235)',
+                                            // 'rgb(153, 102, 255)',
+                                            // 'rgb(201, 203, 207)'
+                                          ],
+                                          borderWidth: 1
+                                        }]
+                                      },
+                                      options: {
+                                        scales: {
+                                          y: {
+                                            beginAtZero: true
+                                          }
+                                        }
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Bar CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <br>
+                          <br>
+
+                          <div class="col-md-12">
+                            <div class="iq-card">
+                              <div class="iq-card-body">
+                                <h5 class="iq-card-title">Gráfico de Pizza de Prova de Vida</h5>
+
+                                <!-- Pie Chart -->
+                                <canvas id="pieChart1" style="max-height: 400px;"></canvas>
+                                <script>
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new Chart(document.querySelector('#pieChart1'), {
+                                      type: 'pie',
+                                      data: {
+                                        labels: [
+                                          'Concluídas',
+                                          'pendentes',
+                                        ],
+                                        datasets: [{
+                                          label: 'My First Dataset',
+                                          data: ["{{ qtd_conc }}", "{{ qtd_pen }}"],
+                                          backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            // 'rgb(255, 205, 86)'
+                                          ],
+                                          hoverOffset: 4
+                                        }]
+                                      }
+                                    });
+                                  });
+                                </script>
+                                <!-- End Pie CHart -->
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+      <!-- </section> -->
+   
+  <!-- /.content -->
+</div>
+{% endblock main %}

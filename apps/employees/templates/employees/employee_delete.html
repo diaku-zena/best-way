@@ -1,0 +1,248 @@
+
+{% load static %}
+
+
+
+{% block main %}
+
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="">
+
+            <div class="-header d-flex justify-content-between">
+
+              <div class="iq-header-title">
+                <br>
+                <h3 class=""><i class="fa fa-times"><span class=""> </span></i> Eliminar Dados </h3>
+              </div>
+              <br>
+
+            </div>
+            <div class="-body" style="padding-left: 0;">
+              <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                  <div class="form-card text-left">
+                    <div class="row">
+                      <div class="">
+                        <p class="control-label justify-content-center" style="text-align: center;">Tem a Certeza que Pretende Eliminar ?</p>
+                        <br><br>
+                        <button type="button" onclick="deleteEmployee()" class="btn btn-danger action-button pull-right" >Eliminar</button>
+                        <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;" >Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim do conteúdo da modal -->
+    </div>
+  </div>
+</div>
+</div>
+  
+            <div class="row">
+              <div class="col-md-12">
+                <div class="">
+
+                  <div class="-header d-flex justify-content-between">
+                    <br>
+
+                  </div>
+                  <div class="-body" style="padding-left: 0;">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="">
+      
+                          <div class="-header d-flex justify-content-between">
+                 
+      
+                          </div>
+                          <div class="iq-card-body" style="padding-left: 0;">
+                            <div class="row"> 
+                              <div class="col-md-1">
+
+                              </div>
+                               <div class="col-md-11">
+                                <form id="form-wizard3" method="post" class="text-center" action="{% url 'employee-delete' %}" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  <input type="text" value={{funcionario.id}} hidden name="id">
+                                <!-- <fieldset>
+                                     <div class="form-card text-left">
+                                        <div class="row">
+                                           <div class="col-12">
+                                              <h3 class="mb-4"><i class="ri-user-fill"></i> Informações Pessoais:</h3>
+                                              <br>
+                                           </div>
+                                        </div>
+                                        <div class="form-card text-left">
+                                         <div class="row">
+                                           <div class="col-12">
+                                           </div>
+                                         </div>
+                                         <div class="row">
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Nome:</h5>
+                                               <label class="control-label">{{funcionario.firstname}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Sobrenome:</h5>
+                                               <label class="control-label">{{funcionario.surname}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Genêro:</h5>
+                                               <label class="control-label">{{funcionario.gender}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Estado Cívil:</h5>
+                                               <label class="control-label">{{funcionario.estado_civil}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Número do BI:</h5>
+                                               <label for="campo" class="control-label">{{funcionario.personal_number}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Data de Nascimento:</h5>
+                                               <label for="emailid" class="control-label">{{funcionario.date_of_birth}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Localidade:</h5>
+                                               <label for="pwd" class="control-label">{{funcionario.Localidade}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Província de Residência:</h5>
+                                               <label for="cpwd" class="control-label">{{funcionario.provincia_residencia}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Contacto Telefônico:</h5>
+                                               <label for="uname" class="control-label">{{funcionario.telefone}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Número de Dependentes:</h5>
+                                               <label for="pwd" class="control-label">2 </label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Número Mecanográfico:</h5>
+                                               <label for="pwd" class="control-label">{{funcionario.numero_mecanografico}}</label>
+                                             </div>
+                                           </div>
+                                           <div class="col-md-4">
+                                             <div class="form-group">
+                                               <h5>Data de Nascimento:</h5>
+                                               <label for="emailid" class="control-label">{{funcionario.date_of_birth}}</label>
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </div>
+                                     </div>
+                                     <div class="form-card text-left">
+                                       <div class="row">
+                                          <div class="col-12">
+                                             <h3 class="mb-4"> <i class="ri-briefcase-4-fill"></i> Informações Profissionais:</h3>
+                                             <br>
+                                          </div>
+                                       </div>
+                                       <div class="row">
+                                          <div class="col-md-4">
+                                             <div class="form-group">
+                                              <h5>Data de Admissão:</h5>
+                                                <label for="emailid" class="control-label">{{funcionario.data_de_admissao}}</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                             <div class="form-group">
+                                              <h5>Direcção de Alocação:</h5>
+                                                <label class="control-label">{{funcionario.direccao.nome}}</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                             <div class="form-group">
+                                              <h5>Categoria Laboral:</h5>
+                                                <label class="control-label">{{funcionario.categoria.nome}}</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                             <div class="form-group">
+                                              <h5>Salário Base:</h5>
+                                                <label for="uname" class="control-label">{{funcionario.vencimento_mensal}}</label>
+                                             </div>
+                                          </div>
+                                
+                                          <div class="col-md-4">
+                                             <div class="form-group">
+                                              <h5>Habilitação Literária:</h5>
+                                                <label class="control-label">{{funcionario.habilitacao}}</label>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    
+                                  </fieldset> -->
+                                  
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  <div class="-header d-flex justify-content-between">
+
+                                    <div class="iq-header-title">
+                                      <br>
+                                      <h3 class=""><i class="fa fa-times"><span class=""> </span></i> Eliminar Dados </h3>
+                                    </div>
+                                    <br>
+                                    <p class="control-label justify-content-center" style="text-align: center;">Tem a Certeza que Pretende Eliminar ?</p>
+                                    <br><br>  
+                                  </div>
+                                  <button type="submit"  type="button" class="btn btn-danger pull-right" style="margin-right: 3px;">Eliminar</button>
+                                  <a href="{% url 'employee-list' %}" type="button" name="previous" class="btn btn-primary previous action-button-previous pull-right " value="Previous" style="margin-right: 3px;">Cancelar</a>
+                               </form>
+                               </div>
+                            </div>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+  {% endblock main %}

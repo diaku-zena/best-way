@@ -1,0 +1,619 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+
+{% block main %}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Processo de Prova de Vida
+        <small>RH</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+        <li><a href="#">Recursos Humanos</a></li>
+        <li class="active"> <a > Processo de Prova de Vida <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+      </ol>
+    </section>
+    <br>
+    <div class="col-md-12">
+      <div class="box box-success ">
+        <div class="box-header with-border" style="height: 70px">
+          <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+          <div class="box-tools pull-right">
+
+          
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+           <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+          </div>
+          <br>
+          <p></p>
+        </div>
+      </div>
+    </div>
+<section class="content" >
+      <!-- Page Content  -->
+ <div class="row" >
+    <div class="col-md-12">
+       <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+             <div class="iq-header-title">
+                <br>
+                <h4 class="card-title">Formulário de Recolha de Informações Para o Processo de Prova de Vida</h4>
+             </div>
+          </div>
+          <div class="iq-card-body" style="padding-left: 0;">
+            <div class="row"> 
+               <div class="col-md-4"> 
+                  <ul id="top-tabbar-vertical" class="p-0"> 
+                     <li class="active text-center" id="personal" >
+                        <a href="javascript:void();">
+                           <i class="ri-user-fill text-primary"></i>
+                        <span style="display:block;">Informações Para a Prova de Vida</span>
+                        </a>
+                     </li>
+                     <!-- <li class="text-center" id="contact">
+                        <a href="javascript:void();">
+                        <i class="ri-briefcase-4-fill text-warning"></i>
+                        <span style="display:block;">Informações Profissionais</span>
+                        </a>
+                     </li> -->
+                  </ul>
+               </div>
+               <div class="col-md-8">
+                  <form id="form-wizard3" class="text-center" action="{% url 'prova-vida-efectuar' %}" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                      <!-- <input type="text" value="{{employee.id}}" hidden name="id"> -->
+                        <div class="form-card text-left">
+                           <div class="row">
+                              <div class="col-12">
+                                 <h3 class="mb-4">Informações Pessoais:</h3>
+                              </div>
+                           </div>
+                           <div class="form-card text-left">
+                            <div class="row">
+                              <div class="col-12">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Nome Completo:</label>
+                                  <input maxlength="100" type="text" required="required" class="form-control"
+                                     value="{{employee.firstname}}" name="primeiro_nome"/>
+                                </div>
+                              </div>
+                              <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Sobrenome:</label>
+                                  <input maxlength="100" type="text" required="required" class="form-control"
+                                  value="{{employee.surname}}" name="sobre_nome" />
+                                </div>
+                              </div> -->
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Genêro:</label>
+                                  <select class="form-control" name="genero">
+                                    <option value="{{employee.gender}}" selected>{{employee.gender}}</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Estado Cívil:</label>
+                                  <select class="form-control" name="estado_civil">
+                                    <option value="{{employee.estado_civil}}" selected>{{employee.estado_civil}}</option>
+                                    <option value="Solteiro">Solteiro (a)</option>
+                                    <option value="Casado">Casado (a)</option>
+                                    <option value="Divorciado">Divorciado (a)</option>
+                                    <option value="Viúvo">Viúvo(a)</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="uname" class="control-label">Contacto Telefônico:</label>
+                                  <input type="text" class="form-control" id="telefone" 
+                                    name="telefone" value="{{employee.telefone}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="uname" class="control-label">Correio Electrônico:</label>
+                                  <input type="text" class="form-control" id="correio_electronico" 
+                                    name="correio_electronico" value="{{employee.correio_electronico}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="numero_bi" class="control-label">Número do BI:</label>
+                                  <input id="numero_bi" name="numero_bi" type="text" class="form-control"
+                                    required="required" maxlength="14" value="{{employee.personnel_number}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_de_validade" class="control-label">Data de Validade: </label>
+                                  <input type="date" id="data_de_validade"  class="form-control" 
+                                    name="data_de_validade" value="{{employee.data_de_validade|date:'Y-m-d'}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_nascimento" class="control-label">Data de Nascimento: </label>
+                                  <input type="date" id="data_nascimento"  class="form-control" 
+                                    name="data_nascimento" value="{{employee.date_of_birth|date:'Y-m-d'}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="morada" class="control-label">Morada: </label>
+                                  <input type="text" class="form-control" required="required" id="morada" name="morada"
+                                  value="{{employee.morada}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="cpwd" class="control-label">Província de Residência:</label>
+                                  <select class="form-control" name="provincia_residencia">
+                                    <option value="{{employee.provincia_residencia}}" selected>{{employee.provincia_residencia}}</option>
+                                    <option value="Bengo">Bengo</option>
+                                    <option value="Benguela">Benguela</option>
+                                    <option value="Bié">Bié</option>
+                                    <option value="Cabinda">Cabinda</option>
+                                    <option value="Cuando Cubango">Cuando Cubango</option>
+                                    <option value="Cuanza Norte">Cuanza Norte</option>
+                                    <option value="Cuanza Sul">Cuanza Sul</option>
+                                    <option value="Cunene">Cunene</option>
+                                    <option value="Huambo">Huambo</option>
+                                    <option value="Huíla">Huíla</option>
+                                    <option value="Luanda">Luanda</option>
+                                    <option value="Lunda Norte">Lunda Norte</option>
+                                    <option value="Lunda Sul">Lunda Sul</option>
+                                    <option value="Malanje">Malanje</option>
+                                    <option value="Moxico">Moxico</option>
+                                    <option value="Namibe">Namibe</option>
+                                    <option value="Uíge">Uíge</option>
+                                    <option value="Zaire">Zaire</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="cpwd" class="control-label">Província de Nascimento:</label>
+                                  <select class="form-control" name="provincia_nascimento">
+                                    <option value="{{employee.provincia_nascimento}}" selected>{{employee.provincia_nascimento}}</option>
+                                    <option value="Bengo">Bengo</option>
+                                    <option value="Benguela">Benguela</option>
+                                    <option value="Bié">Bié</option>
+                                    <option value="Cabinda">Cabinda</option>
+                                    <option value="Cuando Cubango">Cuando Cubango</option>
+                                    <option value="Cuanza Norte">Cuanza Norte</option>
+                                    <option value="Cuanza Sul">Cuanza Sul</option>
+                                    <option value="Cunene">Cunene</option>
+                                    <option value="Huambo">Huambo</option>
+                                    <option value="Huíla">Huíla</option>
+                                    <option value="Luanda">Luanda</option>
+                                    <option value="Lunda Norte">Lunda Norte</option>
+                                    <option value="Lunda Sul">Lunda Sul</option>
+                                    <option value="Malanje">Malanje</option>
+                                    <option value="Moxico">Moxico</option>
+                                    <option value="Namibe">Namibe</option>
+                                    <option value="Uíge">Uíge</option>
+                                    <option value="Zaire">Zaire</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="numero_mecanografico" class="control-label">Número Mecanográfico: </label>
+                                  <input type="text" class="form-control" required="required" id="numero_mecanografico" name="numero_mecanografico"
+                                  value="{{employee.numero_mecanografico}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="numero_seguranca_social" class="control-label">Número Segurança Social: </label>
+                                  <input type="text" class="form-control" required="required" id="numero_seguranca_social" name="numero_seguranca_social"
+                                  value="{{employee.numero_seguranca_social}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="numero_dependentes" class="control-label">Número de Dependentes: </label>
+                                  <input type="text" class="form-control" required="required" id="numero_dependentes" name="numero_dependentes"
+                                  value="{{employee.numero_dependentes}}">
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <hr>
+
+                        <div class="form-card text-left">
+                           <div class="row">
+                              <div class="col-12">
+                                 <h3 class="mb-4">Informações Profissionais:</h3>
+                              </div>
+                           </div>
+                           <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="data_admissao" class="control-label">Data de Admissão: </label>
+                                <input type="date" id="data_admissao" class="form-control" 
+                                  name="data_admissao" value="{{ employee.data_de_admissao|date:'Y-m-d'}}"> 
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                 <label for="motivo_admissao" class="control-label">Motivo da Admissão: </label>
+                                 <input type="text" id="motivo_admissao" class="form-control" required="required" 
+                                 name="motivo_admissao" value="{{employee.motivo_admissao}}">
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label for="data_de_demissao" class="control-label">Data de Demissão: </label>
+                                 <input type="date" id="data_de_demissao" class="form-control"  
+                                 name="data_de_demissao" value="{{employee.data_de_demissao|date:'Y-m-d'}}">
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="motivo_demissao" class="control-label">Motivo da Demissão: </label>
+                                <input type="text" id="motivo_demissao" class="form-control"  
+                                name="motivo_demissao" value="{{employee.motivo_demissao}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="data_fim_contrato" class="control-label">Data Fim Contrato: </label>
+                                  <input type="date" id="data_fim_contrato" class="form-control"
+                                  name="data_fim_contrato" value="{{employee.data_fim_contrato|date:'Y-m-d'}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="anos_trabalho" class="control-label">Anos de Trabalho: </label>
+                                <input type="text" id="anos_trabalho" class="form-control" required="required" 
+                                name="anos_trabalho" value="{{employee.anos_trabalho}}">
+                              </div>
+                            </div> 
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="cargo" class="control-label">Cargo / Função: </label>
+                                <input type="text" id="cargo" class="form-control" required="required" 
+                                name="cargo" value="{{employee.cargo}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="profissao" class="control-label">Profissão: </label>
+                                <input type="text" id="profissao" class="form-control" required="required" 
+                                name="profissao" value="{{employee.profissao}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="tipo_contrato" class="control-label">Tipo de Contrato: </label>
+                                <input type="text" id="tipo_contrato" class="form-control" required="required" 
+                                name="tipo_contrato" value="{{employee.tipo_contrato}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label">Tipo de Pessoal:</label>
+                                <select class="form-control" name="tipo_pessoal">
+                                  <option value="{{employee.tipo_pessoal}}" selected>{{employee.tipo_pessoal}}</option>
+                                  <option value="Pessoal do Quadro Efectivo">Pessoal do Quadro Efectivo</option>
+                                  <option value="Pessoal Não Efectivo">Pessoal Não Efectivo</option>
+                                  <option value="Comissão de Serviço">Comissão de Serviço</option>
+                                  <option value="Colaborador">Colaborador</option>
+                                  <option value="Reformado">Reformado</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label">Situação de Contrato:</label>
+                                <select class="form-control" name="situacao_contrato">
+                                  <option value="{{employee.situacao_contrato}}" selected>{{employee.situacao_contrato}}</option>
+                                  <option value="Contratado">Contratado</option>
+                                  <option value="Efectivo">Efectivo</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="carga_horaria_diurna" class="control-label">Carga Horária Diurna: </label>
+                                <input type="text" id="carga_horaria_diurna" class="form-control" required="required" 
+                                name="carga_horaria_diurna" value="{{employee.carga_horaria_diurna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="carga_horaria_nocturna" class="control-label">Carga Horária Nocturna: </label>
+                                <input type="text" id="carga_horaria_nocturna" class="form-control" required="required" 
+                                name="carga_horaria_nocturna"  value="{{employee.carga_horaria_nocturna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="valor_aula_diurna" class="control-label">Valor Aula Diurna: </label>
+                                <input type="text" id="valor_aula_diurna" class="form-control" required="required" 
+                                name="valor_aula_diurna" value="{{employee.valor_aula_diurna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="valor_aula_nocturna" class="control-label">Valor Aula Nocturna: </label>
+                                <input type="text" id="valor_aula_nocturna" class="form-control" required="required" 
+                                name="valor_aula_nocturna" value="{{employee.valor_aula_nocturna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="aula_diurna" class="control-label">Honorário / Aula Diurna: </label>
+                                <input type="text" id="aula_diurna" class="form-control" required="required" 
+                                name="aula_diurna" value="{{employee.aula_diurna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="aula_nocturna" class="control-label">Honorário / Aula Nocturna: </label>
+                                <input type="text" id="aula_nocturna" class="form-control" required="required" 
+                                name="aula_nocturna" value="{{employee.aula_nocturna}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="honorario_total" class="control-label">Honorário Total: </label>
+                                <input type="text" id="honorario_total" class="form-control" required="required" 
+                                name="honorario_total" value="{{employee.honorario_total}}">
+                              </div>
+                            </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label class="control-label">Departamento / Unidade Acadêmica:</label>
+                                 <select class="form-control" name="direcao_alocacao">
+                                  <option value="{{employee.direccao.nome}}" selected>{{employee.direccao.nome}}</option>
+                                  {% for direccao in direccoes %}
+                                       
+                                       <option value="{{direccao.id}}">{{direccao.nome}}</option>
+                                  
+                                  {% endfor %}
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label class="control-label">Categoria Profissional:</label>
+                                 <select class="form-control" name="categoria">
+                                  <option value="{{employee.categoria_laboral.nome}}" selected>{{employee.categoria_laboral.nome}}</option>
+                                  {% for categoria in  categorias %}
+                                       <option value="{{categoria.id}}">{{categoria.nome}}</option>
+
+                                  {% endfor %}
+                                 </select>
+                                 </select>
+                              </div>
+                           </div>
+               
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label for="vencimento_mensal" class="control-label">Salário Base:</label>
+                                 <input type="text" class="form-control" id="vencimento_mensal" required="required" 
+                                 name="vencimento_mensal" value="{{employee.vencimento_mensal}}">
+                              </div>
+                           </div>
+                        
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label class="control-label">Habilitação Literária:</label>
+                                 <select class="form-control" name="habilitacao_literaria">
+                                       <option value="{{employee.habilitacao}}" selected>{{employee.habilitacao}}</option>
+                                       <option value="Ensino de Base">Ensino de Base</option>
+                                       <option value="Ensino Médio">Ensino Médio</option>
+                                       <option value="Licenciatura">Licenciatura</option>
+                                       <option value="Especialização em pós-graduação">Especialização em pós-graduação</option>
+                                       <option value="Mestrado">Mestrado</option>
+                                       <option value="Doutoramento">Doutoramento</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="area_de_formacao" class="control-label">Área de Formação: </label>
+                              <input type="text" class="form-control" id="area_de_formacao" name="area_de_formacao"
+                              value="{{employee.area_de_formacao}}">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Regime de Trabalho:</label>
+                              <select class="form-control" name="regime_trabalho">
+                                <option value="{{employee.regime_trabalho}}" selected>{{employee.regime_trabalho}}</option>
+                                <option value="Colaborador">Colaborador</option>
+                                <option value="Efectivo">Efectivo</option>
+                              </select>
+                            </div>
+                          </div>
+
+                           <!-- VINCULO COMO PROFESSOR -->
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label"> <b>Vínculo Como Professor<span style="color:red;">*</span>:</b></label>
+                              <select class="form-control" name="vinculo_professor" required="required">
+                                <option value="" selected>Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <div  class="form-group">
+                              <label  class="control-label" for="observacao">Observações:</label><br>
+                              <textarea id="observacao" class="form-control" name="observacao" rows="1" cols="30" value="{{prova_vida.observacao}}"></textarea>
+                            </div>
+                          </div>
+                         
+                          
+ 
+                          <hr>
+                          <div class="form-card text-left">
+                            <div class="row">
+                             
+                            </div>
+                          </div>
+
+                          <!-- VINCULO COMO ADMINISTRATIVO -->
+                          <div class="form-card text-left">
+                            <div class="row">
+                               <div class="col-12">
+                                  <hr>
+                               </div>
+                            </div>
+                            <div class="form-card text-left">
+                             <div class="row">
+                               <div class="col-12">
+                               </div>
+                             </div>
+                             <div class="row">
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label"> <b>Vínculo Como Administrativo<span style="color:red;">*</span>:</b> </label>
+                                    <select class="form-control" name="vinculo_administrativo" required="required">
+                                      <option value="" selected>Selecione</option>
+                                      <option value="Sim">Sim</option>
+                                      <option value="Não">Não</option>
+                                    </select> 
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="data_de_admissao_administrativo" class="control-label">Data de Admissão: </label>
+                                      <input type="date" id="data_de_admissao_administrativo" class="form-control" name="data_de_admissao_administrativo" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Direcção:</label>
+                                      <select class="form-control" name="direccao_administrativo">
+                                        <option value=" " selected>Selecione</option>
+                                        {% for direccao in direccoes %}
+                                            
+                                            <option value="{{direccao.id}}">{{direccao.nome}}</option>
+                                        
+                                        {% endfor %}
+                                      </select>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Categoria Profissional:</label>
+                                      <select class="form-control" name="categoria_laboral_administrativo">
+                                        <option value="" selected>Selecione</option>
+                                        {% for categoria in  categorias %}
+                                            <option value="{{categoria.id}}">{{categoria.nome}}</option>
+            
+                                        {% endfor %}
+                                      </select>
+                                      </select>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label">Função de Chefia:</label>
+                                    
+                                    <select class="form-control" name="funcao_chefia_administrativo">
+                                      <option value=" " selected>Selecione</option>
+                                      {% for funcao in funcoes_chefia %}   
+                                      <option value="{{funcao.id}}">{{funcao.nome}}</option>
+                                      {% endfor %}
+                                    </select>  
+                                  </div>
+                              </div>
+                  
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="curso_ministrado" class="control-label">Curso(s) Ministrado(s):</label>
+                                      <input type="text" class="form-control" id="curso_ministrado" name="curso_ministrado" placeholder="Informe o curso ministrado">
+                                    </div>
+                                </div> 
+                    
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="vencimento_mensal_administrativo" class="control-label">Salário Base:</label>
+                                      <input type="text" class="form-control" id="vencimento_mensal_administrativo" name="vencimento_mensal_administrativo" placeholder="Informe o salário base">
+                                    </div>
+                                </div>
+                              
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Habilitação Literária:</label>
+                                      <select class="form-control" name="habilitacao_administrativo">
+                                            <option value="None" selected>Selecione</option>
+                                            <option value="Ensino de Base">Ensino de Base</option>
+                                            <option value="Ensino Médio">Ensino Médio</option>
+                                            <option value="Licenciatura">Licenciatura</option>
+                                            <option value="Especialização em pós-graduação">Especialização em pós-graduação</option>
+                                            <option value="Mestrado">Mestrado</option>
+                                            <option value="Doutoramento">Doutoramento</option>
+                                      </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="area_de_formacao_administrativo" class="control-label">Área de Formação: </label>
+                                    <input type="text" class="form-control" id="area_de_formacao_administrativo" name="area_de_formacao_administrativo"
+                                      placeholder="Informe a área de formação">
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label">Regime de Trabalho:</label>
+                                    <select class="form-control" name="regime_trabalho_administrativo">
+                                      <option value="" selected>Selecione</option>
+                                      <option value="Sim">Colaborador</option>
+                                      <option value="Não">Efectivo</option>
+                                    </select>
+                                  </div>
+                                </div> 
+                             </div>
+                           </div>
+                         </div>
+                         <br>
+                              <input type="submit"class="btn btn-primary action-button pull-right " value="Confirmar Prova de Vida" >
+                              <a href="{% url 'home' %}" type="button" name="previous" class="btn btn-secondary  action-button-previous pull-right " value="Previous" style="margin-right: 3px; text-decoration: none; color: black;">Sair</a>
+                     </fieldset>
+                  </form>
+               </div>
+            </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+    </div>
+</section>
+    <!-- /.content -->
+  </div>
+
+
+{% endblock main %}

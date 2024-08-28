@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+
+  {% if object %}
+    Actualizar {{ object }}
+  {% else %}
+  Adicionar um novo funcionário
+  {% endif %}
+
+{% endblock title %}
+
+
+{% block content %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {% include 'corecode/form_snippet.html' %}
+
+  {% if object %}
+    <input type="submit" class="btn btn-primary" value="Atualizar entrada">
+  {% else %}
+    <input type="submit" class="btn btn-primary" value="Adicionar um novo funcionário">
+  {% endif %}
+</form> 
+
+
+{% endblock content %}

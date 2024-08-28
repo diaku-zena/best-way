@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Visualizar Direcção de Alocação
+      <small>RH</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a> Visualizar Direcção de Alocação <small class="label pull-right" style="color: green;">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Geral</font>
+            </font>
+          </small> </a></li>
+    </ol>
+  </section>
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+        </h5>
+
+        <div class="box-tools pull-right">
+          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <!-- Page Content  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+            <div class="iq-header-title">
+              <br>
+              <h4 class="card-title">Visualizar Direcção de Alocação</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="">
+
+                <div class="-header d-flex justify-content-between">
+                  <br>
+
+                </div>
+                <div class="-body" style="padding-left: 0;">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="">
+    
+                        <div class="-header d-flex justify-content-between">
+                          <br>
+    
+                        </div>
+                        <div class="iq-card-body" style="padding-left: 0;">
+                          <div class="row"> 
+                             <div class="col-md-8">
+                                <form id="form-wizard3" class="text-center">
+                                   <!-- fieldsets -->
+                                   <fieldset>
+                                      <div class="form-card text-left">
+                                         <div class="row">
+                                         </div>
+                                         <div class="form-card text-left">
+                                          <div class="row">
+                                            <div class="col-12">
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-10">
+                                              <div class="form-group">
+                                                <h5>Nome da Direcção de Alocação:</h5>
+                                                <label class="control-label">{{direccoes.nome}}</label>
+                                              </div>
+                                            </div>
+                                            <a href="{% url 'direccao-list' %}" class="btn btn-primary action-button pull-right "  >Voltar</a>
+                                   </fieldset>
+                                </form>
+                                
+                             </div>
+                          </div>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</section>
+<!-- /.content -->
+</div>
+
+{% endblock main %}

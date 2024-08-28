@@ -1,0 +1,377 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block main %}
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Dados Estatísticos da Prova de Vida
+        <small>RH</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+        <li><a href="#">Recursos Humanos</a></li>
+        <li class="active"> <a > Dados Estatísticos da Prova de Vida <small class="label pull-right" style="color: green;"> <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geral</font></font></small> </a></li>
+      </ol>
+    </section>
+    <br>
+    <div class="col-md-12">
+      <div class="box box-success ">
+        <div class="box-header with-border" style="height: 70px">
+          <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos</h5>
+
+          <div class="box-tools pull-right">
+
+           
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
+           <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+          </div>
+          <br>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <section class="content" >
+      <!-- Page Content  -->
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                       <div class="iq-header-title">
+                        <br>
+                          <h4 class="card-title">Provas de Vida Concluídas</h4>
+                       </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div id="table" class="table-editable">
+                          <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                            <input type="text" id="searchInput" placeholder="Pesquisar...">
+                            <label for="filterSelect">Número de Linhas:</label>
+                            <select id="filterSelect">
+                              <option value="10">10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="1000">Todos</option>
+                            </select>
+                          </span>
+                            <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                             
+                              <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-prova-vida' %}"><i class="fa fa-file-excel-o"><span class=""> Excel</span></i></a>
+                              <a class="btn btn-sm iq-bg-dark" href="{% url 'prova-vida-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i></a>
+                            </span>
+                            <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                              <thead>
+                                <tr>
+                                  <th>Nome Completo</th>
+                                  <th>Data de Nascimento</th>
+                                  <th>BI</th>
+                                  <th>Estado Cívil</th>
+                                  <th>Contacto Telefônico</th>
+                                  <th>Localidade</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for funcionario_concluido in funcionario_concluidos %}
+                                <tr>
+                                  <td>{{funcionario_concluido.firstname}} {{funcionario.surname}}</td>
+                                  <td>{{funcionario_concluido.date_of_birth}}</td>
+                                  <td>{{funcionario_concluido.personnel_number}}</td>
+                                  <td>{{funcionario_concluido.estado_civil}}</td>
+                                  {% if funcionario_concluido.telefone is not None %}
+                                  <td>{{funcionario_concluido.telefone}}</td>
+              
+                                  {% else %}
+                                  <td></td>
+              
+                                  {% endif %}
+              
+                                  {% if funcionario_concluido.localidade is not None %}
+                                  <td>{{funcionario_concluido.localidade}}</td>
+              
+                                  {% else %}
+                                  <td></td>
+              
+                                  {% endif %}
+                                 
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                             
+                              </tbody>
+                            </table>
+                          </div>
+                    </div><!--enden-->
+                 </div>
+              </div>
+              
+           </div>
+          <div class="row">
+            <div class="col-md-12">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                      <br>
+                        <h4 class="card-title">Provas de Vida em Falta</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                    <div class="iq-card-body">
+                        <div id="table" class="table-editable">
+                          <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                            <input type="text" id="searchInput" placeholder="Pesquisar...">
+                            <label for="filterSelect">Número de Linhas:</label>
+                            <select id="filterSelect">
+                              <option value="10">10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="1000">Todos</option>
+                            </select>
+                          </span>
+                            <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                              <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-funcionarios-faltosos' %}"><i class="fa fa-file-excel-o"><span class=""> Excel</span></i></a>
+                              <a class="btn btn-sm iq-bg-dark" href="{% url 'prova-vida-f-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i>
+                              </a>
+                            </span>
+                            <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                              <thead>
+                                <tr>
+                                  <th>Nome Completo</th>
+                                  <th>Data de Nascimento</th>
+                                  <th>BI</th>
+                                  <th>Estado Cívil</th>
+                                  <th>Contacto Telefônico</th>
+                                  <th>Localidade</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for funcionario_falta in funcionario_faltas %}
+                                <tr>
+                                  <td>{{funcionario_falta.firstname}} {{funcionario_falta.surname}}</td>
+                                  <td>{{funcionario_falta.date_of_birth}}</td>
+                                  <td>{{funcionario_falta.personnel_number}}</td>
+                                  <td>{{funcionario_falta.estado_civil}}</td>
+                                  {% if funcionario_falta.telefone is not None %}
+                                  <td>{{funcionario_falta.telefone}}</td>
+              
+                                  {% else %}
+                                  <td></td>
+              
+                                  {% endif %}
+              
+                                  {% if funcionario_falta.localidade is not None %}
+                                  <td>{{funcionario_falta.localidade}}</td>
+              
+                                  {% else %}
+                                  <td></td>
+              
+                                  {% endif %}
+                                </tr>
+                                {% endfor %}
+                             
+                              </tbody>
+                            </table>
+                          </div>
+                    </div><!--enden-->
+                  </div>
+               </div>
+            </div>
+            
+          </div>
+          <div class="row">
+  
+            <div class="col-md-6">
+              <div class="iq-card">
+                <div class="iq-card-body">
+                  <h5 class="iq-card-title">Gráfico de Linha de Prova de Vida</h5>
+                
+                  <canvas id="lineChart1" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#lineChart1'), {
+                        type: 'line',
+                        data: {
+                          labels: ['Concluídas', 'Faltas'],
+                          datasets: [{
+                            label: 'Gráfico de Linha',
+                            data: ["{{ qtd_conc }}", "{{ qtd_falta }}"],
+                            fill: false,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+  
+                </div>
+              </div>
+            </div> 
+  
+            <div class="col-md-6">
+              <div class="iq-card">
+                  <div class="iq-card-body">
+                    <h5 class="iq-card-title">Gráfico de Barra de Prova de Vida</h5>
+  
+                  <canvas id="barChart1" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#barChart1'), {
+                        type: 'bar',
+                        data: {
+                          labels: ['Concluídas', 'Faltas'],
+                          datasets: [{
+                            label: 'Gráfico de Barra',
+                            data: ["{{ qtd_conc }}", "{{ qtd_falta }}"],
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              // 'rgba(255, 159, 64, 0.2)',
+                              // 'rgba(255, 205, 86, 0.2)',
+                              // 'rgba(75, 192, 192, 0.2)',
+                              // 'rgba(54, 162, 235, 0.2)',
+                              // 'rgba(153, 102, 255, 0.2)',
+                              // 'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(75, 192, 192)',
+                              // 'rgb(255, 159, 64)',
+                              // 'rgb(255, 205, 86)',
+                              // 'rgb(75, 192, 192)',
+                              // 'rgb(54, 162, 235)',
+                              // 'rgb(153, 102, 255)',
+                              // 'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+  
+                </div>
+              </div>
+            </div>
+  
+            <br>
+            <br>
+  
+            <div class="col-md-12">
+              <div class="iq-card">
+                <div class="iq-card-body">
+                  <h5 class="iq-card-title">Gráfico de Pizza de Prova de Vida</h5>
+  
+                
+                  <canvas id="pieChart1" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#pieChart1'), {
+                        type: 'pie',
+                        data: {
+                          labels: [
+                            'Concluídas',
+                            'Faltas',
+                          ],
+                          datasets: [{
+                            label: 'My First Dataset',
+                            data: ["{{ qtd_conc }}", "{{ qtd_falta }}"],
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              // 'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 4
+                          }]
+                        }
+                      });
+                    });
+                  </script>
+  
+                </div>
+              </div>
+            </div> 
+
+            <div class="col-md-6">
+              <div class="iq-card">
+                  <div class="iq-card-body">
+                      <h5 class="iq-card-title">Gráfico de Barra da Prova de Vida Por Localidade</h5>
+                      <canvas id="barChart2" style="max-height: 400px;"></canvas>
+                      <script>
+                          document.addEventListener("DOMContentLoaded", () => {
+                              new Chart(document.querySelector('#barChart2'), {
+                                  type: 'bar',
+                                  data: {
+                                      labels: ['Bié','Cubal', 'Huambo','Lobito', 'Luanda','Móxico'],
+                                      datasets: [{
+                                          label: 'Provas de Vida Concluídas',
+                                          data: ["{{ qtd_conc_bie }}","{{ qtd_conc_cubal }}", "{{ qtd_conc_huambo }}","{{ qtd_conc_lobito}}", "{{ qtd_conc_luanda }}","{{ qtd_conc_moxico }}"],
+                                          backgroundColor: [
+                                              // 'rgba(255, 99, 132, 0.2)',
+                                              'rgba(54, 162, 235, 0.2)',
+                                              // 'rgba(255, 205, 86, 0.2)',
+                                          ],
+                                          borderColor: [
+                                              // 'rgb(255, 99, 132)',
+                                              'rgb(54, 162, 235)',
+                                              // 'rgb(255, 205, 86)',
+                                          ],
+                                          borderWidth: 1
+                                      },{
+                                          label: 'Provas de Vida Não Concluídas',
+                                          data: ["{{ qtd_falta_bie }}","{{ qtd_falta_cubal }}", "{{ qtd_falta_huambo }}","{{ qtd_falta_lobito}}", "{{ qtd_falta_luanda }}","{{ qtd_falta_moxico }}"],
+                                          backgroundColor: [
+                                            //  'rgba(54, 162, 235, 0.2)',
+                                              'rgba(255, 99, 132, 0.2)',
+                                              // 'rgba(255, 205, 86, 0.2)',
+                                          ],
+                                          borderColor: [
+                                              // 'rgb(54, 162, 235)',
+                                               'rgb(255, 99, 132)',
+                                              // 'rgb(255, 205, 86)',
+                                          ],
+                                          borderWidth: 1
+                                      }]
+                                  },
+                                  options: {
+                                      scales: {
+                                          y: {
+                                              beginAtZero: true
+                                          }
+                                      }
+                                  }
+                              });
+                          });
+                      </script>
+                  </div>
+              </div>
+          </div>
+          
+
+
+          </div>
+        </div>
+        
+    </div>
+  </section>
+  </div>
+
+  {% endblock main %}
+  

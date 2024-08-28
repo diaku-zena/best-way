@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+</head>
+<body>
+    <input type="text" id="searchInput" placeholder="Search by name">
+    <ul id="employeeList">
+        <!-- Employee data will be displayed here dynamically -->
+    </ul>
+    <div id="paginationControls">
+        <!-- Pagination controls will be displayed here dynamically -->
+    </div>
+
+    <script src="{% static 'assets/dist/js/employee_list.js' %}"></script>
+</body>
+</html>

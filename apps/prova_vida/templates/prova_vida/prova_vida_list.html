@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>  
+      Prova de Vida
+      <small>RH</small>
+    </h1>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="">
+
+              <div class="-header d-flex justify-content-between">
+
+                <div class="iq-header-title">
+                  <br>
+                  <h3 class=""><i class="fa fa-upload"><span class=""> </span></i> Importar Dados </h3>
+                </div>
+                <br>
+
+              </div>
+              <div class="-body" style="padding-left: 0;">
+                <div class="row">
+                  <div class="col-md-2">
+
+                  </div>
+                  <div class="col-md-8">
+                    <form id="form-wizard3" method="post" class="text-center" action="{% url 'import-excel-prova-vida' %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <!-- fieldsets -->
+                      <fieldset>
+                        <div class="form-card text-left">
+                          <div class="row">
+                            <div class="col-12">
+                              <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label class="control-label">Escolha um Ficheiro:</label>
+                                <input maxlength="100" type="file" required="required" class="form-control"
+                                  placeholder="Informe o seu nome completo"  name="excel_file"/>
+                              </div>
+                            </div>
+                      </fieldset>
+                      <br>
+                      <br>
+                      <button type="submit" class="btn btn-primary action-button pull-right" >Importar</button>
+                      <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal" style="margin-right: 3px;">Fechar</button>
+                    </form>
+
+                  </div>
+                  <div class="col-md-2">
+
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fim do conteúdo da modal -->
+      </div>
+    </div>
+  </div>
+</div>
+
+    <ol class="breadcrumb">
+      <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+      <li><a href="#">Recursos Humanos</a></li>
+      <li class="active"> <a> Prova de Vida <small class="label pull-right" style="color: green;">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Geral</font>
+            </font>
+          </small> </a></li>
+    </ol>
+  </section>
+
+  <br>
+  <div class="col-md-12">
+    <div class="box box-success ">
+      <div class="box-header with-border" style="height: 70px">
+        <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+        </h5>
+
+        <div class="box-tools pull-right">
+
+         
+          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+          <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+        </div>
+        <br>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <!-- Page Content  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="iq-card">
+          <div class="iq-card-header d-flex justify-content-between">
+            <div class="iq-header-title">
+              <br>
+              <h4 class="card-title">Lista de Provas de Vida Concluídas</h4> 
+            </div>
+          </div>
+          <div class="iq-card-body">
+            <div id="table" class="table-editable">
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:left;">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <label for="filterSelect">Número de Linhas:</label>
+                <select id="filterSelect">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="1000">Todos</option>
+                </select>
+              </span>
+              <span class="table-add " style="margin-bottom: 3px; margin-right: 2px; float:right;">
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'prova-vida-pdf' %}"><i class="fa fa-file-pdf-o"><span class=""> PDF</span></i></a>
+                <button class="btn btn-sm iq-bg-dark" data-toggle="modal" data-target="#exampleModal1"><i class="fa fa-file-excel-o"><span class=""> Importar</span></i>
+                </button>
+                <a class="btn btn-sm iq-bg-dark" href="{% url 'export-excel-prova-vida' %}"><i class="fa fa-file-excel-o"><span class=""> Exportar</span></i></a>
+              </span>
+              <table id="dataTable" class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                  {% for prova_vida in provas_vida %}
+                  <tr>
+                    <th>Nome Completo</th>
+                    <!-- <th>Gênero</th> -->
+                    <th>Número BI</th>
+                    <!-- <th>Contacto Telefônico</th> -->
+                    <th>Número Mecanográfico</th>
+                    <th>Categoria Profissional</th>  
+                    <th>Prova de Vida</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{prova_vida.funcionario.firstname}} {{prova_vida.funcionario.surname}}</td>
+                    <!-- <td>{{prova_vida.funcionario.gender}}</td> -->
+                    <td>{{prova_vida.funcionario.personnel_number}}</td>
+                    <!-- <td>{{prova_vida.funcionario.telefone}}</td> -->
+                    <td>{{prova_vida.funcionario.numero_mecanografico}}</td>
+                    <td>{{prova_vida.funcionario.categoria_laboral.nome}}</td>
+                    <td>{{prova_vida.data_prova_vida|date:"d-m-Y"}}</td>
+                
+                    <td >
+                      <span class="text-center"><a href="{% url 'prova-vida-func-edit' prova_vida.id %}" type="button"
+                        class="btn iq-bg-warning btn-rounded btn-sm my-0"><i class="fa fa-pencil"
+                          aria-hidden="false"></i></a>
+                    </span>
+                      <span class=""><a href="{% url 'prova-vida-func-detail' prova_vida.id %}" type="button" class="btn iq-bg-primary btn-rounded btn-sm my-0"><i
+                            class="fa fa-eye" aria-hidden="true"></i></a>
+                      </span>
+                      <span class=""><a href="#" type="button" class="btn iq-bg-danger btn-rounded btn-sm my-0"><i
+                        class="fa fa-trash" aria-hidden="true"></i></a>
+                      </span>
+                    </td>
+                  </tr>
+
+                  {% endfor %}
+              
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation example" class="text-center">
+              <ul class="pagination justify-content-center">
+                 <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                 </li>
+                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                 <li class="page-item"><a class="page-link" href="#">2</a></li>
+                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                 <li class="page-item">
+                    <a class="page-link" href="#">Próximo</a>
+                 </li>
+              </ul>
+           </nav>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</section>
+<!-- /.content -->
+</div>
+
+
+
+{% endblock main %}

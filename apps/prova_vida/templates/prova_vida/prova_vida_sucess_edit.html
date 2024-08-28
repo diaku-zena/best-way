@@ -1,0 +1,523 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load static %}
+
+
+{% block main %}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Prova de Vida
+        <small>RH</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
+        <li><a href="#">Recursos Humanos</a></li>
+        <li class="active"> <a> Prova de Vida <small class="label pull-right" style="color: green;">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Geral</font>
+              </font>
+            </small> </a></li>
+      </ol>
+    </section>
+    <br>
+    <div class="col-md-12">
+      <div class="box box-success ">
+        <div class="box-header with-border" style="height: 70px">
+          <h5 class="box-title" style="font-size: 12px"><i class="fa fa-fw  fa-object-group"></i> Recursos Humanos
+          </h5>
+
+          <div class="box-tools pull-right">
+
+
+            <div class="alert text-white bg-success" style="padding-right: 6px;" role="alert">
+              <div class="iq-alert-text">Prova de Vida Editada com Sucesso!</div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="ri-close-line"></i>
+              </button>
+           </div> 
+            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+            <img src="{% static 'imagens/bwcangola_logo.png' %}" style="width: 70px; height:2%">
+          </div>
+          <br>
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+    <section class="content">
+      <!-- Page Content  -->
+       <div class="row">
+        <div class="col-md-12">
+          <div class="iq-card">
+            <div class="iq-card-header d-flex justify-content-between">
+              <div class="iq-header-title">
+                <br>
+                <h4 class="card-title">Resumo da Prova de Vida do Funcionário</h4>
+                <span>
+                  
+                </span>
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="">
+
+                  <div class="-header d-flex justify-content-between">
+                    <br>
+
+                  </div>
+                  <div class="-body" style="padding-left: 0;">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="">
+      
+                          <div class="-header d-flex justify-content-between">
+                 
+      
+                          </div>
+                          <div class="iq-card-body" style="padding-left: 0;">
+                            <div class="row"> 
+                               <div class="col-md-8">
+                                  <form id="form-wizard3" class="text-center">
+                                     <!-- fieldsets -->
+                                     <fieldset>
+                                        <div class="form-card text-left">
+                                           <div class="row">
+                                           </div>
+                                           <div class="form-card text-left">
+                                            <div class="row">
+                                              <div class="col-12">
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-1">
+                                                  
+                                              </div>
+                                              <div class="col-md-11">
+                                                <form id="form-wizard3" class="text-center">
+                                                   <!-- fieldsets -->
+                                                   <fieldset>
+                                                      <div class="form-card text-left">
+                                                         <div class="row">
+                                                            <div class="col-12">
+                                                               <h3 class="mb-4"><i class="ri-user-fill"></i> Informações Pessoais:</h3>
+                                                               <br>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-card text-left">
+                                                          <div class="row">
+                                                            <div class="col-12">
+                                                              <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
+                                                            </div>
+                                                          </div>
+                                                          <div class="row">
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Nome Completo:</h5>
+                                                                <label class="control-label">{{prova_vida.funcionario.firstname}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Genêro:</h5>
+                                                                <label class="control-label">{{prova_vida.funcionario.gender}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Estado Cívil:</h5>
+                                                                <label class="control-label">{{prova_vida.funcionario.estado_civil}}</label>
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Contacto Telefônico:</h5>
+                                                                <label for="uname" class="control-label">{{prova_vida.funcionario.telefone}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Correio Electrônico:</h5>
+                                                                <label for="uname" class="control-label">{{prova_vida.funcionario.correio_electronico}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Número do BI:</h5>
+                                                                <label for="campo" class="control-label">{{prova_vida.funcionario.personnel_number}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Data de Validade:</h5>
+                                                                <label class="control-label"> {{prova_vida.funcionario.data_de_validade|date:"d-m-Y"}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Data de Nascimento:</h5>
+                                                                <label class="control-label"> {{prova_vida.funcionario.date_of_birth|date:"d-m-Y"}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Morada:</h5>
+                                                                <label for="pwd" class="control-label">{{prova_vida.funcionario.morada}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Província de Residência:</h5>
+                                                                <label for="cpwd" class="control-label">{{prova_vida.funcionario.provincia_residencia}}</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Província de Nascimento:</h5>
+                                                                <label for="cpwd" class="control-label">{{prova_vida.funcionario.provincia_nascimento}}</label>
+                                                              </div>
+                                                            </div>
+                                                       
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Número Mecanográfico:</h5>
+                                                                <label for="pwd" class="control-label">{{prova_vida.funcionario.numero_mecanografico}}</label>
+                                                              </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                                <h5>Número Segurança Social:</h5>
+                                                                <label for="pwd" class="control-label">{{prova_vida.funcionario.numero_seguranca_social}}</label>
+                                                              </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                              <div class="form-group">
+                                                               <h5>Número de Dependentes:</h5>
+                                                                 <label class="control-label">{{prova_vida.funcionario.numero_dependentes}}</label>
+                                                              </div>
+                                                           </div>
+                                                        
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-card text-left">
+                                                        <div class="row">
+                                                           <div class="col-12">
+                                                              <h3 class="mb-4"> <i class="ri-briefcase-4-fill"></i> Informações Profissionais:</h3>
+                                                              <br>
+                                                           </div>
+                                                        </div>
+                                                        <div class="row">
+                                                          <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Data de Admissão:</h5>
+                                                               <label for="emailid" class="control-label">{{prova_vida.funcionario.data_de_admissao|date:"d-m-Y"}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Motivo de Admissão:</h5>
+                                                               <label for="emailid" class="control-label">{{prova_vida.funcionario.motivo_admissao}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Data de Demissão:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.data_de_demissao|date:"d-m-Y"}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Motivo de Demissão:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.motivo_demissao}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Data Fim Contrato:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.data_fim_contrato|date:"d-m-Y"}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Anos de Trabalho:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.anos_trabalho}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Cargo / Função:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.cargo}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Profissão:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.profissao}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Tipo de Contrato:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.tipo_contrato}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Tipo de Pessoal:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.tipo_pessoal}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Situação de Contrato:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.situacao_contrato}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Carga Horária Diurna:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.carga_horaria_diurna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Carga Horária Nocturna:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.carga_horaria_nocturna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Valor Aula Diurna: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.valor_aula_diurna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Valor Aula Nocturna: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.valor_aula_nocturna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Honorário / Aula Diurna: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.aula_diurna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Honorário / Aula Nocturna: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.aula_nocturna}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Honorário Total: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.honorario_total}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Regime de Trabalho: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.regime_trabalho}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Departamento / Unidade Acadêmica:</h5>
+                                                               <label class="control-label">{{prova_vida.funcionario.direccao.nome}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Categoria Profisional:</h5>
+                                                               <label class="control-label">{{prova_vida.funcionario.categoria_laboral.nome}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Função de Chefia:</h5>
+                                                               <label class="control-label">{{prova_vida.funcionario.funcao_chefia.nome}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Salário Base:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.vencimento_mensal}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Situação:</h5>
+                                                              <label for="uname" class="control-label">
+                                                                {% if funcionario.current_status == 'activo' %}
+                                                                Normal
+                                                                {% else %}
+                                                                {{prova_vida.funcionario.current_status}}
+                                                                {% endif %}
+                                                              </label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Habilitação Literária:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.habilitacao}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Área de Formação:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.area_de_formacao}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5><b>Vínculo Como Professor<span style="color:red;">*</span>:</b></h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.vinculo_professor}}</label>
+                                                            </div>
+                                                         </div>
+                                                     
+                                                         
+                                                          <div class="form-card text-left">
+                                                            <div class="row">
+                                                              <div class="col-12">
+                                                                 <hr>
+                                                              </div>
+                                                           </div>
+                                                          </div>
+                                                          <hr>
+                                                          <div class="form-card text-left">
+                                                            <div class="row">
+                                                            
+                                                            </div>
+                                                          </div>
+
+                                                          <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5><b>Vínculo Como Administrativo<span style="color:red;">*</span>:</b></h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.vinculo_administrativo}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Data de Admissão:</h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.data_de_admissao_administrativo|date:"d-m-Y"}}</label>
+                                                          </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Direcção:</h5>
+                                                             <label class="control-label">{{prova_vida.funcionario.direccao_administrativo}}</label>
+                                                          </div>
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Categoria Profisional:</h5>
+                                                             <label class="control-label">{{prova_vida.funcionario.categoria_laboral_administrativo}}</label>
+                                                          </div>
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Função de Chefia:</h5>
+                                                             <label class="control-label">{{prova_vida.funcionario.funcao_chefia_administrativo}}</label>
+                                                          </div>
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Curso(s) Ministrado(s):</h5>
+                                                             <label class="control-label">{{prova_vida.funcionario.curso_ministrado}}</label>
+                                                          </div>
+                                                       </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Salário Base:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.vencimento_mensal_administrativo}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Habilitação Literária:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.habilitacao_administrativo}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                             <h5>Área de Formação:</h5>
+                                                               <label for="uname" class="control-label">{{prova_vida.funcionario.area_de_formacao_administrativo}}</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-4">
+                                                          <div class="form-group">
+                                                           <h5>Regime de Trabalho: </h5>
+                                                             <label for="emailid" class="control-label">{{prova_vida.funcionario.regime_trabalho_administrativo}}</label>
+                                                          </div>
+                                                         </div>
+
+                                                        <div class="col-md-4">
+                                                          <div class="form-group">
+                                                            <h5>Observações:</h5>
+                                                              <label class="control-label">{{prova_vida.observacao}}</label>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                     </div>
+                                                      <div class="form-card text-left">
+                                                        <div class="row">
+                                                           <div class="col-12">
+                                                              <h3 class="mb-4"> <i class="fa fa-life-ring" aria-hidden="true"></i> Informações da Prova de Vida:</h3>
+                                                              <br>
+                                                           </div>
+                                                        </div>
+                                                        <div class="row">
+                                                           <div class="col-md-6">
+                                                              <div class="form-group">
+                                                               <h5>Data de Realização da Prova de Vida:</h5>
+                                                                 <label class="control-label">{{prova_vida.data_prova_vida|date:"d-m-Y"}}</label>
+                                                              </div>
+                                                           </div>
+                                                           <div class="col-md-3">
+                                                              
+                                                           </div>
+                                                           <div class="col-md-3">
+                                                              
+                                                           </div>
+                                                        </div>
+                                                     </div>
+                                                     
+                                                   </fieldset>
+                                                   <a href="{% url 'home' %}" type="button" name="previous" class="btn btn-primary previous action-button-previous pull-right " value="Previous" style="margin-right: 3px;">Página Inicial</a>
+                                                </form>
+                                             </div>
+                                     </fieldset>
+                                  </form>
+                                  
+                               </div>
+                            </div>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+
+  </section>
+  <!-- /.content -->
+  </div>
+
+{% endblock main %}
