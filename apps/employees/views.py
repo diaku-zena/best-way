@@ -535,29 +535,6 @@ def upload_excel(request):
             wb = load_workbook(excel_file)
             ws = wb.active
 
-            '''
-
-
-provincia_nascimento
-gender
-estado_civil
-numero_dependentes
-morada
-provincia_residencia
-telefone
-correio_electronico
-data_de_admissao
-direccao
-funcao_chefia
-categoria_laboral_antiga
-categoria_laboral_nova
-vencimento_mensal
-habilitacao
-area_de_formacao
-reforma
-tempo_na_empresa
-            '''
-
             for row in ws.iter_rows(min_row=2, values_only=True):
                 numero_mecanografico = row[0]
                 firstname = row[1]
@@ -569,24 +546,22 @@ tempo_na_empresa
                 numero_seguranca_social = row[7]
                 nacionalidade = row[8]
                 provincia_nascimento = row[9]
-                provincia_nascimento = row[10]
-                gender = row[11]
-                estado_civil = row[12]
-                numero_dependentes = row[13]
-                morada = row[14]
-                provincia_residencia = row[15]
-                telefone = row[16]
-                correio_electronico = row[17]
-                data_de_admissao = row[18]
-                direcao_nome = row[19]
-                funcao_chefia = row[20]
-                categoria_antiga_nome = row[21]
-                categoria_nova_nome = row[22]
-                vencimento_mensal = row[23]
-                habilitacao = row[24]
-                area_de_formacao = row[25]
-                reforma = row[26]
-                tempo_na_empresa = row[27]
+                gender = row[10]
+                estado_civil = row[11]
+                numero_dependentes = row[12]
+                morada = row[13]
+                provincia_residencia = row[14]
+                telefone = row[15]
+                correio_electronico = row[16]
+                data_de_admissao = row[17]
+                direcao_nome = row[18]
+                funcao_chefia = row[19]
+                categoria_antiga_nome = row[20]
+                categoria_nova_nome = row[21]
+                habilitacao = row[22]
+                area_de_formacao = row[23]
+                reforma = row[24]
+                tempo_na_empresa = row[25]
 
                 # Conversão de datas
                 def parse_date(date_value):
@@ -600,9 +575,10 @@ tempo_na_empresa
                         return date_value.date()
                     return None
 
-                data_admissao = parse_date(data_admissao)
+                data_admissao = parse_date(data_de_admissao)
                 data_de_emissao = parse_date(data_de_emissao)
                 data_de_validade = parse_date(data_de_validade)
+                data_de_nascimento = parse_date(date_of_birth)
 
                 # Validação de campos
                 def validate_field(value):
@@ -610,15 +586,11 @@ tempo_na_empresa
 
                 categoria_antiga = Categoria.objects.filter(nome=categoria_antiga_nome, tipo='antiga').first()
                 categoria_nova = Categoria.objects.filter(nome=categoria_nova_nome, tipo='nova').first()
+                funcao_chefia = FuncaoChefia.objects.filter(nome=funcao_chefia).first()
                 direcao = DirecaoAlocacao.objects.filter(nome=direcao_nome).first()
-                profissao = validate_field(profissao)
                 habilitacao = validate_field(habilitacao)
-                tipo_contrato = validate_field(tipo_contrato)
-                regime = validate_field(regime)
-                tipo_pessoal = validate_field(tipo_pessoal)
-                motivo_admissao = validate_field(motivo_admissao)
-                motivo_demissao = validate_field(motivo_demissao)
-                anos_trabalho = validate_field(anos_trabalho)
+                firstname = validate_field(firstname)
+                tempo_na_empresa = tempo_na_empresa
 
                 try:
                     Employee.objects.create(
@@ -626,7 +598,7 @@ tempo_na_empresa
                         numero_mecanografico = numero_mecanografico,
                         firstname=firstname,
                         personnel_number = personnel_number,
-                        date_of_birth = date_of_birth,
+                        date_of_birth = data_de_nascimento,
                         data_de_emissao = data_de_emissao,
                         data_de_validade = data_de_validade,
                         numero_seguranca_social = numero_seguranca_social,
@@ -641,7 +613,7 @@ tempo_na_empresa
                         correio_electronico = correio_electronico,
                         
                         # Dados Profissionais
-                        data_de_admissao = data_de_admissao,
+                        data_de_admissao = data_admissao,
                         direccao= direcao,
                         funcao_chefia = funcao_chefia,
                         categoria_laboral_antiga = categoria_antiga,
