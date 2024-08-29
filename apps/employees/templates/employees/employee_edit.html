@@ -335,7 +335,7 @@
                                         <div class="form-group">
                                           <label class="control-label">Categoria Laboral Antiga:</label>
                                           <select class="form-control" name="categoria_antiga">
-                                            <option value="{{funcionario.categoria_laboral_antiga.nome}}" selected>{{funcionario.categoria_laboral_antiga.nome}}</option>
+                                            <option value="{{funcionario.categoria_laboral_antiga.id}}" selected>{{funcionario.categoria_laboral_antiga.nome}}</option>
                                             {% for categoria in categorias_antigas %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
@@ -348,7 +348,7 @@
                                         <div class="form-group">
                                           <label class="control-label">Categoria Laboral Nova:</label>
                                           <select class="form-control" name="categoria_nova">
-                                            <option value="{{funcionario.categoria_laboral_nova.nome}}" selected>{{funcionario.categoria_laboral_nova.nome}}</option>
+                                            <option value="{{funcionario.categoria_laboral_nova.id}}" selected>{{funcionario.categoria_laboral_nova.nome}}</option>
                                             {% for categoria in categorias_novas %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
