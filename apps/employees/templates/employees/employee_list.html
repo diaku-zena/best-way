@@ -189,11 +189,36 @@
                                 </div>
                                 <div class="col-md-4">
                                   <div class="form-group">
+                                    <label for="correio_electronico" class="control-label">Correio Eletrônico:</label>
+                                    <input type="text" class="form-control" id="correio_electronico" name="correio_electronico"
+                                      placeholder="Informe o seu correio eletrônico">
+                                    <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                      name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="nacionalidade" class="control-label">Nacionalidade</label>
+                                    <input type="text" class="form-control" id="nacionalidade" name="nacionalidade"
+                                      placeholder="Digite a sua nacionalidade">
+                                    <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                      name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
                                     <label for="numero_bi" class="control-label">Número do BI:</label>
                                     <input id="numero_bi" name="numero_bi" type="text" class="form-control"
                                       required="required" maxlength="14" placeholder="Informe o número do BI">
                                     <!-- <input id="numero_bi" name="numero_bi" type="text" class="form-control"
                                        required="required" maxlength="14" placeholder="Informe o número do BI" pattern="[0-9]{9}(LA|BE|HU|HA|MO|BO|CA|KK|CU|UI|NE|CC|CE|BA|HO|ZA)[0-9]{3}" title="Entre Com um Número de bilhete Válido"> -->
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="data_de_emissao" class="control-label">Data de Emissão: </label>
+                                    <input type="date" id="data_de_emissao" class="form-control" required="required"
+                                      name="data_de_emissao">
                                   </div>
                                 </div>
                                 <div class="col-md-4">
@@ -320,31 +345,6 @@
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="motivo_admissao" class="control-label">Motivo da Admissão: </label>
-                                  <input type="text" id="motivo_admissao" class="form-control" name="motivo_admissao">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="data_de_demissao" class="control-label">Data de Demissão: </label>
-                                  <input type="date" id="data_de_demissao" class="form-control" name="data_de_demissao">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="motivo_demissao" class="control-label">Motivo da Demissão: </label>
-                                  <input type="text" id="motivo_demissao" class="form-control" name="motivo_demissao">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="data_fim_contrato" class="control-label">Data Fim Contrato: </label>
-                                  <input type="date" id="data_fim_contrato" class="form-control"
-                                    name="data_fim_contrato">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
                                   <label class="control-label">Reforma:</label>
                                   <select class="form-control" name="reforma" required="required">
                                     <option value="" selected>Selecione</option>
@@ -352,105 +352,6 @@
                                     <option value="Pré-reforma">Pré-reforma</option>
                                     <option value="Não reformado">Não reformado</option>
                                   </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="cargo" class="control-label">Cargo / Função: </label>
-                                  <input type="text" id="cargo" class="form-control" required="required" name="cargo">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="profissao" class="control-label">Profissão: </label>
-                                  <input type="text" id="profissao" class="form-control" required="required"
-                                    name="profissao">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="tipo_contrato" class="control-label">Tipo de Contrato: </label>
-                                  <input type="text" id="tipo_contrato" class="form-control" required="required"
-                                    name="tipo_contrato">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label class="control-label">Tipo de Pessoal:</label>
-                                  <select class="form-control" name="tipo_pessoal" required="required">
-                                    <option value="" selected>Selecione</option>
-                                    <option value="Pessoal do Quadro Efectivo">Pessoal do Quadro Efectivo</option>
-                                    <option value="Pessoal Não Efectivo">Pessoal Não Efectivo</option>
-                                    <option value="Comissão de Serviço">Comissão de Serviço</option>
-                                    <option value="Colaborador">Colaborador</option>
-                                    <option value="Reformado">Reformado</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <!-- <div class="col-md-4">
-                                  <div class="form-group">
-                                    <label for="tipo_pessoal" class="control-label">Tipo de Pessoal: </label>
-                                    <input type="text" id="tipo_pessoal" class="form-control" required="required" name="tipo_pessoal" >
-                                  </div>
-                                </div> -->
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label class="control-label">Situação de Contrato:</label>
-                                  <select class="form-control" name="situacao_contrato" required="required">
-                                    <option value="" selected>Selecione</option>
-                                    <option value="Contratado">Contratado</option>
-                                    <option value="Efectivo">Efectivo</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="carga_horaria_diurna" class="control-label">Carga Horária Diurna: </label>
-                                  <input type="text" id="carga_horaria_diurna" class="form-control" required="required"
-                                    name="carga_horaria_diurna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="carga_horaria_nocturna" class="control-label">Carga Horária Nocturna:
-                                  </label>
-                                  <input type="text" id="carga_horaria_nocturna" class="form-control"
-                                    required="required" name="carga_horaria_nocturna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="valor_aula_diurna" class="control-label">Valor Aula Diurna: </label>
-                                  <input type="text" id="valor_aula_diurna" class="form-control" required="required"
-                                    name="valor_aula_diurna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="valor_aula_nocturna" class="control-label">Valor Aula Nocturna: </label>
-                                  <input type="text" id="valor_aula_nocturna" class="form-control" required="required"
-                                    name="valor_aula_nocturna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="aula_diurna" class="control-label">Honorário / Aula Diurna: </label>
-                                  <input type="text" id="aula_diurna" class="form-control" required="required"
-                                    name="aula_diurna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="aula_nocturna" class="control-label">Honorário / Aula Nocturna: </label>
-                                  <input type="text" id="aula_nocturna" class="form-control" required="required"
-                                    name="aula_nocturna">
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="honorario_total" class="control-label">Honorário Total: </label>
-                                  <input type="text" id="honorario_total" class="form-control" required="required"
-                                    name="honorario_total">
                                 </div>
                               </div>
                               <div class="col-md-4">
@@ -471,7 +372,20 @@
                                   <label class="control-label">Categoria Laboral Antiga:</label>
                                   <select class="form-control" name="categoria">
                                     <option value="" selected>Selecione</option>
-                                    {% for categoria in categorias %}
+                                    {% for categoria in categorias_antigas %}
+                                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label">Categoria Laboral Nova:</label>
+                                  <select class="form-control" name="categorianova">
+                                    <option value="" selected>Selecione</option>
+                                    {% for categoria in categorias_novas %}
                                     <option value="{{categoria.id}}">{{categoria.nome}}</option>
 
                                     {% endfor %}
@@ -482,24 +396,10 @@
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label class="control-label">Função Chefia Nova:</label>
+                                  <label class="control-label">Função Chefia:</label>
                                   <select class="form-control" name="funcoes_chefias_nova">
                                     <option value="" selected>Selecione</option>
                                     {% for categoria in funcoes_chefia %}
-                                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
-
-                                    {% endfor %}
-                                  </select>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label class="control-label">Função Chefia Antiga:</label>
-                                  <select class="form-control" name="funcoes_chefias_antiga">
-                                    <option value="" selected>Selecione</option>
-                                    {% for categoria in categorias_nova %}
                                     <option value="{{categoria.id}}">{{categoria.nome}}</option>
 
                                     {% endfor %}
@@ -539,16 +439,6 @@
                                 </div>
                               </div>
 
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label class="control-label">Regime de Trabalho:</label>
-                                  <select class="form-control" name="regime_trabalho" required="required">
-                                    <option value="" selected>Selecione</option>
-                                    <option value="Colaborador">Colaborador</option>
-                                    <option value="Efectivo">Efectivo</option>
-                                  </select>
-                                </div>
-                              </div>
                             </div>
 
                           </div>

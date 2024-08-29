@@ -101,6 +101,7 @@ aria-hidden="true">
                            <label class="control-label">Nome da Antiga Categoria laboral:</label>
                            <input maxlength="100" type="text" required="required" class="form-control"
                              placeholder="Informe a nova categoria profissional" name="nome"/>
+                           <input type="hidden" id="tipo_categoria" value="{{tipo_categoria}}" name="tipo_categoria"/>
                          </div>
                        </div>
                  </fieldset>
@@ -200,7 +201,7 @@ aria-hidden="true">
                    <div class="iq-card-header d-flex justify-content-between">
                       <div class="iq-header-title">
                        <br>
-                         <h4 class="card-title">Lista de Categorias Laborais Antiga</h4>
+                         <h4 class="card-title">Lista de Categorias Laborais {{tipo_categoria|capfirst}}s</h4>
                       </div>
                    </div>
                    <div class="iq-card-body">

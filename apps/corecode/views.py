@@ -667,7 +667,7 @@ def funcao_chefia_delete(request,id):
 def categoria_add(request):
     abertura = Abertura_Prova_Vida.objects.filter(estado_actual="aberta").first()
 
-    categoria = Categoria(nome=request.POST["nome"])
+    categoria = Categoria(nome=request.POST["nome"], tipo=request.POST["tipo_categoria"])
     categoria.save()
     context = {"categoria":categoria,"abertura_actual":abertura}
 
@@ -689,13 +689,12 @@ def categoria_nova_add(request):
 
 
 @login_required(login_url="/accounts/login/")
-def categoria_list(request):
+def categoria_list(request, tipo):
     abertura = Abertura_Prova_Vida.objects.filter(estado_actual="aberta").first()
 
-    categorias=Categoria.objects.all()
+    categorias=Categoria.objects.filter(tipo=tipo)
 
-    context ={'categorias':categorias,"abertura_actual":abertura}
-
+    context ={'categorias':categorias,"abertura_actual":abertura, "tipo_categoria": tipo}
     template_name = "corecode/categoria_list.html"
     return render(request, template_name,context)
 

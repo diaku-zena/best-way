@@ -32,7 +32,7 @@ function displayCategorias(categorias) {
     });
 }
 async function fetchCategorias() {
-    const response = await fetch(`categoria-list-ajax/${currentPage}`);
+    const response = await fetch(`categoria-laboral-ajax/${currentPage}`);
     const data = await response.json();
     displayCategorias(data.results);
     displayPagination(data.count);

@@ -37,7 +37,7 @@ from datetime import datetime
 import math
 from .models import Employee, EmployeeBulkUpload
 
-from apps.corecode.models import Categoria, CategoriaNova,DirecaoAlocacao,FuncaoChefia
+from apps.corecode.models import Categoria, CategoriaNova, Citizenship,DirecaoAlocacao,FuncaoChefia
 
 from .forms import (
     EmployeeForm 
@@ -181,155 +181,61 @@ def addFuncionario(request):
     except:
             estado_civil=None
 
-    try:
-        regime_trabalho = request.POST['regime_trabalho']
-    except:
-            regime_trabalho=None
-
-    try:
-        vinculo_administrativo = request.POST['vinculo_administrativo']
-    except:
-            vinculo_administrativo=None
-
-    try:
-        vinculo_professor = request.POST['vinculo_professor']
-    except:
-            vinculo_professor=None
-
-    try:
-        data_de_admissao_administrativo = request.POST['data_de_admissao_administrativo']
-    except:
-            data_de_admissao_administrativo=None
-
-    try:
-        direccao_administrativo = request.POST['direccao_administrativo']
-    except:
-            direccao_administrativo=None
-
-    try:
-        categoria_laboral_administrativo = request.POST['categoria_laboral_administrativo']
-    except:
-            categoria_laboral_administrativo=None
-
-    try:
-        funcao_chefia_administrativo = request.POST['funcao_chefia_administrativo']
-    except:
-            funcao_chefia_administrativo=None
-
-    try:
-        vencimento_mensal_administrativo = request.POST['vencimento_mensal_administrativo']
-    except:
-            vencimento_mensal_administrativo=None
-
-    try:
-        habilitacao_administrativo = request.POST['habilitacao_administrativo']
-    except:
-            habilitacao_administrativo=None
-
-    try:
-        area_de_formacao_administrativo = request.POST['area_de_formacao_administrativo']
-    except:
-            area_de_formacao_administrativo=None
-
-    try:
-        regime_trabalho_administrativo = request.POST['regime_trabalho_administrativo']
-    except:
-            regime_trabalho_administrativo=None
 
     try:
         reforma = request.POST['reforma']
     except:
             reforma=None   
+
+    try:
+        nacionality = request.POST['nacionalidade']
+    except:
+            nacionality=None   
     
 
-    data_demissao = request.POST.get('data_de_demissao')
     data_admissao = request.POST.get('data_admissao')
+    data_admissao = request.POST.get('data_de_emissao')
 
-
+    tempo_na_empresa = datetime.now()
     if data_admissao:
         data_admissao = datetime.strptime(data_admissao, '%Y-%m-%d')
-
-    if data_demissao:
-        data_demissao = datetime.strptime(data_demissao, '%Y-%m-%d')
-        tempo_na_empresa = data_demissao - data_admissao
-    else:
         data_atual = datetime.now()
         tempo_na_empresa = data_atual - data_admissao
             
     anos_na_empresa = math.floor(tempo_na_empresa.days / 365)  
-    funcionario=Employee(            
+    diuturnidade = 0
+
+    funcionario=Employee(      
+        # Dados Pessoais   
+        numero_mecanografico = request.POST['numero_mecanografico'],
         firstname=request.POST['primeiro_nome'],
         current_status = 'activo',
-        # estado = request.POST['estado'],
         personnel_number = request.POST['numero_bi'],
-        # data_de_emissao = request.POST['data_de_emissao'],
+        date_of_birth = datetime.strptime(request.POST.get('data_nascimento', ''), '%Y-%m-%d') if request.POST.get('data_nascimento') else None,
         data_de_emissao = datetime.strptime(request.POST.get('data_de_emissao', ''), '%Y-%m-%d') if request.POST.get('data_de_emissao') else None,
         data_de_validade = datetime.strptime(request.POST.get('data_de_validade', ''), '%Y-%m-%d') if request.POST.get('data_de_validade') else None,
-        numero_mecanografico = request.POST['numero_mecanografico'],
         numero_seguranca_social = request.POST['numero_seguranca_social'],
-        gender = request.POST['genero'],
-        date_of_birth = datetime.strptime(request.POST.get('data_nascimento', ''), '%Y-%m-%d') if request.POST.get('data_nascimento') else None,
-        # date_of_birth = request.POST['data_nascimento'],
-        provincia_residencia = request.POST['provincia_residencia'],
+        nacionalidade = request.POST['nacionalidade'],
         provincia_nascimento = request.POST['provincia_nascimento'],
-        # naturalidade = request.POST['naturalidade'],
+        gender = request.POST['genero'],
         estado_civil = estado_civil,
         numero_dependentes = request.POST['numero_dependentes'],
         morada = request.POST['morada'],
-        profissao = request.POST['profissao'],
-        tipo_contrato = request.POST['tipo_contrato'],
-        tipo_pessoal = request.POST['tipo_pessoal'],
-        
-        correio_electronico = correio_electronico,
+        provincia_residencia = request.POST['provincia_residencia'],
         telefone = numero_telefone,
+        correio_electronico = correio_electronico,
+        
+        # Dados Profissionais
         data_de_admissao = datetime.strptime(request.POST.get('data_admissao', ''), '%Y-%m-%d') if request.POST.get('data_admissao') else None,
-        motivo_admissao = request.POST.get('motivo_admissao'),
-        data_de_demissao = datetime.strptime(request.POST.get('data_de_demissao', ''), '%Y-%m-%d') if request.POST.get('data_de_demissao') else None,
-        motivo_demissao = request.POST.get('motivo_demissao'),
-        data_fim_contrato = datetime.strptime(request.POST.get('data_fim_contrato', ''), '%Y-%m-%d') if request.POST.get('data_fim_contrato') else None,
-        # data_de_admissao = request.POST['data_admissao'],
-        # motivo_admissao = request.POST['motivo_admissao'],
-        # data_de_demissao = request.POST['data_de_demissao'],
-        # motivo_demissao = request.POST['motivo_demissao'],
-        # data_fim_contrato = request.POST['data_fim_contrato'],
-        cargo = request.POST['cargo'],
-        situacao_contrato = request.POST['situacao_contrato'],
-        carga_horaria_diurna = request.POST['carga_horaria_diurna'],
-        carga_horaria_nocturna = request.POST['carga_horaria_nocturna'],
-        valor_aula_diurna = request.POST['valor_aula_diurna'],
-        valor_aula_nocturna = request.POST['valor_aula_nocturna'],
-        aula_diurna = request.POST['aula_diurna'],
-        aula_nocturna = request.POST['aula_nocturna'],
-        honorario_total = request.POST['honorario_total'],
-        regime_trabalho = regime_trabalho,
-        
-
         direccao= direcao,
-
-        vencimento_mensal = request.POST['vencimento_mensal'],
-
-        categoria_laboral = categoria,
-
         funcao_chefia = funcao_chefia,
-        
+        categoria_laboral = categoria,
+        categoria_nova=funcao_chefia_antiga,
+        vencimento_mensal = request.POST['vencimento_mensal'],
         habilitacao = request.POST['habilitacao_literaria'],
         area_de_formacao = area_de_formacao,
-        vinculo_administrativo = vinculo_administrativo,
-        vinculo_professor = vinculo_professor,
-        data_de_admissao_administrativo = data_de_admissao_administrativo,
-        categoria_laboral_administrativo = categoria_laboral_administrativo,
-        funcao_chefia_administrativo = funcao_chefia_administrativo,
-        direccao_administrativo = direccao_administrativo,
-        vencimento_mensal_administrativo = vencimento_mensal_administrativo,
-        habilitacao_administrativo = habilitacao_administrativo,
-        area_de_formacao_administrativo = area_de_formacao_administrativo,
-        regime_trabalho_administrativo = regime_trabalho_administrativo,
         reforma = reforma,
         tempo_na_empresa = anos_na_empresa,
-        categoria_nova=funcao_chefia_antiga
-        
-        
-                         
     )
 
     funcionario.save()
@@ -351,16 +257,16 @@ def employee_list(request):
 
     
     funcionarios  = Employee.objects.filter(estado_objecto='activo').order_by("firstname")
-    categorias  = Categoria.objects.all()
-    categorias_nova  = CategoriaNova.objects.all()
+    categorias_antigas  = Categoria.objects.filter(tipo="antiga")
+    categorias_nova  = Categoria.objects.filter(tipo="nova")
     direccoes  = DirecaoAlocacao.objects.all()
     funcoes_chefia  = FuncaoChefia.objects.all()
     p = Paginator(funcionarios, 100)
     
    
     context = {"funcionarios": funcionarios,
-               'categorias':categorias,
-               'categorias_nova':categorias_nova,
+               'categorias_antigas':categorias_antigas,
+               'categorias_novas':categorias_nova,
                'direccoes':direccoes,
                'funcoes_chefia':funcoes_chefia,
                'abertura_actual':abertura,}

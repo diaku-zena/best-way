@@ -122,6 +122,7 @@ class DirecaoAlocacao(models.Model):
 
 class Categoria(models.Model):
     ESTADO_OBJECTO = [("activo", "Activo"), ("eliminado", "Eliminado")]
+    TIPO_CATEGORIA = [("nova", "Nova"), ("antiga", "Antiga")]
     id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True, editable=False)
 
 
@@ -129,6 +130,9 @@ class Categoria(models.Model):
 
     estado_objecto  = models.CharField(
         max_length=200, choices=ESTADO_OBJECTO, default="activo", verbose_name="estado objecto"
+    )
+    tipo  = models.CharField(
+        max_length=200, choices=TIPO_CATEGORIA, default="antiga", verbose_name="Categoria Laboral"
     )
 
     class Meta:

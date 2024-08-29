@@ -99,14 +99,14 @@ urlpatterns = [
     path("funcao-chefia-antiga-update/", editFuncaoChefia, name="funcao-chefia-update"),
     path("delete/funcao-chefia", deleteFuncaoChefia, name="funcao-chefia-delete"),
 
-    path("categoria/list/categoria-list-ajax/<int:page>", categoria_list_ajax, name="categoria-list-ajax"),
-    path("categoria-list-ajax/<int:page>", categoria_list_ajax, name="categoria-list-ajax"),
-    path("categoria-laboral-antiga/list/", categoria_list, name="categoria-list"),
-    path("categoria-laboral-antiga/edit/<uuid:id>", categoria_edit, name="categoria-edit"),
-    path("categoria-laboral-antiga/detail/<uuid:id>", categoria_detail, name="categoria-detail"),
-    path("categoria-laboral-antiga-delete/<uuid:id>",categoria_delete, name="categoria-delete"),
-    path("categoria-laboral-antiga/create/", categoria_add, name="categoria-create"),
-    path("categoria-laboral-antiga-update/", editCategoria, name="categoria-update"),
+    path("categoria/list/categoria-laboral-ajax/<int:page>", categoria_list_ajax, name="categoria-laboral-ajax"),
+    path("categoria-laboral-ajax/<int:page>", categoria_list_ajax, name="categoria-laboral-ajax"),
+    path("categoria-laboral/list/<str:tipo>", categoria_list, name="categoria-laboral"),
+    path("categoria-laboral/edit/<uuid:id>", categoria_edit, name="categoria-edit"),
+    path("categoria-laboral/detail/<uuid:id>", categoria_detail, name="categoria-detail"),
+    path("categoria-laboral-delete/<uuid:id>",categoria_delete, name="categoria-delete"),
+    path("categoria-laboral/create/", categoria_add, name="categoria-create"),
+    path("categoria-laboral-update/", editCategoria, name="categoria-update"),
     path("delete-categoria/", deleteCategoria, name="categoria-delete"),
 
 

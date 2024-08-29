@@ -160,13 +160,14 @@ class Employee(models.Model):
         verbose_name="Direção de Alocação",
     )
 
-    nacionalidade = models.ForeignKey(
-        Citizenship,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        verbose_name="Nacionalidade",
-    )
+    # nacionalidade = models.ForeignKey(
+    #     Citizenship,
+    #     on_delete=models.CASCADE,
+    #     blank=True,
+    #     null=True,
+    #     verbose_name="Nacionalidade",
+    # )
+    nacionalidade = models.CharField(max_length=50, default="NaN")
 
     categoria_laboral = models.ForeignKey(
         Categoria,
