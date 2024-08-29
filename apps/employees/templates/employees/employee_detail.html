@@ -98,7 +98,7 @@
                                               <div class="form-card text-left">
                                                 <div class="row">
                                                   <div class="col-12">
-                                                    <h3 class="mb-4"><i class="ri-user-fill"></i> Informações Pessoais:
+                                                    <h3 class="mb-4"><i class="ri-user-fill"></i> Informações Pessoais2:
                                                     </h3>
                                                     <br>
                                                   </div>
@@ -137,6 +137,13 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                       <div class="form-group">
+                                                        <h5>Nacionalidade:</h5>
+                                                        <label for="uname"
+                                                          class="control-label">{{funcionario.nacionalidade}}</label>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="form-group">
                                                         <h5>Contacto Telefônico:</h5>
                                                         <label for="uname"
                                                           class="control-label">{{funcionario.telefone}}</label>
@@ -161,6 +168,13 @@
                                                         <h5>Data de Validade:</h5>
                                                         <label for="data_de_validade" class="control-label">
                                                           {{funcionario.data_de_validade|date:"d-m-Y"}}</label>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="form-group">
+                                                        <h5>Data de Emissão</h5>
+                                                        <label for="pwd"
+                                                          class="control-label">{{funcionario.data_de_emissao|date:"d-m-Y"}}</label>
                                                       </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -242,32 +256,11 @@
                                                   </div>
                                                   <div class="col-md-4">
                                                     <div class="form-group">
-                                                      <h5>Motivo de Admissão:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.motivo_admissao}}</label>
+                                                      <h5>Estabelecimento:</h5>
+                                                      <label class="control-label">{{funcionario.direccao.nome}}</label>
                                                     </div>
                                                   </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Data de Demissão:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.data_de_demissao|date:"d-m-Y"}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Motivo de Demissão:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.motivo_demissao}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Data Fim Contrato:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.data_fim_contrato|date:"d-m-Y"}}</label>
-                                                    </div>
-                                                  </div>
+
                                                   <div class="col-md-4">
                                                     <div class="form-group">
                                                       <h5>Anos de Trabalho:</h5>
@@ -275,123 +268,11 @@
                                                         class="control-label">{{funcionario.tempo_na_empresa}}</label>
                                                     </div>
                                                   </div>
+
                                                   <div class="col-md-4">
                                                     <div class="form-group">
-                                                      <h5>Cargo / Função:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.cargo}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Profissão:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.profissao}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Tipo de Contrato:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.tipo_contrato}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Tipo de Pessoal:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.tipo_pessoal}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Situação de Contrato:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.situacao_contrato}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Carga Horária Diurna:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.carga_horaria_diurna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Carga Horária Nocturna:</h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.carga_horaria_nocturna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Valor Aula Diurna: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.valor_aula_diurna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Valor Aula Nocturna: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.valor_aula_nocturna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Honorário / Aula Diurna: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.aula_diurna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Honorário / Aula Nocturna: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.aula_nocturna}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Honorário Total: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.honorario_total}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Regime de Trabalho: </h5>
-                                                      <label for="emailid"
-                                                        class="control-label">{{funcionario.regime_trabalho}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Estabelecimento:</h5>
-                                                      <label class="control-label">{{funcionario.direccao.nome}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Categoria Laboral Antiga:</h5>
-                                                      <label
-                                                        class="control-label">{{funcionario.categoria_laboral.nome}}</label>
-                                                    </div>
-                                                  </div>
-                                                 
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Função de Chefia Antiga:</h5>
-                                                      <label
-                                                        class="control-label">{{funcionario.funcao_chefia.nome}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Função de Chefia Nova:</h5>
-                                          <label
-                                             class="control-label">{{funcionario.categoria_nova.nome}}</label>
+                                                      <h5>Função de Chefia:</h5>
+                                                        <label class="control-label">{{funcionario.funcao_chefia.nome}}</label>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4">
@@ -399,18 +280,6 @@
                                                       <h5>Salário Base:</h5>
                                                       <label for="uname"
                                                         class="control-label">{{funcionario.vencimento_mensal}}</label>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <h5>Situação:</h5>
-                                                      <label for="uname" class="control-label">
-                                                        {% if funcionario.current_status == 'activo' %}
-                                                        Normal
-                                                        {% else %}
-                                                        {{funcionario.current_status}}
-                                                        {% endif %}
-                                                      </label>
                                                     </div>
                                                   </div>
 
@@ -429,13 +298,26 @@
                                                         class="control-label">{{funcionario.area_de_formacao}}</label>
                                                     </div>
                                                   </div>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                  <div class="form-group">
-                                                    <h5>Origem:</h5>
-                                                    <label for="uname"
-                                                      class="control-label">{{funcionario.origem}}</label>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                      <h5>Reforma:</h5>
+                                                      <label for="uname"
+                                                        class="control-label">{{funcionario.reforma}}</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                      <h5>Categoria Laboral Nova:</h5>
+                                                      <label for="uname"
+                                                        class="control-label">{{funcionario.categoria_laboral_nova}}</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                      <h5>Categoria Laboral Antiga:</h5>
+                                                      <label for="uname"
+                                                        class="control-label">{{funcionario.categoria_laboral_antiga}}</label>
+                                                    </div>
                                                   </div>
                                                 </div>
 
