@@ -420,7 +420,7 @@ def editFuncionario(request):
     except:
             categoria_antiga=None   
     try:
-        categoria_nova_id = request.POST['categoria_antiga']
+        categoria_nova_id = request.POST['categoria_nova']
         categoria_nova = Categoria.objects.get(id=categoria_nova_id)
     except:
             categoria_nova=None   
