@@ -169,20 +169,22 @@ class Employee(models.Model):
     # )
     nacionalidade = models.CharField(max_length=50, default="NaN")
 
-    categoria_laboral = models.ForeignKey(
+    categoria_laboral_antiga = models.ForeignKey(
         Categoria,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        verbose_name="Categoria",
+        verbose_name="Categoria Antiga",
+         related_name="funcionarios_com_categoria_antiga"
     )
 
-    categoria_nova = models.ForeignKey(
-        CategoriaNova,
+    categoria_laboral_nova = models.ForeignKey(
+        Categoria,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
         verbose_name="Categoria Nova",
+         related_name="funcionarios_com_categoria_nova"
     )
 
     data_de_admissao = models.DateField(verbose_name="Data de Demissão", null=True)

@@ -93,6 +93,7 @@
                                 action="{% url 'employee-update' %}" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <!-- fieldsets -->
+                                
                                 <fieldset>
                                   <input type="text" value="{{funcionario.id}}" hidden name="id">
                                   <div class="form-card text-left">
@@ -104,23 +105,18 @@
                                     <div class="form-card text-left">
                                       <div class="row">
                                         <div class="col-12">
+                                          <!-- <h4 class="mb-4">Informações Pessoais:</h4> -->
                                         </div>
                                       </div>
                                       <div class="row">
                                         <div class="col-md-4">
                                           <div class="form-group">
                                             <label class="control-label">Nome Completo:</label>
-                                            <input maxlength="100" type="text" class="form-control"
-                                              value="{{funcionario.firstname}}" name="primeiro_nome" />
+                                            <input maxlength="100" value="{{funcionario.firstname}}" type="text" required="required" class="form-control"
+                                              placeholder="Informe o seu nome completo" name="primeiro_nome" />
                                           </div>
                                         </div>
-                                        <!-- <div class="col-md-4">
-                                              <div class="form-group">
-                                                <label class="control-label">Sobrenome:</label>
-                                                <input maxlength="100" type="text" class="form-control"
-                                                value="{{funcionario.surname}}" name="sobre_nome" />
-                                              </div>
-                                            </div> -->
+        
                                         <div class="col-md-4">
                                           <div class="form-group">
                                             <label class="control-label">Genêro:</label>
@@ -132,7 +128,6 @@
                                             </select>
                                           </div>
                                         </div>
-
                                         <div class="col-md-4">
                                           <div class="form-group">
                                             <label class="control-label">Estado Cívil:</label>
@@ -148,16 +143,29 @@
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="uname" class="control-label">Contacto Telefônico:</label>
+                                            <label for="telefone" class="control-label">Contacto Telefônico:</label>
                                             <input type="text" class="form-control" id="telefone" name="telefone"
                                               value="{{funcionario.telefone}}">
+                                            <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                              name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
                                           </div>
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="uname" class="control-label">Correio Electrônico:</label>
-                                            <input type="text" class="form-control" id="correio_electronico"
-                                              name="correio_electronico" value="{{funcionario.correio_electronico}}">
+                                            <label for="correio_electronico" class="control-label">Correio Eletrônico:</label>
+                                            <input type="text" class="form-control" id="correio_electronico" name="correio_electronico"
+                                              placeholder="Informe o seu correio eletrônico" value="{{funcionario.correio_electronico}}">
+                                            <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                              name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
+                                          </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <div class="form-group">
+                                            <label for="nacionalidade" class="control-label">Nacionalidade</label>
+                                            <input type="text" class="form-control" id="nacionalidade" name="nacionalidade"
+                                              placeholder="Digite a sua nacionalidade" value="{{funcionario.nacionalidade}}">
+                                            <!-- <input type="text" class="form-control" id="telefone" required="required"
+                                              name="telefone" placeholder="Informe o seu contacto" pattern="[9][0-9]{8}" title="Entre Com um Número de Contacto Válido"> -->
                                           </div>
                                         </div>
                                         <div class="col-md-4">
@@ -165,6 +173,13 @@
                                             <label for="numero_bi" class="control-label">Número do BI:</label>
                                             <input id="numero_bi" name="numero_bi" type="text" class="form-control"
                                               maxlength="14" value="{{funcionario.personnel_number}}">
+                                          </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <div class="form-group">
+                                            <label for="data_de_emissao" class="control-label">Data de Emissão: </label>
+                                            <input type="date" id="data_de_emissao" class="form-control" required="required"
+                                              name="data_de_emissao" value="{{funcionario.data_de_emissao|date:'Y-m-d'}}">
                                           </div>
                                         </div>
                                         <div class="col-md-4">
@@ -178,17 +193,16 @@
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="data_nascimento" class="control-label">Data de Nascimento:
-                                            </label>
-                                            <input type="date" id="data_nascimento" class="form-control"
+                                            <label for="data_nascimento" class="control-label">Data de Nascimento: </label>
+                                            <input type="date" id="data_nascimento" class="form-control" required="required"
                                               name="data_nascimento" value="{{funcionario.date_of_birth|date:'Y-m-d'}}">
                                           </div>
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="morada" class="control-label">Morada: </label>
-                                            <input type="text" class="form-control" id="morada" name="morada"
-                                              value="{{funcionario.morada}}">
+                                            <input type="text" class="form-control" required="required" id="morada"
+                                              name="morada" placeholder="Informe a sua morada" value="{{funcionario.morada}}">
                                           </div>
                                         </div>
                                         <div class="col-md-4">
@@ -220,8 +234,9 @@
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="cpwd" class="control-label">Província de Nascimento:</label>
-                                            <select class="form-control" name="provincia_nascimento">
+                                            <label for="provincia_nascimento" class="control-label">Província de
+                                              Nascimento:</label>
+                                            <select class="form-control" name="provincia_nascimento" required="required">
                                               <option value="{{funcionario.provincia_nascimento}}" selected>
                                                 {{funcionario.provincia_nascimento}}</option>
                                               <option value="Bengo">Bengo</option>
@@ -245,38 +260,39 @@
                                             </select>
                                           </div>
                                         </div>
+        
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="numero_mecanografico" class="control-label">Número
-                                              Mecanográfico: </label>
-                                            <input type="text" class="form-control" id="numero_mecanografico"
-                                              name="numero_mecanografico" value="{{funcionario.numero_mecanografico}}">
+                                            <label for="numero_mecanografico" class="control-label">Número Mecanográfico:
+                                            </label>
+                                            <input type="text" class="form-control" required="required"
+                                              id="numero_mecanografico" name="numero_mecanografico"
+                                              placeholder="Número mecanográfico"  value="{{funcionario.numero_mecanografico}}">
                                           </div>
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
-                                            <label for="numero_seguranca_social" class="control-label">Número Segurança
-                                              Social: </label>
-                                            <input type="text" class="form-control" id="numero_seguranca_social"
-                                              name="numero_seguranca_social"
-                                              value="{{funcionario.numero_seguranca_social}}">
+                                            <label for="numero_seguranca_social" class="control-label">Número Segurança Social:
+                                            </label>
+                                            <input type="text" class="form-control" required="required"
+                                              id="numero_seguranca_social" name="numero_seguranca_social"
+                                              placeholder="Número Segurança Social"  value="{{funcionario.numero_seguranca_social}}">
                                           </div>
                                         </div>
                                         <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="numero_dependentes" class="control-label">Número de Dependentes:
                                             </label>
-                                            <input type="text" class="form-control" id="numero_dependentes"
-                                              name="numero_dependentes" value="{{funcionario.numero_dependentes}}">
+                                            <input type="text" class="form-control" required="required" id="numero_dependentes"
+                                              name="numero_dependentes" placeholder="Informe o nº de dependentes"  value="{{funcionario.numero_dependentes}}">
                                           </div>
                                         </div>
-
                                       </div>
                                     </div>
                                   </div>
-
+        
                                   <hr>
-
+        
                                   <div class="form-card text-left">
                                     <div class="row">
                                       <div class="col-12">
@@ -287,49 +303,15 @@
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label for="data_admissao" class="control-label">Data de Admissão: </label>
-                                          <input type="date" id="data_admissao" class="form-control"
-                                            name="data_admissao" value="{{funcionario.data_de_admissao|date:'Y-m-d'}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="motivo_admissao" class="control-label">Motivo da Admissão:
-                                          </label>
-                                          <input type="text" id="motivo_admissao" class="form-control"
-                                            name="motivo_admissao" value="{{funcionario.motivo_admissao}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="data_de_demissao" class="control-label">Data de Demissão: </label>
-                                          <input type="date" id="data_de_demissao" class="form-control"
-                                            name="data_de_demissao"
-                                            value="{{funcionario.data_de_demissao|date:'Y-m-d'}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="motivo_demissao" class="control-label">Motivo da Demissão:
-                                          </label>
-                                          <input type="text" id="motivo_demissao" class="form-control"
-                                            name="motivo_demissao" value="{{funcionario.motivo_demissao}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="data_fim_contrato" class="control-label">Data Fim Contrato:
-                                          </label>
-                                          <input type="date" id="data_fim_contrato" class="form-control"
-                                            name="data_fim_contrato"
-                                            value="{{funcionario.data_fim_contrato|date:'Y-m-d'}}">
+                                          <input type="date" id="data_admissao" class="form-control" required="required"
+                                            name="data_admissao"  value="{{funcionario.data_de_admissao|date:'Y-m-d'}}">
                                         </div>
                                       </div>
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label class="control-label">Reforma:</label>
                                           <select class="form-control" name="reforma" required="required">
-                                            <option value="{{funcionario.reforma}}" selected>{{funcionario.reforma}}
-                                            </option>
+                                            <option value="{{funcionario.reforma}}"  value="{{funcionario.reforma}}" selected>{{funcionario.reforma}}</option>
                                             <option value="Reformado">Reformado</option>
                                             <option value="Pré-reforma">Pré-reforma</option>
                                             <option value="Não reformado">Não reformado</option>
@@ -338,120 +320,9 @@
                                       </div>
                                       <div class="col-md-4">
                                         <div class="form-group">
-                                          <label for="cargo" class="control-label">Cargo / Função: </label>
-                                          <input type="text" id="cargo" class="form-control" name="cargo"
-                                            value="{{funcionario.cargo}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="profissao" class="control-label">Profissão: </label>
-                                          <input type="text" id="profissao" class="form-control" name="profissao"
-                                            value="{{funcionario.profissao}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="tipo_contrato" class="control-label">Tipo de Contrato: </label>
-                                          <input type="text" id="tipo_contrato" class="form-control"
-                                            name="tipo_contrato" value="{{funcionario.tipo_contrato}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label class="control-label">Tipo de Pessoal:</label>
-                                          <select class="form-control" name="tipo_pessoal">
-                                            <option value="{{funcionario.tipo_pessoal}}" selected>
-                                              {{funcionario.tipo_pessoal}}</option>
-                                            <option value="Pessoal do Quadro Efectivo">Pessoal do Quadro Efectivo
-                                            </option>
-                                            <option value="Pessoal Não Efectivo">Pessoal Não Efectivo</option>
-                                            <option value="Comissão de Serviço">Comissão de Serviço</option>
-                                            <option value="Colaborador">Colaborador</option>
-                                            <option value="Reformado">Reformado</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                      <!-- <div class="col-md-4">
-                                            <div class="form-group">
-                                              <label for="tipo_pessoal" class="control-label">Tipo de Pessoal: </label>
-                                              <input type="text" id="tipo_pessoal" class="form-control" name="tipo_pessoal" >
-                                            </div>
-                                          </div> -->
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label class="control-label">Situação de Contrato:</label>
-                                          <select class="form-control" name="situacao_contrato">
-                                            <option value="{{funcionario.situacao_contrato}}" selected>
-                                              {{funcionario.situacao_contrato}}</option>
-                                            <option value="Contratado">Contratado</option>
-                                            <option value="Efectivo">Efectivo</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="carga_horaria_diurna" class="control-label">Carga Horária Diurna:
-                                          </label>
-                                          <input type="text" id="carga_horaria_diurna" class="form-control"
-                                            name="carga_horaria_diurna" value="{{funcionario.carga_horaria_diurna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="carga_horaria_nocturna" class="control-label">Carga Horária
-                                            Nocturna: </label>
-                                          <input type="text" id="carga_horaria_nocturna" class="form-control"
-                                            name="carga_horaria_nocturna"
-                                            value="{{funcionario.carga_horaria_nocturna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="valor_aula_diurna" class="control-label">Valor Aula Diurna:
-                                          </label>
-                                          <input type="text" id="valor_aula_diurna" class="form-control"
-                                            name="valor_aula_diurna" value="{{funcionario.valor_aula_diurna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="valor_aula_nocturna" class="control-label">Valor Aula Nocturna:
-                                          </label>
-                                          <input type="text" id="valor_aula_nocturna" class="form-control"
-                                            name="valor_aula_nocturna" value="{{funcionario.valor_aula_nocturna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="aula_diurna" class="control-label">Honorário / Aula Diurna:
-                                          </label>
-                                          <input type="text" id="aula_diurna" class="form-control" name="aula_diurna"
-                                            value="{{funcionario.aula_diurna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="aula_nocturna" class="control-label">Honorário / Aula Nocturna:
-                                          </label>
-                                          <input type="text" id="aula_nocturna" class="form-control"
-                                            name="aula_nocturna" value="{{funcionario.aula_nocturna}}">
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label for="honorario_total" class="control-label">Honorário Total: </label>
-                                          <input type="text" id="honorario_total" class="form-control"
-                                            name="honorario_total" value="{{funcionario.honorario_total}}">
-                                        </div>
-                                      </div>
-                                     
-
-                                      <div class="col-md-4">
-                                        <div class="form-group">
                                           <label class="control-label">Estabelecimento:</label>
                                           <select class="form-control" name="direcao_alocacao">
-                                            <option value=" " selected>Selecione</option>
+                                            <option value="" selected>{{funcionario.direcao}}</option>
                                             {% for direccao in direccoes %}
         
                                             <option value="{{direccao.id}}">{{direccao.nome}}</option>
@@ -463,9 +334,9 @@
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label class="control-label">Categoria Laboral Antiga:</label>
-                                          <select class="form-control" name="categoria">
-                                            <option value="" selected>Selecione</option>
-                                            {% for categoria in categorias %}
+                                          <select class="form-control" name="categoria_antiga">
+                                            <option value="{{funcionario.categoria_laboral_antiga.nome}}" selected>{{funcionario.categoria_laboral_antiga.nome}}</option>
+                                            {% for categoria in categorias_antigas %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
                                             {% endfor %}
@@ -473,12 +344,24 @@
                                           </select>
                                         </div>
                                       </div>
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label class="control-label">Categoria Laboral Nova:</label>
+                                          <select class="form-control" name="categoria_nova">
+                                            <option value="{{funcionario.categoria_laboral_nova.nome}}" selected>{{funcionario.categoria_laboral_nova.nome}}</option>
+                                            {% for categoria in categorias_novas %}
+                                            <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
+                                            {% endfor %}
+                                          </select>
+                                          </select>
+                                        </div>
+                                      </div>
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label class="control-label">Função Chefia Nova:</label>
                                           <select class="form-control" name="funcoes_chefias_nova">
-                                            <option value="" selected>Selecione</option>
+                                            <option value="{{funcionario.funcao_chefia.id}}" selected>{{funcionario.funcao_chefia.nome}}</option>
                                             {% for categoria in funcoes_chefia %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
@@ -492,8 +375,8 @@
                                         <div class="form-group">
                                           <label class="control-label">Função Chefia Antiga:</label>
                                           <select class="form-control" name="funcoes_chefias_antiga">
-                                            <option value="" selected>Selecione</option>
-                                            {% for categoria in categorias_novas %}
+                                            <option value="{{funcionario.funcao_chefia.id}}" selected>{{funcionario.funcao_chefia.nome}}</option>
+                                            {% for categoria in funcoes_chefia %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
                                             {% endfor %}
@@ -509,7 +392,7 @@
                                             name="vencimento_mensal" value="{{funcionario.vencimento_mensal}}">
                                         </div>
                                       </div>
-
+        
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label class="control-label">Habilitação Literária:</label>
@@ -529,32 +412,18 @@
                                       <div class="col-md-4">
                                         <div class="form-group">
                                           <label for="area_de_formacao" class="control-label">Área de Formação: </label>
-                                          <input type="text" class="form-control" id="area_de_formacao"
-                                            name="area_de_formacao" value="{{funcionario.area_de_formacao}}">
+                                          <input type="text" class="form-control" id="area_de_formacao" name="area_de_formacao"
+                                            placeholder="Informe a área de formação" value="{{funcionario.area_de_formacao}}">
                                         </div>
                                       </div>
-
-                                      <div class="col-md-4">
-                                        <div class="form-group">
-                                          <label class="control-label">Regime de Trabalho:</label>
-                                          <select class="form-control" name="regime_trabalho">
-                                            <option value="{{funcionario.regime_trabalho}}" selected>
-                                              {{funcionario.regime_trabalho}}</option>
-                                            <option value="Colaborador">Colaborador</option>
-                                            <option value="Efectivo">Efectivo</option>
-                                          </select>
-                                        </div>
-                                      </div>
-
+        
                                     </div>
-                                    <br>
-                                    <input type="submit" class="btn btn-primary action-button pull-right "
-                                      value="Salvar">
-
-                                    <a href="{% url 'employee-list' %}" type="button" name="previous"
-                                      class="btn btn-secondary  action-button-previous pull-right " value="Previous"
-                                      style="margin-right: 3px; text-decoration: none; color: black;">Sair</a>
-
+        
+                                  </div>
+                                  <input type="submit" class="btn btn-primary action-button pull-right " value="Salvar">
+                                  <button type="button" class="btn btn-secondary action-button  pull-right" data-dismiss="modal"
+                                    style="margin-right: 3px;">Fechar</button>
+        
                                 </fieldset>
                               </form>
 

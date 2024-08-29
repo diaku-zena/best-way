@@ -370,7 +370,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label class="control-label">Categoria Laboral Antiga:</label>
-                                  <select class="form-control" name="categoria">
+                                  <select class="form-control" name="categoria_antiga">
                                     <option value="" selected>Selecione</option>
                                     {% for categoria in categorias_antigas %}
                                     <option value="{{categoria.id}}">{{categoria.nome}}</option>
@@ -383,7 +383,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label class="control-label">Categoria Laboral Nova:</label>
-                                  <select class="form-control" name="categorianova">
+                                  <select class="form-control" name="categoria_nova">
                                     <option value="" selected>Selecione</option>
                                     {% for categoria in categorias_novas %}
                                     <option value="{{categoria.id}}">{{categoria.nome}}</option>

@@ -191,6 +191,16 @@ def addFuncionario(request):
         nacionality = request.POST['nacionalidade']
     except:
             nacionality=None   
+    try:
+        categoria_antiga_id = request.POST['categoria_antiga']
+        categoria_antiga = Categoria.objects.get(id=categoria_antiga_id)
+    except:
+            categoria_antiga=None   
+    try:
+        categoria_nova_id = request.POST['categoria_antiga']
+        categoria_nova = Categoria.objects.get(id=categoria_nova_id)
+    except:
+            categoria_nova=None   
     
 
     data_admissao = request.POST.get('data_admissao')
@@ -229,8 +239,8 @@ def addFuncionario(request):
         data_de_admissao = datetime.strptime(request.POST.get('data_admissao', ''), '%Y-%m-%d') if request.POST.get('data_admissao') else None,
         direccao= direcao,
         funcao_chefia = funcao_chefia,
-        categoria_laboral = categoria,
-        categoria_nova=funcao_chefia_antiga,
+        categoria_laboral_antiga = categoria_antiga,
+        categoria_laboral_nova=categoria_nova,
         vencimento_mensal = request.POST['vencimento_mensal'],
         habilitacao = request.POST['habilitacao_literaria'],
         area_de_formacao = area_de_formacao,
@@ -300,8 +310,8 @@ def employee_list_type(request,tipo):
 @login_required(login_url="/accounts/login/")
 def employee_edit(request,id):
       
-    categorias  = Categoria.objects.filter(estado_objecto='activo')
-    categorias_novas  = CategoriaNova.objects.filter(estado_objecto='activo')
+    categorias_antigas  = Categoria.objects.filter(tipo="antiga")
+    categorias_novas  = Categoria.objects.filter(tipo="nova")
     direccoes  = DirecaoAlocacao.objects.filter(estado_objecto='activo')
     funcoes_chefia  = FuncaoChefia.objects.filter(estado_objecto='activo')
    
@@ -331,7 +341,7 @@ def employee_edit(request,id):
     #print(funcionario.data_de_admissao)
     #print(funcionario.date_of_birth)
     context = {"funcionario": funcionario,
-            'categorias':categorias,
+            'categorias_antigas':categorias_antigas,
             'categorias_novas':categorias_novas,
             'direccoes':direccoes,
             'funcoes_chefia':funcoes_chefia,}
@@ -362,21 +372,14 @@ def employee_detail(request,id):
 
 @login_required(login_url="/accounts/login/")
 def editFuncionario(request):
-    funcionarios = Employee.objects.filter(estado_objecto='activo')
-    categorias = Categoria.objects.filter(estado_objecto='activo')
-    categorias_novas = CategoriaNova.objects.filter(estado_objecto='activo')
-    direcoes = DirecaoAlocacao.objects.filter(estado_objecto='activo')
-    funcoes_chefia = FuncaoChefia.objects.filter(estado_objecto='activo')
     
-    try:
-        direccao = DirecaoAlocacao.objects.get(pk=request.POST.get('direcao_alocacao'))
-    except:
-        direccao = None
+
+    funcionario = Employee.objects.get(pk=request.POST.get('id'))
 
     try:
-        categoria = Categoria.objects.get(pk=request.POST['categoria'])
+        direcao = DirecaoAlocacao.objects.get(pk=request.POST['direcao_alocacao'])
     except:
-        categoria=None
+        direcao=None
 
     try:
         funcao_chefia = FuncaoChefia.objects.get(pk=request.POST['funcoes_chefias_nova'])
@@ -386,15 +389,47 @@ def editFuncionario(request):
     try:
         funcao_chefia_antiga = CategoriaNova.objects.get(pk=request.POST['funcoes_chefias_nova'])
     except:
-        funcao_chefia_antiga= None
+            funcao_chefia_antiga=None        
 
-    funcionario = Employee.objects.get(pk=request.POST.get('id'))
+    try:
+        correio_electronico = request.POST['correio_electronico']
+    except:
+            correio_electronico=None
+
+    try:
+        area_de_formacao = request.POST['area_de_formacao']
+    except:
+            area_de_formacao=None
+
+    try:
+        telefone = request.POST['telefone']
+    except:
+            telefone=None
+
+    try:
+        estado_civil = request.POST['estado_civil']
+    except:
+            estado_civil=None
+    try:
+        reforma = request.POST['reforma']
+    except:
+            reforma=None    
+    try:
+        categoria_antiga_id = request.POST['categoria_antiga']
+        categoria_antiga = Categoria.objects.get(id=categoria_antiga_id)
+    except:
+            categoria_antiga=None   
+    try:
+        categoria_nova_id = request.POST['categoria_antiga']
+        categoria_nova = Categoria.objects.get(id=categoria_nova_id)
+    except:
+            categoria_nova=None   
     
-    funcionario.firstname = request.POST.get('primeiro_nome')
-    funcionario.personnel_number = request.POST.get('numero_bi')
-    
+
+    data_admissao = request.POST.get('data_admissao')
+    data_admissao = request.POST.get('data_de_emissao')
+
     # Verificação e conversão de datas
-
     data_de_demissao = request.POST.get('data_de_demissao')
     if data_de_demissao:
         funcionario.data_de_demissao = datetime.strptime(data_de_demissao, '%Y-%m-%d')
@@ -425,70 +460,43 @@ def editFuncionario(request):
             
     anos_na_empresa = math.floor(tempo_na_empresa.days / 365)  
 
+    # Dados Pessoais 
+    funcionario.numero_mecanografico = request.POST['numero_mecanografico']
+    funcionario.firstname = request.POST['primeiro_nome']
+    funcionario.personnel_number = request.POST['numero_bi']
+    funcionario.date_of_birth = datetime.strptime(request.POST.get('data_nascimento', ''), '%Y-%m-%d') if request.POST.get('data_nascimento') else None
+    funcionario.data_de_emissao = datetime.strptime(request.POST.get('data_de_emissao', ''), '%Y-%m-%d') if request.POST.get('data_de_emissao') else None
+    funcionario.data_de_validade = datetime.strptime(request.POST.get('data_de_validade', ''), '%Y-%m-%d') if request.POST.get('data_de_validade') else None
+    funcionario.numero_seguranca_social = request.POST['numero_seguranca_social']
+    funcionario.nacionalidade = request.POST['nacionalidade']
+    funcionario.provincia_nascimento = request.POST['provincia_nascimento']
+    funcionario.gender = request.POST['genero']
+    funcionario.estado_civil = estado_civil
+    funcionario.numero_dependentes = request.POST['numero_dependentes']
+    funcionario.morada = request.POST['morada']
+    funcionario.provincia_residencia = request.POST['provincia_residencia']
+    funcionario.telefone = telefone
+    funcionario.correio_electronico = correio_electronico
 
-    funcionario.numero_mecanografico = request.POST.get('numero_mecanografico')
-    funcionario.numero_seguranca_social = request.POST.get('numero_seguranca_social')
-    funcionario.gender = request.POST.get('genero')
-    funcionario.provincia_residencia = request.POST.get('provincia_residencia')
-    funcionario.provincia_nascimento = request.POST.get('provincia_nascimento')
-    funcionario.estado_civil = request.POST.get('estado_civil')
-    funcionario.numero_dependentes = request.POST.get('numero_dependentes')
-    funcionario.morada = request.POST.get('morada')
-    funcionario.telefone = request.POST.get('telefone')
-    funcionario.correio_electronico = request.POST.get('correio_electronico')
-    funcionario.profissao = request.POST.get('profissao')
-    funcionario.tipo_contrato = request.POST.get('tipo_contrato')
-    funcionario.tipo_pessoal = request.POST.get('tipo_pessoal')
-    funcionario.motivo_admissao = request.POST.get('motivo_admissao')
-    funcionario.motivo_demissao = request.POST.get('motivo_demissao')
-    funcionario.categoria_nova=funcao_chefia_antiga
-    funcionario.funcao_chefia = funcao_chefia
     funcionario.tempo_na_empresa = anos_na_empresa
     
+    # Dados Profissionais
+    funcionario.habilitacao = request.POST.get('habilitacao_literaria')
+    funcionario.reforma = reforma
+    funcionario.data_de_admissao = data_admissao
+    funcionario.funcao_chefia = funcao_chefia
+    funcionario.direccao = direcao
+    funcionario.categoria_laboral_antiga = categoria_antiga
+    funcionario.categoria_laboral_nova=categoria_nova
+    funcionario.vencimento_mensal = request.POST.get('vencimento_mensal')
+    funcionario.area_de_formacao = area_de_formacao
 
     data_fim_contrato = request.POST.get('data_fim_contrato')
     if data_fim_contrato:
         funcionario.data_fim_contrato = datetime.strptime(data_fim_contrato, '%Y-%m-%d')
 
-    funcionario.reforma = request.POST.get('reforma')
-    funcionario.cargo = request.POST.get('cargo')
-    funcionario.situacao_contrato = request.POST.get('situacao_contrato')
-    funcionario.carga_horaria_diurna = request.POST.get('carga_horaria_diurna')
-    funcionario.carga_horaria_nocturna = request.POST.get('carga_horaria_nocturna')
-    funcionario.valor_aula_diurna = request.POST.get('valor_aula_diurna')
-    funcionario.valor_aula_nocturna = request.POST.get('valor_aula_nocturna')
-    funcionario.aula_diurna = request.POST.get('aula_diurna')
-    funcionario.aula_nocturna = request.POST.get('aula_nocturna')
-    funcionario.honorario_total = request.POST.get('honorario_total')
-    funcionario.regime_trabalho = request.POST.get('regime_trabalho')
-    funcionario.vencimento_mensal = request.POST.get('vencimento_mensal')
     funcionario.current_status = 'activo'
-    funcionario.habilitacao = request.POST.get('habilitacao_literaria')
-    funcionario.area_de_formacao = request.POST.get('area_de_formacao')
-    funcionario.origem = 'incluso'
-
-    # funcionario.vinculo_administrativo = request.POST.get('vinculo_administrativo')
-    # funcionario.vinculo_professor = request.POST.get('vinculo_professor')
-    
-    # data_de_admissao_administrativo = request.POST.get('data_de_admissao_administrativo')
-    # if data_de_admissao_administrativo:
-    #     funcionario.data_de_admissao_administrativo = datetime.strptime(data_de_admissao_administrativo, '%Y-%m-%d')
-
-    # funcionario.categoria_laboral_administrativo = request.POST.get('categoria_laboral_administrativo')
-    # funcionario.funcao_chefia_administrativo = request.POST.get('funcao_chefia_administrativo')
-    # funcionario.direccao_administrativo = request.POST.get('direccao_administrativo')
-    # funcionario.vencimento_mensal_administrativo = request.POST.get('vencimento_mensal_administrativo')
-    # funcionario.habilitacao_administrativo = request.POST.get('habilitacao_administrativo')
-    # funcionario.area_de_formacao_administrativo = request.POST.get('area_de_formacao_administrativo')
-    # funcionario.regime_trabalho_administrativo = request.POST.get('regime_trabalho_administrativo')
-
-    if categoria is not None:
-        funcionario.categoria_laboral = categoria
-
-   
-
-    if direccao is not None:
-        funcionario.direccao = direccao
+    funcionario.origem = 'incluso'    
 
     funcionario.save()
 
