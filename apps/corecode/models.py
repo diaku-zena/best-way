@@ -115,7 +115,7 @@ class DirecaoAlocacao(models.Model):
         ordering = ["nome"]
 
     def __str__(self):
-        return self.descricao
+        return self.nome
     
 
 

@@ -322,7 +322,7 @@
                                         <div class="form-group">
                                           <label class="control-label">Estabelecimento:</label>
                                           <select class="form-control" name="direcao_alocacao">
-                                            <option value="" selected>{{funcionario.direcao}}</option>
+                                            <option value="{{funcionario.direccao.id}}" selected>{{funcionario.direccao}}</option>
                                             {% for direccao in direccoes %}
         
                                             <option value="{{direccao.id}}">{{direccao.nome}}</option>
@@ -361,8 +361,8 @@
                                         <div class="form-group">
                                           <label class="control-label">Função Chefia Nova:</label>
                                           <select class="form-control" name="funcoes_chefias_nova">
-                                            <option value="{{funcionario.funcao_chefia.id}}" selected>{{funcionario.funcao_chefia.nome}}</option>
-                                            {% for categoria in funcoes_chefia %}
+                                            <option value="{{funcionario.funcao_chefia_nova.id}}" selected>{{funcionario.funcao_chefia_nova.nome}}</option>
+                                            {% for categoria in funcoes_chefia_nova %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
         
                                             {% endfor %}

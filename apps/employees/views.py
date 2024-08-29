@@ -151,15 +151,15 @@ def addFuncionario(request):
             categoria=None
 
     try:
-        funcao_chefia = FuncaoChefia.objects.get(pk=request.POST['funcoes_chefias_nova'])
+        funcao_chefia_antiga = FuncaoChefia.objects.get(pk=request.POST['funcoes_chefias_antiga'])
     except:
-            funcao_chefia=None
+            funcao_chefia_antiga=None
 
 
     try:
-        funcao_chefia_antiga = CategoriaNova.objects.get(pk=request.POST['funcoes_chefias_nova'])
+        funcao_chefia_nova = CategoriaNova.objects.get(pk=request.POST['funcoes_chefias_nova'])
     except:
-            funcao_chefia_antiga=None        
+            funcao_chefia_nova=None        
 
     try:
         correio_electronico = request.POST['correio_electronico']
@@ -197,7 +197,7 @@ def addFuncionario(request):
     except:
             categoria_antiga=None   
     try:
-        categoria_nova_id = request.POST['categoria_antiga']
+        categoria_nova_id = request.POST['categoria_nova']
         categoria_nova = Categoria.objects.get(id=categoria_nova_id)
     except:
             categoria_nova=None   
@@ -238,7 +238,8 @@ def addFuncionario(request):
         # Dados Profissionais
         data_de_admissao = datetime.strptime(request.POST.get('data_admissao', ''), '%Y-%m-%d') if request.POST.get('data_admissao') else None,
         direccao= direcao,
-        funcao_chefia = funcao_chefia,
+        funcao_chefia = funcao_chefia_antiga,
+        funcao_chefia_nova = funcao_chefia_nova,
         categoria_laboral_antiga = categoria_antiga,
         categoria_laboral_nova=categoria_nova,
         vencimento_mensal = request.POST['vencimento_mensal'],
@@ -270,7 +271,8 @@ def employee_list(request):
     categorias_antigas  = Categoria.objects.filter(tipo="antiga")
     categorias_nova  = Categoria.objects.filter(tipo="nova")
     direccoes  = DirecaoAlocacao.objects.all()
-    funcoes_chefia  = FuncaoChefia.objects.all()
+    funcoes_chefia  = FuncaoChefia.objects.filter(estado_objecto='activo')
+    funcoes_chefia_nova  = CategoriaNova.objects.filter(estado_objecto='activo')
     p = Paginator(funcionarios, 100)
     
    
@@ -279,7 +281,9 @@ def employee_list(request):
                'categorias_novas':categorias_nova,
                'direccoes':direccoes,
                'funcoes_chefia':funcoes_chefia,
-               'abertura_actual':abertura,}
+               'funcoes_chefia_nova':funcoes_chefia_nova,
+               'abertura_actual':abertura,
+               }
 
     template_name = "employees/employee_list.html"
     return render(request, template_name,context)
@@ -314,6 +318,7 @@ def employee_edit(request,id):
     categorias_novas  = Categoria.objects.filter(tipo="nova")
     direccoes  = DirecaoAlocacao.objects.filter(estado_objecto='activo')
     funcoes_chefia  = FuncaoChefia.objects.filter(estado_objecto='activo')
+    funcoes_chefia_nova  = CategoriaNova.objects.filter(estado_objecto='activo')
    
     
     funcionario = Employee.objects.get(pk=id)
@@ -344,7 +349,9 @@ def employee_edit(request,id):
             'categorias_antigas':categorias_antigas,
             'categorias_novas':categorias_novas,
             'direccoes':direccoes,
-            'funcoes_chefia':funcoes_chefia,}
+            'funcoes_chefia':funcoes_chefia,
+            'funcoes_chefia_nova':funcoes_chefia_nova,
+            }
     template_name = "employees/employee_edit.html"
     return render(request, template_name, context)
 
@@ -382,14 +389,14 @@ def editFuncionario(request):
         direcao=None
 
     try:
-        funcao_chefia = FuncaoChefia.objects.get(pk=request.POST['funcoes_chefias_nova'])
+        funcao_chefia = FuncaoChefia.objects.get(pk=request.POST['funcoes_chefias_antiga'])
     except:
         funcao_chefia=None
 
     try:
-        funcao_chefia_antiga = CategoriaNova.objects.get(pk=request.POST['funcoes_chefias_nova'])
+        funcao_chefia_nova = CategoriaNova.objects.get(pk=request.POST['funcoes_chefias_nova'])
     except:
-            funcao_chefia_antiga=None        
+            funcao_chefia_nova=None        
 
     try:
         correio_electronico = request.POST['correio_electronico']
@@ -485,6 +492,7 @@ def editFuncionario(request):
     funcionario.reforma = reforma
     funcionario.data_de_admissao = data_admissao
     funcionario.funcao_chefia = funcao_chefia
+    funcionario.funcao_chefia_nova = funcao_chefia_nova
     funcionario.direccao = direcao
     funcionario.categoria_laboral_antiga = categoria_antiga
     funcionario.categoria_laboral_nova=categoria_nova
@@ -1160,8 +1168,8 @@ def export_to_excel(request):
         funcao_chefia = ''
         direccao = ''
         
-        if  obj.categoria_laboral is not None:
-            categoria= obj.categoria_laboral.nome
+        if  obj.categoria_laboral_antiga is not None:
+            categoria= obj.categoria_laboral_antiga.nome
 
         if  obj.funcao_chefia is not None:
             funcao_chefia= obj.funcao_chefia.nome
@@ -1188,7 +1196,6 @@ def export_to_excel(request):
         obj.correio_electronico,
         obj.data_de_admissao.strftime("%d-%m-%Y") if obj.data_de_admissao else '',
         direccao,
-        obj.estabelecimento,
         categoria,
         # obj.categoria_nova.nome,
         funcao_chefia,

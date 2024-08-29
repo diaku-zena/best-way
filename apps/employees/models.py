@@ -329,7 +329,15 @@ class Employee(models.Model):
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        verbose_name="funcao de chefia",
+        verbose_name="funcao de chefia antiga",
+    )
+
+    funcao_chefia_nova = models.ForeignKey(
+        CategoriaNova,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        verbose_name="funcao de chefia nova",
     )
 
     novo_numero_mecanografico = models.CharField(
