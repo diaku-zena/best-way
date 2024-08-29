@@ -535,34 +535,58 @@ def upload_excel(request):
             wb = load_workbook(excel_file)
             ws = wb.active
 
+            '''
+
+
+provincia_nascimento
+gender
+estado_civil
+numero_dependentes
+morada
+provincia_residencia
+telefone
+correio_electronico
+data_de_admissao
+direccao
+funcao_chefia
+categoria_laboral_antiga
+categoria_laboral_nova
+vencimento_mensal
+habilitacao
+area_de_formacao
+reforma
+tempo_na_empresa
+            '''
+
             for row in ws.iter_rows(min_row=2, values_only=True):
                 numero_mecanografico = row[0]
                 firstname = row[1]
                 vencimento_mensal = row[2]
                 personnel_number = row[3]
-                numero_seguranca_social = row[4]
-                categoria_nome = row[5]
-                profissao = row[6]
-                habilitacao = row[7]
-                tipo_contrato = row[8]
-                regime = row[9]
-                tipo_pessoal = row[10]
-                data_admissao = row[11]
-                motivo_admissao = row[12]
-                data_de_demissao = row[13]
-                motivo_demissao = row[14]
-                data_fim_contrato = row[15]
-                anos_trabalho = row[16]
-                cargo = row[17]
-                direcao_nome = row[18]
-                situacao_contrato = row[19]
-                carga_horaria_diurna = row[20]
-                carga_horaria_nocturna = row[21]
-                valor_aula_diurna = row[22]
-                valor_aula_nocturna = row[23]
-                aula_diurna = row[24]
-                aula_nocturna = row[25]
-                honorario_total = row[26]
+                date_of_birth = row[4]
+                data_de_emissao = row[5]
+                data_de_validade = row[6]
+                numero_seguranca_social = row[7]
+                nacionalidade = row[8]
+                provincia_nascimento = row[9]
+                provincia_nascimento = row[10]
+                gender = row[11]
+                estado_civil = row[12]
+                numero_dependentes = row[13]
+                morada = row[14]
+                provincia_residencia = row[15]
+                telefone = row[16]
+                correio_electronico = row[17]
+                data_de_admissao = row[18]
+                direcao_nome = row[19]
+                funcao_chefia = row[20]
+                categoria_antiga_nome = row[21]
+                categoria_nova_nome = row[22]
+                vencimento_mensal = row[23]
+                habilitacao = row[24]
+                area_de_formacao = row[25]
+                reforma = row[26]
+                tempo_na_empresa = row[27]
 
                 # Conversão de datas
                 def parse_date(date_value):
@@ -577,14 +601,15 @@ def upload_excel(request):
                     return None
 
                 data_admissao = parse_date(data_admissao)
-                data_de_demissao = parse_date(data_de_demissao)
-                data_fim_contrato = parse_date(data_fim_contrato)
+                data_de_emissao = parse_date(data_de_emissao)
+                data_de_validade = parse_date(data_de_validade)
 
                 # Validação de campos
                 def validate_field(value):
                     return value if value not in [None, 'none', 'None', 0] else None
 
-                categoria = Categoria.objects.filter(nome=categoria_nome).first()
+                categoria_antiga = Categoria.objects.filter(nome=categoria_antiga_nome, tipo='antiga').first()
+                categoria_nova = Categoria.objects.filter(nome=categoria_nova_nome, tipo='nova').first()
                 direcao = DirecaoAlocacao.objects.filter(nome=direcao_nome).first()
                 profissao = validate_field(profissao)
                 habilitacao = validate_field(habilitacao)
@@ -594,44 +619,39 @@ def upload_excel(request):
                 motivo_admissao = validate_field(motivo_admissao)
                 motivo_demissao = validate_field(motivo_demissao)
                 anos_trabalho = validate_field(anos_trabalho)
-                cargo = validate_field(cargo)
-                situacao_contrato = validate_field(situacao_contrato)
-                carga_horaria_diurna = validate_field(carga_horaria_diurna)
-                carga_horaria_nocturna = validate_field(carga_horaria_nocturna)
-                valor_aula_diurna = validate_field(valor_aula_diurna)
-                valor_aula_nocturna = validate_field(valor_aula_nocturna)
-                aula_diurna = validate_field(aula_diurna)
-                aula_nocturna = validate_field(aula_nocturna)
-                honorario_total = validate_field(honorario_total)
 
                 try:
                     Employee.objects.create(
-                        numero_mecanografico=numero_mecanografico,
+                        # Dados Pessoais   
+                        numero_mecanografico = numero_mecanografico,
                         firstname=firstname,
-                        vencimento_mensal=vencimento_mensal,
-                        personnel_number=personnel_number,
-                        numero_seguranca_social=numero_seguranca_social,
-                        habilitacao=habilitacao,
-                        gender='',
-                        data_de_admissao=data_admissao,
-                        tipo_contrato=tipo_contrato,
-                        regime_trabalho=regime,
-                        tipo_pessoal=tipo_pessoal,
-                        motivo_admissao=motivo_admissao,
-                        motivo_demissao=motivo_demissao,
-                        anos_trabalho=anos_trabalho,
-                        cargo=cargo,
-                        situacao_contrato=situacao_contrato,
-                        carga_horaria_diurna=carga_horaria_diurna,
-                        carga_horaria_nocturna=carga_horaria_nocturna,
-                        valor_aula_diurna=valor_aula_diurna,
-                        valor_aula_nocturna=valor_aula_nocturna,
-                        aula_diurna=aula_diurna,
-                        aula_nocturna=aula_nocturna,
-                        honorario_total=honorario_total,
-                        profissao=profissao,
-                        categoria_laboral=categoria,
-                        direccao=direcao,
+                        personnel_number = personnel_number,
+                        date_of_birth = date_of_birth,
+                        data_de_emissao = data_de_emissao,
+                        data_de_validade = data_de_validade,
+                        numero_seguranca_social = numero_seguranca_social,
+                        nacionalidade = nacionalidade,
+                        provincia_nascimento = provincia_nascimento,
+                        gender = gender,
+                        estado_civil = estado_civil,
+                        numero_dependentes = numero_dependentes,
+                        morada = morada,
+                        provincia_residencia = provincia_residencia,
+                        telefone = telefone,
+                        correio_electronico = correio_electronico,
+                        
+                        # Dados Profissionais
+                        data_de_admissao = data_de_admissao,
+                        direccao= direcao,
+                        funcao_chefia = funcao_chefia,
+                        categoria_laboral_antiga = categoria_antiga,
+                        categoria_laboral_nova=categoria_nova,
+                        vencimento_mensal = vencimento_mensal,
+                        habilitacao = habilitacao,
+                        area_de_formacao = area_de_formacao,
+                        reforma = reforma,
+                        tempo_na_empresa = tempo_na_empresa,
+
                         current_status='activo',
                         origem='Primavera',
                         estado='Activo',
